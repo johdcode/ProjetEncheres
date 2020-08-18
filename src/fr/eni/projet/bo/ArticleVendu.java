@@ -120,10 +120,9 @@ public class ArticleVendu {
 		super();
 	}
 
-	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate dateDebutEnchere,
+	public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEnchere,
 			LocalDate dateFinEnchere, int miseAPrix, int prixVente, Enum<EnumEtatVente> etatVente) {
 		super();
-		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
 		this.description = description;
 		this.dateDebutEnchere = dateDebutEnchere;
@@ -133,11 +132,10 @@ public class ArticleVendu {
 		this.etatVente = etatVente;
 	}
 
-	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate dateDebutEnchere,
+	public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEnchere,
 			LocalDate dateFinEnchere, int miseAPrix, int prixVente, Enum<EnumEtatVente> etatVente,
 			Utilisateur utilisateur, Categorie categorie, Retrait retrait, List<Enchere> listEncheres) {
 		super();
-		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
 		this.description = description;
 		this.dateDebutEnchere = dateDebutEnchere;
