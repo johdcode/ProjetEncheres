@@ -45,11 +45,12 @@ public class ConnexionServlet extends HttpServlet {
 			System.out.println("connecté");
 		}
 		else {
-			RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/WEB-INF/Connexion.jsp"); 
+			
 			if(seSouvenirDeMoi.contentEquals("seSouvenirDeMoi")) {
 				session.setAttribute("suiviSession", seSouvenirDeMoi);
 				
 			}
+			RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/WEB-INF/Connexion.jsp"); 
 		}
 		
 		
