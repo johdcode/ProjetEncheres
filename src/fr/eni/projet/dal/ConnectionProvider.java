@@ -9,33 +9,24 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 public class ConnectionProvider {
-	//objet permettant de manipuler le pool de connection
 	private static DataSource dataSource;
+	private static Connection connection;
 
 	static
 	{
-	    //création d'objet context permettant de rechercher dans l'arbre jndi
-	    //lookup pour rechercher la ressource du pool
 	    Context context;
 	    try {
 	        context = new InitialContext();
-	        ConnectionProvider.dataSource = (DataSource) context.lookup("java:comp/env/jdbc/pool_cnx");
+	        dataSource = (DataSource) context.lookup("java:comp/env/jdbc/pool_cnx");
 	
 	    } catch (NamingException e) {
 	        e.printStackTrace();
-	        throw new RuntimeException("Impossible d'accéder à la base de données");
+	        throw new RuntimeException("Impossible d'accÃ©der Ã  la base de donnÃ©es");
 	    }
 	}
 	
 	public static Connection getConnection() throws SQLException{
-		return ConnectionProvider.dataSource.getConnection();
-	}
-	
-	public static void closeConnection() {
-		try {
-			((Connection) ConnectionProvider.dataSource).close();
-		} catch(SQLException e) {
-			e.printStackTrace();
-		}
+		connection = dataSource.getConnection();
+		return connection;
 	}
 }

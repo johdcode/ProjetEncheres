@@ -1,5 +1,6 @@
 package fr.eni.projet.bll;
 
+import fr.eni.projet.bo.Utilisateur;
 import fr.eni.projet.dal.DAOFactory;
 import fr.eni.projet.dal.UtilisateurDAO;
 
@@ -19,5 +20,7 @@ public class UtilisateurManager {
 		return instance;
 	}
 	
-	
+	public void insert(Utilisateur utilisateur) {
+		utilisateurDAO.insert(utilisateur);
+	}
 }

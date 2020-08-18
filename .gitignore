@@ -7,3 +7,5 @@ build/classes/fr/eni/projet/dal/jdbc/UtilisateurDAOJdbcImpl.class
 *.class
 *.class
 *.class
+*.class
+*.class

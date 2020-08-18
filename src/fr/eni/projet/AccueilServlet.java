@@ -11,7 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.projet.bll.UtilisateurManager;
+import fr.eni.projet.bo.Utilisateur;
 import fr.eni.projet.dal.ConnectionProvider;
+import fr.eni.projet.dal.jdbc.UtilisateurDAOJdbcImpl;
 
 /**
  * Servlet implementation class AccueilServlet
@@ -24,11 +27,13 @@ public class AccueilServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
+//			printWritter.print("La connection est " + (c.isClosed() ? "fermï¿½e" : "ouverte") + ".");
 		PrintWriter printWritter = response.getWriter();
 		try {
 			Connection c = ConnectionProvider.getConnection();
-			printWritter.print("La connection est " + (c.isClosed() ? "fermée" : "ouverte") + ".");
+			Utilisateur u = new Utilisateur(1, "jooo", "John", "Edouard", "john@mail.com", "0654854596", "Rue Shuman", "54896", "Nantes", "motDePasse", 0.6f, false);
+			UtilisateurManager.getInstance().insert(u);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
