@@ -4,17 +4,17 @@ import java.time.LocalDate;
 
 public class Enchere {
 	//Variable
-	LocalDate dateEnchère;
+	LocalDate dateEnchere;
 	int montantEnchere;
 	Utilisateur utilisateur;
 	ArticleVendu articleVendu;
 	
 	// Getter & Setter
-	public LocalDate getDateEnchère() {
-		return dateEnchère;
+	public LocalDate getDateEnchere() {
+		return dateEnchere;
 	}
-	public void setDateEnchère(LocalDate dateEnchère) {
-		this.dateEnchère = dateEnchère;
+	public void setDateEnchere(LocalDate dateEnchère) {
+		this.dateEnchere = dateEnchère;
 	}
 	public int getMontantEnchere() {
 		return montantEnchere;
@@ -39,14 +39,14 @@ public class Enchere {
 	public Enchere() {
 		super();
 	}
-	public Enchere(LocalDate dateEnchère, int montantEnchere) {
+	public Enchere(LocalDate dateEnchere, int montantEnchere) {
 		super();
-		this.dateEnchère = dateEnchère;
+		this.dateEnchere = dateEnchere;
 		this.montantEnchere = montantEnchere;
 	}
-	public Enchere(LocalDate dateEnchère, int montantEnchere, Utilisateur utilisateur, ArticleVendu articleVendu) {
+	public Enchere(LocalDate dateEnchere, int montantEnchere, Utilisateur utilisateur, ArticleVendu articleVendu) {
 		super();
-		this.dateEnchère = dateEnchère;
+		this.dateEnchere = dateEnchere;
 		this.montantEnchere = montantEnchere;
 		this.utilisateur = utilisateur;
 		this.articleVendu = articleVendu;
@@ -55,7 +55,7 @@ public class Enchere {
 	//toString
 	@Override
 	public String toString() {
-		return "Enchere [dateEnchère=" + dateEnchère + ", montantEnchere=" + montantEnchere + ", utilisateur="
+		return "Enchere [dateEnchere=" + dateEnchere + ", montantEnchere=" + montantEnchere + ", utilisateur="
 				+ utilisateur + ", articleVendu=" + articleVendu + "]";
 	}
 	
