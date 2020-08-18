@@ -1,6 +1,7 @@
 package fr.eni.projet.bo;
 
-import java.time.LocalDate;
+
+import java.sql.Timestamp;
 import java.util.List;
 
 public class ArticleVendu {
@@ -9,10 +10,13 @@ public class ArticleVendu {
 	int noArticle;
 	String nomArticle;
 	String description;
-	LocalDate dateDebutEnchere;
-	LocalDate dateFinEnchere;
+	Timestamp dateDebutEnchere;
+	Timestamp dateFinEnchere;
 	int miseAPrix;
 	int prixVente;
+	int noUtilisateurArticle;
+	int noCategorieArticle;
+	
 	
 	Enum<EnumEtatVente> etatVente;
 	
@@ -47,19 +51,19 @@ public class ArticleVendu {
 		this.description = description;
 	}
 
-	public LocalDate getDateDebutEnchere() {
+	public Timestamp getDateDebutEnchere() {
 		return dateDebutEnchere;
 	}
 
-	public void setDateDebutEnchere(LocalDate dateDebutEnchere) {
+	public void setDateDebutEnchere(Timestamp dateDebutEnchere) {
 		this.dateDebutEnchere = dateDebutEnchere;
 	}
 
-	public LocalDate getDateFinEnchere() {
+	public Timestamp getDateFinEnchere() {
 		return dateFinEnchere;
 	}
 
-	public void setDateFinEnchere(LocalDate dateFinEnchere) {
+	public void setDateFinEnchere(Timestamp dateFinEnchere) {
 		this.dateFinEnchere = dateFinEnchere;
 	}
 
@@ -115,15 +119,34 @@ public class ArticleVendu {
 		this.etatVente = etatVente;
 	}
 
+	public int getNoUtilisateurArticle() {
+		return noUtilisateurArticle;
+	}
+
+	public void setNoUtilisateurArticle(int noUtilisateurArticle) {
+		this.noUtilisateurArticle = noUtilisateurArticle;
+	}
+
+	public int getNoCategorieArticle() {
+		return noCategorieArticle;
+	}
+
+	public void setNoCategorieArticle(int noCategorieArticle) {
+		this.noCategorieArticle = noCategorieArticle;
+	}
+
+	public void setListEncheres(List<Enchere> listEncheres) {
+		this.listEncheres = listEncheres;
+	}
+
 	//Constructors
 	public ArticleVendu() {
 		super();
 	}
 
-	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate dateDebutEnchere,
-			LocalDate dateFinEnchere, int miseAPrix, int prixVente, Enum<EnumEtatVente> etatVente) {
+	public ArticleVendu(String nomArticle, String description, Timestamp dateDebutEnchere,
+			Timestamp dateFinEnchere, int miseAPrix, int prixVente, Enum<EnumEtatVente> etatVente) {
 		super();
-		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
 		this.description = description;
 		this.dateDebutEnchere = dateDebutEnchere;
@@ -133,17 +156,21 @@ public class ArticleVendu {
 		this.etatVente = etatVente;
 	}
 
-	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate dateDebutEnchere,
-			LocalDate dateFinEnchere, int miseAPrix, int prixVente, Enum<EnumEtatVente> etatVente,
-			Utilisateur utilisateur, Categorie categorie, Retrait retrait, List<Enchere> listEncheres) {
+	
+
+	public ArticleVendu(String nomArticle, String description, Timestamp dateDebutEnchere, Timestamp dateFinEnchere,
+			int miseAPrix, int prixVente, int noUtilisateurArticle, int noCategorieArticle,
+			Enum<EnumEtatVente> etatVente, Utilisateur utilisateur, Categorie categorie, Retrait retrait,
+			List<Enchere> listEncheres) {
 		super();
-		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
 		this.description = description;
 		this.dateDebutEnchere = dateDebutEnchere;
 		this.dateFinEnchere = dateFinEnchere;
 		this.miseAPrix = miseAPrix;
 		this.prixVente = prixVente;
+		this.noUtilisateurArticle = noUtilisateurArticle;
+		this.noCategorieArticle = noCategorieArticle;
 		this.etatVente = etatVente;
 		this.utilisateur = utilisateur;
 		this.categorie = categorie;
@@ -151,14 +178,15 @@ public class ArticleVendu {
 		this.listEncheres = listEncheres;
 	}
 
-	
 	//toString
 	@Override
 	public String toString() {
 		return "ArticleVendu [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
 				+ ", dateDebutEnchere=" + dateDebutEnchere + ", dateFinEnchere=" + dateFinEnchere + ", miseAPrix="
-				+ miseAPrix + ", prixVente=" + prixVente + ", etatVente=" + etatVente + ", utilisateur=" + utilisateur
-				+ ", categorie=" + categorie + ", retrait=" + retrait + ", listEncheres=" + listEncheres + "]";
+				+ miseAPrix + ", prixVente=" + prixVente + ", noUtilisateurArticle=" + noUtilisateurArticle
+				+ ", noCategorieArticle=" + noCategorieArticle + ", etatVente=" + etatVente + ", utilisateur="
+				+ utilisateur + ", categorie=" + categorie + ", retrait=" + retrait + ", listEncheres=" + listEncheres
+				+ "]";
 	}
 
 		

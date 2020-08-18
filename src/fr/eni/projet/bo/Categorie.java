@@ -30,14 +30,12 @@ public class Categorie {
 	public Categorie() {
 		super();
 	}
-	public Categorie(int noCategorie, String libelle) {
+	public Categorie(String libelle) {
 		super();
-		this.noCategorie = noCategorie;
 		this.libelle = libelle;
 	}
 	public Categorie(int noCategorie, String libelle, List<ArticleVendu> listeArticleCategorie) {
 		super();
-		this.noCategorie = noCategorie;
 		this.libelle = libelle;
 		this.listeArticleCategorie = listeArticleCategorie;
 	}

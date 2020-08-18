@@ -104,10 +104,9 @@ public class Utilisateur {
 	public Utilisateur() {
 		super();
 	}
-	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
+	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String codePostal, String ville, String motDePasse, float credit, boolean administrateur) {
 		super();
-		this.noUtilisateur = noUtilisateur;
 		this.pseudo = pseudo;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -120,11 +119,10 @@ public class Utilisateur {
 		this.credit = credit;
 		this.administrateur = administrateur;
 	}
-	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
+	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String codePostal, String ville, String motDePasse, float credit, boolean administrateur,
 			List<ArticleVendu> listeArticlesVendus, List<Enchere> listeEncheres) {
 		super();
-		this.noUtilisateur = noUtilisateur;
 		this.pseudo = pseudo;
 		this.nom = nom;
 		this.prenom = prenom;

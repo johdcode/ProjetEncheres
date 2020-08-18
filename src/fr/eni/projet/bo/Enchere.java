@@ -4,17 +4,27 @@ import java.time.LocalDate;
 
 public class Enchere {
 	//Variable
-	LocalDate dateEnchère;
+	int noEnchere;
+	LocalDate dateEnchere;
 	int montantEnchere;
+	int noArticleVenduEnchere;
+	int noUtilisateurEnchere;
+	
 	Utilisateur utilisateur;
 	ArticleVendu articleVendu;
 	
 	// Getter & Setter
-	public LocalDate getDateEnchère() {
-		return dateEnchère;
+	public LocalDate getDateEnchere() {
+		return dateEnchere;
 	}
-	public void setDateEnchère(LocalDate dateEnchère) {
-		this.dateEnchère = dateEnchère;
+	public int getNoEnchere() {
+		return noEnchere;
+	}
+	public void setNoEnchere(int noEnchere) {
+		this.noEnchere = noEnchere;
+	}
+	public void setDateEnchere(LocalDate dateEnchère) {
+		this.dateEnchere = dateEnchère;
 	}
 	public int getMontantEnchere() {
 		return montantEnchere;
@@ -35,28 +45,55 @@ public class Enchere {
 		this.articleVendu = articleVendu;
 	}
 	
+	public int getNoArticleVenduEnchere() {
+		return noArticleVenduEnchere;
+	}
+	public void setNoArticleVenduEnchere(int noArticleVenduEnchere) {
+		this.noArticleVenduEnchere = noArticleVenduEnchere;
+	}
+	public int getNoUtilisateurEnchere() {
+		return noUtilisateurEnchere;
+	}
+	public void setNoUtilisateurEnchere(int noUtilisateurEnchere) {
+		this.noUtilisateurEnchere = noUtilisateurEnchere;
+	}
 	//Constructor
 	public Enchere() {
 		super();
 	}
-	public Enchere(LocalDate dateEnchère, int montantEnchere) {
+	public Enchere(LocalDate dateEnchere, int montantEnchere) {
 		super();
-		this.dateEnchère = dateEnchère;
+		this.dateEnchere = dateEnchere;
 		this.montantEnchere = montantEnchere;
 	}
-	public Enchere(LocalDate dateEnchère, int montantEnchere, Utilisateur utilisateur, ArticleVendu articleVendu) {
+	
+	public Enchere(LocalDate dateEnchere, int montantEnchere, Utilisateur utilisateur, ArticleVendu articleVendu) {
 		super();
-		this.dateEnchère = dateEnchère;
+		this.dateEnchere = dateEnchere;
 		this.montantEnchere = montantEnchere;
 		this.utilisateur = utilisateur;
 		this.articleVendu = articleVendu;
 	}
 	
+	public Enchere(LocalDate dateEnchere, int montantEnchere, int noArticleVenduEnchere, int noUtilisateurEnchere,
+			Utilisateur utilisateur, ArticleVendu articleVendu) {
+		super();
+		this.dateEnchere = dateEnchere;
+		this.montantEnchere = montantEnchere;
+		this.noArticleVenduEnchere = noArticleVenduEnchere;
+		this.noUtilisateurEnchere = noUtilisateurEnchere;
+		this.utilisateur = utilisateur;
+		this.articleVendu = articleVendu;
+	}
+	
+	
+	
 	//toString
 	@Override
 	public String toString() {
-		return "Enchere [dateEnchère=" + dateEnchère + ", montantEnchere=" + montantEnchere + ", utilisateur="
-				+ utilisateur + ", articleVendu=" + articleVendu + "]";
+		return "Enchere [noEnchere=" + noEnchere + ", dateEnchere=" + dateEnchere + ", montantEnchere=" + montantEnchere
+				+ ", noArticleVenduEnchere=" + noArticleVenduEnchere + ", noUtilisateurEnchere=" + noUtilisateurEnchere
+				+ ", utilisateur=" + utilisateur + ", articleVendu=" + articleVendu + "]";
 	}
 	
 	
