@@ -1,5 +1,7 @@
 package fr.eni.projet.bll;
 
+import java.util.List;
+
 import fr.eni.projet.bo.Utilisateur;
 import fr.eni.projet.dal.DAOFactory;
 import fr.eni.projet.dal.UtilisateurDAO;
@@ -22,5 +24,22 @@ public class UtilisateurManager {
 	
 	public void insert(Utilisateur utilisateur) {
 		utilisateurDAO.insert(utilisateur);
+	}
+
+	public List<Utilisateur> selectAll(){
+		return utilisateurDAO.selectAll();
+	}
+	
+	
+	public boolean authentification(String identifiant, String motDePasse) {
+		List <Utilisateur> listeAuthentification = this.utilisateurDAO.selectAll();
+		boolean correspondance = false;
+		for(Utilisateur utilisateur : listeAuthentification) {
+			if(utilisateur.getPseudo().equals(identifiant)&&utilisateur.getMotDePasse().equals(motDePasse)) {
+				correspondance = true;
+			}
+		}
+		
+		return correspondance;
 	}
 }

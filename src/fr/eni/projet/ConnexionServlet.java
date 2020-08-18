@@ -39,11 +39,11 @@ public class ConnexionServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		boolean authentification;
-		UtilisateurManager um = um.getInstance();
+		UtilisateurManager um = UtilisateurManager.getInstance();
 		authentification = um.authentification(identifiant, motDePasse);
 				
-		if(authentification=true) {
-			RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/WEB-INF/Accueil.jsp"); 
+		if(authentification=!true) {
+			RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/WEB-INF/Connexion.jsp"); 
 			System.out.println("connecté");
 		}
 		else {
@@ -52,7 +52,7 @@ public class ConnexionServlet extends HttpServlet {
 				session.setAttribute("suiviSession", seSouvenirDeMoi);
 				
 			}
-			RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/WEB-INF/Connexion.jsp"); 
+			RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/WEB-INF/Accueil.jsp"); 
 		}
 		
 		
