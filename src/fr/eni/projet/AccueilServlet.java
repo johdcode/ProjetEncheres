@@ -31,7 +31,7 @@ public class AccueilServlet extends HttpServlet {
 		PrintWriter printWritter = response.getWriter();
 		try {
 			Connection c = ConnectionProvider.getConnection();
-			Utilisateur u = new Utilisateur(1, "jooo", "John", "Edouard", "john@mail.com", "0654854596", "Rue Shuman", "54896", "Nantes", "motDePasse", 0.6f, false);
+			Utilisateur u = new Utilisateur("jo", "John", "Edouard", "john@mail.com", "0654854596", "Rue Shuman", "54896", "Nantes", "motDePasse", 0.6f, false);
 			UtilisateurManager.getInstance().insert(u);
 			
 		} catch (SQLException e) {
