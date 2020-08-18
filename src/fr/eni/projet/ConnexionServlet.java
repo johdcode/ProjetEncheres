@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import fr.eni.projet.bll.UtilisateurManager;
+
 /**
  * Servlet implementation class Connexion
  */
@@ -36,7 +38,7 @@ public class ConnexionServlet extends HttpServlet {
 		String messageAuthentification = "Le mot de passe ou l'idenfiant est incorrect";
 		HttpSession session = request.getSession();
 		
-		boolean authentification = false;
+		boolean authentification;
 		UtilisateurManager um = um.getInstance();
 		authentification = um.authentification(identifiant, motDePasse);
 				
