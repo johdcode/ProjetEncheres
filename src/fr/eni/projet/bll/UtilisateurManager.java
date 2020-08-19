@@ -1,7 +1,6 @@
 package fr.eni.projet.bll;
 
 import java.util.List;
-
 import fr.eni.projet.bo.Utilisateur;
 import fr.eni.projet.dal.DALException;
 import fr.eni.projet.dal.DAOFactory;

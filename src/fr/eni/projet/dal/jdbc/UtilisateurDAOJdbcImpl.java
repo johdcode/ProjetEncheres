@@ -21,6 +21,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	private final String SELECT_BY_ID = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur from utilisateurs where no_utilisateur=?;";
 	private final String UPDATE = "UPDATE Utilisateurs set pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=?, administrateur=? where no_utilisateur=?;";
 	private final String DELETE = "DELETE FROM utilisateurs WHERE no_utilisateur =?;";
+
 	@Override
 	public void insert(Utilisateur utilisateur) {
 		Utilisateur u = null;
@@ -70,7 +71,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(SELECT_ALL);
 			while(rs.next()) {
-				Utilisateur utilisateur = new Utilisateur( Integer.parseInt(rs.getString("no_utilisateur")), rs.getString("pseudo").trim(), 
+				Utilisateur utilisateur = new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo").trim(), 
 						rs.getString("nom").trim(), rs.getString("prenom").trim(), rs.getString("email").trim(),rs.getString("telephone").trim(),
 						rs.getString("rue").trim(),rs.getString("code_postal").trim(),rs.getString("ville").trim(),rs.getString("mot_de_passe").trim(),
 						rs.getFloat("credit"),rs.getBoolean("administrateur"));

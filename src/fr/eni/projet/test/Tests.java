@@ -10,11 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.projet.bll.UtilisateurManager;
-import fr.eni.projet.bo.ArticleVendu;
 import fr.eni.projet.bo.Utilisateur;
 import fr.eni.projet.dal.DALException;
-import fr.eni.projet.dal.DAOFactory;
-import fr.eni.projet.dal.jdbc.ArticleVenduDAOJdbcImpl;
+
 
 /**
  * Servlet implementation class Tests
@@ -31,9 +29,11 @@ public class Tests extends HttpServlet {
 	UtilisateurManager um = UtilisateurManager.getInstance();
 //		System.out.println(um.authentification("kim", "motDePasse"));
 	//System.out.println(um.selectAll());
+
 		
 		Utilisateur u = new Utilisateur(6,"kim", "Kim", "Maroé", "kim@mail.com", "0707070707", "Rue des lilas", "44200", "Nantes", "motDePasse", 10.0f, false);
 		u.setNom("Coco");
+
 		//um.insert(u);
 		try {
 			um.update(u);
