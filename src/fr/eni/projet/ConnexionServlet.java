@@ -47,10 +47,8 @@ public class ConnexionServlet extends HttpServlet {
 			System.out.println("connecté");
 		}
 		else {
-			
 			if(seSouvenirDeMoi.contentEquals("seSouvenirDeMoi")) {
-				session.setAttribute("suiviSession", seSouvenirDeMoi);
-				
+				session.setAttribute("utilisateur", um.selectById(identifiant,motDePasse));
 			}
 			RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/WEB-INF/Accueil.jsp"); 
 		}
