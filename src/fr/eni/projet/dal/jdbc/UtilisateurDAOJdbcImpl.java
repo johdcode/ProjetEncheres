@@ -58,7 +58,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			}
 		}
 	}
-	
+	@Override
 	public List<Utilisateur> selectAll(){
 		List<Utilisateur> utilisateurs = new ArrayList<Utilisateur>();
 		
@@ -79,7 +79,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		return utilisateurs;
 		
 	}
-	
+	@Override
 	public Utilisateur selectById(String identifiant) {
 		Utilisateur utilisateur = null;
 		try (Connection connection = ConnectionProvider.getConnection()){

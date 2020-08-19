@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import fr.eni.projet.bll.UtilisateurManager;
 import fr.eni.projet.bo.Utilisateur;
 import fr.eni.projet.dal.ConnectionProvider;
-import fr.eni.projet.dal.jdbc.UtilisateurDAOJdbcImpl;
 
 /**
  * Servlet implementation class AccueilServlet

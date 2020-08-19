@@ -5,15 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.eni.gestionAvis.bo.Avis;
-import fr.eni.gestionAvis.bo.Categorie;
-import fr.eni.papeterie.dal.jdbc.JdbcTools;
+
 import fr.eni.projet.bo.ArticleVendu;
-import fr.eni.projet.bo.Utilisateur;
 import fr.eni.projet.dal.ArticleVenduDAO;
 import fr.eni.projet.dal.ConnectionProvider;
 import fr.eni.projet.dal.DALException;
@@ -22,9 +18,9 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 
 	//Variables commandes SQL
 	
-		private static final String sqlInsertArticle = "INSERT INTO ARTICLES_VENDUS VALUES (?,?,?,?,?,?,?,?)";
-		private static final String sqlSelectById = "SELECT no_article,nom_article,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie FROM ARTICLES_VENDUS WHERE no_article = ?";
-		private static final String sqlSelectAll = "SELECT no_article,nom_article,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie FROM ARTICLES_VENDUS";
+		private static final String sqlInsertArticle = "INSERT INTO ARTICLES_VENDUS(nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie) VALUES (?,?,?,?,?,?,?,?)";
+		private static final String sqlSelectById = "SELECT no_article,nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie FROM ARTICLES_VENDUS WHERE no_article = ?";
+		private static final String sqlSelectAll = "SELECT no_article,nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie FROM ARTICLES_VENDUS";
 		private static final String sqlUpdate = "UPDATE  ARTICLES_VENDUS SET nom_article=? ,date_debut_encheres=?,date_fin_encheres=?,prix_initial=?,prix_vente=?,no_utilisateur=?,no_categorie=? WHERE no_article = ? ";
 		private static final String sqlDelete = "DELETE  FROM  ARTICLES_VENDUS WHERE no_article = ?";
 //		
@@ -33,7 +29,12 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 		public ArticleVenduDAOJdbcImpl () {
 			
 		}
+		
+
+	
+		
 	// Methode Insert nouvel Article
+		@Override
 		public void insert(ArticleVendu a, int noUtilisteur, int noCategorie) throws DALException {
 			
 			//1- Obtenir une connexion à la base de données
@@ -74,7 +75,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 		}
 		
 	// Methode Select by ID
-			
+		@Override	
 		public ArticleVendu selectById(int noArticle) throws DALException {
 			ArticleVendu a = null;
 
@@ -104,6 +105,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 					
 		
 	// Methode Select all
+		@Override
 		public List<ArticleVendu> selectAll() throws DALException{
 			List<ArticleVendu> articles = new ArrayList<ArticleVendu>();
 			
@@ -132,6 +134,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 		
 		
 	// Methode Update article
+		@Override
 		public void update(ArticleVendu a) throws DALException {
 			try(Connection conn = ConnectionProvider.getConnection()){
 				PreparedStatement stmt = conn.prepareStatement(sqlUpdate);
@@ -155,6 +158,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 		
 		
 	// Methode Delete
+		@Override
 		public void delete(int id) throws DALException {
 			try (Connection connection = ConnectionProvider.getConnection()) {
 				PreparedStatement stmt = connection.prepareStatement(sqlDelete);

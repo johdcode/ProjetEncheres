@@ -180,6 +180,23 @@ public class ArticleVendu {
 
 	
 	
+	public ArticleVendu(String nomArticle, String description, Timestamp dateDebutEnchere, Timestamp dateFinEnchere,
+			int miseAPrix, int prixVente, int noUtilisateurArticle, int noCategorieArticle,
+			Enum<EnumEtatVente> etatVente, Utilisateur utilisateur, Categorie categorie) {
+		super();
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.dateDebutEnchere = dateDebutEnchere;
+		this.dateFinEnchere = dateFinEnchere;
+		this.miseAPrix = miseAPrix;
+		this.prixVente = prixVente;
+		this.noUtilisateurArticle = noUtilisateurArticle;
+		this.noCategorieArticle = noCategorieArticle;
+		this.etatVente = etatVente;
+		this.utilisateur = utilisateur;
+		this.categorie = categorie;
+	}
+
 	public ArticleVendu(int noArticle, String nomArticle, String description, Timestamp dateDebutEnchere,
 			Timestamp dateFinEnchere, int miseAPrix, int prixVente, int noUtilisateurArticle, int noCategorieArticle) {
 		super();
@@ -193,6 +210,21 @@ public class ArticleVendu {
 		this.noUtilisateurArticle = noUtilisateurArticle;
 		this.noCategorieArticle = noCategorieArticle;
 	}
+	
+	public ArticleVendu(String nomArticle, String description, Timestamp dateDebutEnchere,
+			Timestamp dateFinEnchere, int miseAPrix, int prixVente, int noUtilisateurArticle, int noCategorieArticle) {
+		super();
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.dateDebutEnchere = dateDebutEnchere;
+		this.dateFinEnchere = dateFinEnchere;
+		this.miseAPrix = miseAPrix;
+		this.prixVente = prixVente;
+		this.noUtilisateurArticle = noUtilisateurArticle;
+		this.noCategorieArticle = noCategorieArticle;
+	}
+
+	
 
 	//toString
 	@Override
