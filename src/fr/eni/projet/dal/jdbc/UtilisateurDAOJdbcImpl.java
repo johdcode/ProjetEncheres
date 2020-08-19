@@ -66,9 +66,9 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(SELECT_ALL);
 			while(rs.next()) {
-				Utilisateur utilisateur = new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"), 
-						rs.getString("nom"), rs.getString("prenom"), rs.getNString("email"),rs.getString("telephone"),
-						rs.getString("rue"),rs.getString("code_postal"),rs.getString("ville"),rs.getString("mot_de_passe"),
+				Utilisateur utilisateur = new Utilisateur( Integer.parseInt(rs.getString("no_utilisateur")), rs.getString("pseudo").trim(), 
+						rs.getString("nom").trim(), rs.getString("prenom").trim(), rs.getString("email").trim(),rs.getString("telephone").trim(),
+						rs.getString("rue").trim(),rs.getString("code_postal").trim(),rs.getString("ville").trim(),rs.getString("mot_de_passe").trim(),
 						rs.getFloat("credit"),rs.getBoolean("administrateur"));
 				utilisateurs.add(utilisateur);
 			}
@@ -86,9 +86,9 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		PreparedStatement pstmt = connection.prepareStatement(SELECT_BY_ID);
 		ResultSet rs = pstmt.executeQuery();
 		while(rs.next()) {
-		utilisateur = new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"), 
-					rs.getString("nom"), rs.getString("prenom"), rs.getNString("email"),rs.getString("telephone"),
-					rs.getString("rue"),rs.getString("code_postal"),rs.getString("ville"),rs.getString("mot_de_passe"),
+		utilisateur = new Utilisateur(rs.getInt(1), rs.getString("pseudo").trim(), 
+					rs.getString("nom").trim(), rs.getString("prenom").trim(), rs.getString("email").trim(),rs.getString("telephone").trim(),
+					rs.getString("rue").trim(),rs.getString("code_postal").trim(),rs.getString("ville").trim(),rs.getString("mot_de_passe").trim(),
 					rs.getFloat("credit"),rs.getBoolean("administrateur"));
 		}
 		

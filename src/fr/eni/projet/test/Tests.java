@@ -23,10 +23,10 @@ public class Tests extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UtilisateurManager um = UtilisateurManager.getInstance();
-	//	System.out.println(um.authentification("jo", "motDePasse"));
-	System.out.println(um.selectAll());
+		System.out.println(um.authentification("kim", "motDePasse"));
+	//System.out.println(um.selectAll());
 		//System.out.println(um.selectById("jo"));
-	//	Utilisateur u = new Utilisateur("kim", "Kim", "Maroé", "kim@mail.com", "0707070707", "Rue des lilas", "44200", "Nantes", "motDePasse", 10.0f, false);
+		//Utilisateur u = new Utilisateur("kim", "Kim", "Maroé", "kim@mail.com", "0707070707", "Rue des lilas", "44200", "Nantes", "motDePasse", 10.0f, false);
 		//um.insert(u);
 	}
 

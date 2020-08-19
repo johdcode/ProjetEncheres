@@ -35,6 +35,9 @@ public class UtilisateurManager {
 		List <Utilisateur> listeAuthentification = this.utilisateurDAO.selectAll();
 		boolean correspondance = false;
 		for(Utilisateur utilisateur : listeAuthentification) {
+			System.out.println(utilisateur.getPseudo());
+			System.out.println(utilisateur.getMotDePasse());
+	
 			if(utilisateur.getPseudo().equals(identifiant)&&utilisateur.getMotDePasse().equals(motDePasse)) {
 				correspondance = true;
 			}
