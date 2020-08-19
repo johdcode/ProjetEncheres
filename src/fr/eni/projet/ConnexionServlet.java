@@ -23,7 +23,7 @@ public class ConnexionServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd =this.getServletContext().getRequestDispatcher("/WEB-INF/Connexion.jsp");
+		RequestDispatcher rd =this.getServletContext().getRequestDispatcher("/WEB-INF/templates/Connexion.jsp");
 		rd.forward(request, response);
 		
 	}
@@ -38,22 +38,22 @@ public class ConnexionServlet extends HttpServlet {
 		String messageAuthentification = "Le mot de passe ou l'idenfiant est incorrect";
 //		HttpSession session = request.getSession();
 		
-		int error = 0;
+		int erreur = 0;
 		
 		if(identifiant == null || identifiant == "") {
-			error++;
+			erreur++;
 		}
 		if(identifiant.length() >= 30) {
-			error++;
+			erreur++;
 		}
 		if(motDePasse == null || motDePasse == "") {
-			error++;
+			erreur++;
 		}
 		if(motDePasse.length() >= 30) {
-			error++;
+			erreur++;
 		}
 		
-		if(error < 1) {			
+		if(erreur < 1) {			
 			boolean authentification;
 			UtilisateurManager um = UtilisateurManager.getInstance();
 			authentification = true;
@@ -63,8 +63,7 @@ public class ConnexionServlet extends HttpServlet {
 				RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/WEB-INF/Accueil.jsp"); 
 				System.out.println("connecté");
 			}
-		}
-				
+		}	
 //		else {
 //			
 //			if(seSouvenirDeMoi.contentEquals("seSouvenirDeMoi")) {

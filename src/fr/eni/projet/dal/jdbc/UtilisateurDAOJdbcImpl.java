@@ -19,7 +19,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	private final String SELECT_BY_ID = "SELECT no_utilisateur pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur from utilisateurs where pseudo=?;";
 	@Override
 	public void insert(Utilisateur utilisateur) {
-		Utilisateur u = null;
 		PreparedStatement req = null;
 		ResultSet rs = null;
 		
