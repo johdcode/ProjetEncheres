@@ -36,24 +36,43 @@ public class ConnexionServlet extends HttpServlet {
 		String identifiant =request.getParameter("identifiant");
 		String motDePasse =request.getParameter("motDePasse");
 		String messageAuthentification = "Le mot de passe ou l'idenfiant est incorrect";
-		HttpSession session = request.getSession();
+//		HttpSession session = request.getSession();
 		
-		boolean authentification;
-		UtilisateurManager um = um.getInstance();
-		authentification = um.authentification(identifiant, motDePasse);
-				
-		if(authentification=true) {
-			RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/WEB-INF/Accueil.jsp"); 
-			System.out.println("connecté");
+		int error = 0;
+		
+		if(identifiant == null || identifiant == "") {
+			error++;
 		}
-		else {
+		if(identifiant.length() >= 30) {
+			error++;
+		}
+		if(motDePasse == null || motDePasse == "") {
+			error++;
+		}
+		if(motDePasse.length() >= 30) {
+			error++;
+		}
+		
+		if(error < 1) {			
+			boolean authentification;
+			UtilisateurManager um = UtilisateurManager.getInstance();
+			authentification = true;
+//			authentification = um.authentification(identifiant, motDePasse);
 			
-			if(seSouvenirDeMoi.contentEquals("seSouvenirDeMoi")) {
-				session.setAttribute("suiviSession", seSouvenirDeMoi);
-				
+			if(authentification == true) {
+				RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/WEB-INF/Accueil.jsp"); 
+				System.out.println("connecté");
 			}
-			RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/WEB-INF/Connexion.jsp"); 
 		}
+				
+//		else {
+//			
+//			if(seSouvenirDeMoi.contentEquals("seSouvenirDeMoi")) {
+//				session.setAttribute("suiviSession", seSouvenirDeMoi);
+//				
+//			}
+//			RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/WEB-INF/Connexion.jsp"); 
+//		}
 		
 		
 		
