@@ -1,4 +1,4 @@
-package fr.eni.projet;
+package fr.eni.projet.ihm;
 
 import java.io.IOException;
 
