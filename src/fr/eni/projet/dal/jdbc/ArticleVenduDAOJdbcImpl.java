@@ -7,22 +7,23 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
-
 import fr.eni.projet.bo.ArticleVendu;
 import fr.eni.projet.dal.ArticleVenduDAO;
 import fr.eni.projet.dal.ConnectionProvider;
 import fr.eni.projet.dal.DALException;
 
+
+
+
 public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 
 	//Variables commandes SQL
 	
-		private static final String sqlInsertArticle = "INSERT INTO ARTICLES_VENDUS(nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie) VALUES (?,?,?,?,?,?,?,?)";
-		private static final String sqlSelectById = "SELECT no_article,nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie FROM ARTICLES_VENDUS WHERE no_article = ?";
-		private static final String sqlSelectAll = "SELECT no_article,nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie FROM ARTICLES_VENDUS";
-		private static final String sqlUpdate = "UPDATE  ARTICLES_VENDUS SET nom_article=? ,date_debut_encheres=?,date_fin_encheres=?,prix_initial=?,prix_vente=?,no_utilisateur=?,no_categorie=? WHERE no_article = ? ";
-		private static final String sqlDelete = "DELETE  FROM  ARTICLES_VENDUS WHERE no_article = ?";
+		private static final String SQL_INSERT_ARTICLE = "INSERT INTO ARTICLES_VENDUS(nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie) VALUES (?,?,?,?,?,?,?,?)";
+		private static final String SQL_SELECT_BY_ID = "SELECT no_article,nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie FROM ARTICLES_VENDUS WHERE no_article = ?;";
+		private static final String SQL_SELECT_ALL = "SELECT no_article,nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie FROM ARTICLES_VENDUS;";
+		private static final String SQL_UPDATE = "UPDATE  ARTICLES_VENDUS SET nom_article=?,description=?,date_debut_encheres=?,date_fin_encheres=?,prix_initial=?,prix_vente=?,no_utilisateur=?,no_categorie=? WHERE no_article = ?;";
+		private static final String SQL_DELETE = "DELETE  FROM  ARTICLES_VENDUS WHERE no_article = ?";
 //		
 	// Constructor Vide
 		
@@ -42,7 +43,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 			try(Connection conn = ConnectionProvider.getConnection()) {
 				
 				//2 - Préparer la requete SQL (insert...)
-				PreparedStatement pStmt = conn.prepareStatement(sqlInsertArticle, Statement.RETURN_GENERATED_KEYS);
+				PreparedStatement pStmt = conn.prepareStatement(SQL_INSERT_ARTICLE, Statement.RETURN_GENERATED_KEYS);
 				pStmt.setString(1, a.getNomArticle());
 				pStmt.setString(2, a.getDescription());
 				pStmt.setTimestamp(3, a.getDateDebutEnchere());
@@ -55,7 +56,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 				
 				//3 - Executer la requete
 				pStmt.executeUpdate();
-				
+				System.out.println("ok");
 				//4 - Récupérer l'id
 				ResultSet rsKey = pStmt.getGeneratedKeys(); 
 				if(rsKey.next()) {
@@ -80,21 +81,21 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 			ArticleVendu a = null;
 
 			try(Connection conn = ConnectionProvider.getConnection()){
-					PreparedStatement stmt = conn.prepareStatement(sqlSelectById);
+					PreparedStatement stmt = conn.prepareStatement(SQL_SELECT_BY_ID);
 					stmt.setInt(1, noArticle);
 					ResultSet rs = stmt.executeQuery();
-
 					if(rs.next()) {
-						
-						a = new ArticleVendu(rs.getInt("no_article"),  
+						a = new ArticleVendu(
+										rs.getInt("no_article"),  
 								        rs.getString("nom_article"),
-								        rs.getString("description "),
+								        rs.getString("description"),
 								        rs.getTimestamp("date_debut_encheres"),
 								        rs.getTimestamp("date_fin_encheres"),
 								        rs.getInt("prix_initial"),
 								        rs.getInt("prix_vente"),
 								        rs.getInt("no_utilisateur"),
-								        rs.getInt("no_categorie"));
+								        rs.getInt("no_categorie")
+								);
 					}
 			
 		} catch (SQLException e) {
@@ -111,11 +112,12 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 			
 			try (Connection connection = ConnectionProvider.getConnection()){ 
 				Statement stmt = connection.createStatement();
-				ResultSet rs = stmt.executeQuery(sqlSelectAll);
+				ResultSet rs = stmt.executeQuery(SQL_SELECT_ALL);
 				while(rs.next()) {
-					ArticleVendu article = new ArticleVendu(rs.getInt("no_article"),  
+					ArticleVendu article = new ArticleVendu(
+							rs.getInt("no_article"),  
 					        rs.getString("nom_article"),
-					        rs.getString("description "),
+					        rs.getString("description"),
 					        rs.getTimestamp("date_debut_encheres"),
 					        rs.getTimestamp("date_fin_encheres"),
 					        rs.getInt("prix_initial"),
@@ -137,16 +139,17 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 		@Override
 		public void update(ArticleVendu a) throws DALException {
 			try(Connection conn = ConnectionProvider.getConnection()){
-				PreparedStatement stmt = conn.prepareStatement(sqlUpdate);
+				PreparedStatement stmt = conn.prepareStatement(SQL_UPDATE);
 				
-				stmt.setString(1, a.getDescription());
-				stmt.setTimestamp(2, a.getDateDebutEnchere());
-				stmt.setTimestamp(3, a.getDateFinEnchere());
-				stmt.setInt(4, a.getMiseAPrix());
-				stmt.setInt(5, a.getPrixVente());
-				stmt.setInt(6, a.getNoUtilisateurArticle());
-				stmt.setInt(7, a.getNoCategorieArticle());
-				stmt.setString(8, a.getNomArticle());
+				stmt.setString(1, a.getNomArticle());
+				stmt.setString(2, a.getDescription());
+				stmt.setTimestamp(3, a.getDateDebutEnchere());
+				stmt.setTimestamp(4, a.getDateFinEnchere());
+				stmt.setInt(5, a.getMiseAPrix());
+				stmt.setInt(6, a.getPrixVente());
+				stmt.setInt(7, a.getNoUtilisateurArticle());
+				stmt.setInt(8, a.getNoCategorieArticle());
+				stmt.setInt(9, a.getNoArticle());
 				
 				stmt.executeUpdate();
 			}catch (SQLException e) {
@@ -161,12 +164,27 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 		@Override
 		public void delete(int id) throws DALException {
 			try (Connection connection = ConnectionProvider.getConnection()) {
-				PreparedStatement stmt = connection.prepareStatement(sqlDelete);
-				stmt.setInt(1, id);
+				PreparedStatement stmt = connection.prepareStatement(SQL_DELETE);
+				stmt.setInt(1,id);
 				stmt.executeUpdate();
 			} catch (SQLException e) {
 				throw new DALException("Delete ArticleVendu FAIL - ", e);
 			}
+		}
+		@Override
+		public void insert(ArticleVendu a, int noUtilisteur, int noCategorie) throws DALException {
+			// TODO Auto-generated method stub
+			
+		}
+		@Override
+		public ArticleVendu selectById(int noArticle) throws DALException {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		@Override
+		public void update(ArticleVendu a) throws DALException {
+			// TODO Auto-generated method stub
+			
 		}
 		
 	

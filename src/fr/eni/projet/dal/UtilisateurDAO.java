@@ -7,5 +7,8 @@ import fr.eni.projet.bo.Utilisateur;
 public interface UtilisateurDAO {
 	public void insert(Utilisateur utilisateur);
 	public List<Utilisateur> selectAll();
-	public Utilisateur selectById(String identifiant);
+	public void update(Utilisateur utilisateur) throws DALException;
+	void delete(int id) throws DALException;
+	Utilisateur selectById(int identifiant);
+	
 }
