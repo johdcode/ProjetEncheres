@@ -178,6 +178,22 @@ public class ArticleVendu {
 		this.listEncheres = listEncheres;
 	}
 
+	
+	
+	public ArticleVendu(int noArticle, String nomArticle, String description, Timestamp dateDebutEnchere,
+			Timestamp dateFinEnchere, int miseAPrix, int prixVente, int noUtilisateurArticle, int noCategorieArticle) {
+		super();
+		this.noArticle = noArticle;
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.dateDebutEnchere = dateDebutEnchere;
+		this.dateFinEnchere = dateFinEnchere;
+		this.miseAPrix = miseAPrix;
+		this.prixVente = prixVente;
+		this.noUtilisateurArticle = noUtilisateurArticle;
+		this.noCategorieArticle = noCategorieArticle;
+	}
+
 	//toString
 	@Override
 	public String toString() {
