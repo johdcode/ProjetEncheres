@@ -80,7 +80,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		
 	}
 	
-	public Utilisateur selectById(String identifiant, String motDePasse) {
+	public Utilisateur selectById(String identifiant) {
 		Utilisateur utilisateur = null;
 		try (Connection connection = ConnectionProvider.getConnection()){
 		PreparedStatement pstmt = connection.prepareStatement(SELECT_BY_ID);

@@ -43,7 +43,7 @@ public class UtilisateurManager {
 		return correspondance;
 	}
 
-	public Utilisateur selectById(String identifiant, String motDePasse) {
-	return utilisateurDAO.selectById(identifiant, motDePasse);
+	public Utilisateur selectById(String identifiant) {
+	return utilisateurDAO.selectById(identifiant);
 	}
 }
