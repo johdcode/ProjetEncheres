@@ -11,11 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fr.eni.projet.bll.UtilisateurManager;
+import fr.eni.projet.bo.Utilisateur;
 
 /**
  * Servlet implementation class Connexion
  */
-@WebServlet("/ConnexionServlet")
+@WebServlet("/connexion")
 public class ConnexionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -23,8 +24,14 @@ public class ConnexionServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd =this.getServletContext().getRequestDispatcher("/WEB-INF/templates/Connexion.jsp");
-		rd.forward(request, response);
+		// Utilisateur connecté
+		HttpSession session = request.getSession();
+		System.out.println(session.getAttribute("utilisateurSession"));
+		if(session.getAttribute("utilisateurSession") != null) {
+			request.setAttribute("connecte", true);
+		}
+		
+		this.getServletContext().getRequestDispatcher("/WEB-INF/templates/Connexion.jsp").forward(request, response);
 		
 	}
 
@@ -32,11 +39,13 @@ public class ConnexionServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		HttpSession session = request.getSession();
+		
 		String seSouvenirDeMoi = request.getParameter("seSouvenirDeMoi");
 		String identifiant =request.getParameter("identifiant");
 		String motDePasse =request.getParameter("motDePasse");
 		String messageAuthentification = "Le mot de passe ou l'idenfiant est incorrect";
-//		HttpSession session = request.getSession();
 		
 		int erreur = 0;
 		
@@ -53,15 +62,21 @@ public class ConnexionServlet extends HttpServlet {
 			erreur++;
 		}
 		
-		if(erreur < 1) {			
-			boolean authentification;
-			UtilisateurManager um = UtilisateurManager.getInstance();
-			authentification = true;
-//			authentification = um.authentification(identifiant, motDePasse);
+		// Si il n'y a pas d'erreur et que l'utilisateur n'est pas encore connecté
+		if((erreur < 1) && (session.getAttribute("utilisateurSession") == null)) {		
+			UtilisateurManager utilisateurManager = UtilisateurManager.getInstance();
+			Utilisateur u = utilisateurManager.authentification(identifiant, motDePasse);
 			
-			if(authentification == true) {
-				RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/WEB-INF/Accueil.jsp"); 
-				System.out.println("connecté");
+			if(u != null) {
+				session.setAttribute("utilisateurSession", u);
+				
+				response.sendRedirect(request.getContextPath() + "/liste-encheres"); 
+				System.out.println("Utilisateur connecté");
+			} else  {
+				System.out.println("La connexion a échoué");
+				response.sendRedirect(request.getContextPath() + "/connexion"); 
+//				RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/WEB-INF/Accueil.jsp"); 
+				erreur++;
 			}
 		}	
 //		else {

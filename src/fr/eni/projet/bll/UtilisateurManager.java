@@ -31,23 +31,18 @@ public class UtilisateurManager {
 	}
 	
 	
-	public boolean authentification(String identifiant, String motDePasse) {
+	public Utilisateur authentification(String identifiant, String motDePasse) {
 		List <Utilisateur> listeAuthentification = this.utilisateurDAO.selectAll();
-		boolean correspondance = false;
 		for(Utilisateur utilisateur : listeAuthentification) {
-			System.out.println(utilisateur.getPseudo());
-			System.out.println(utilisateur.getMotDePasse());
-	
-			if(utilisateur.getPseudo().equals(identifiant)&&utilisateur.getMotDePasse().equals(motDePasse)) {
-				correspondance = true;
+			if((utilisateur.getPseudo().equals(identifiant) || utilisateur.getEmail().equals(identifiant)) && utilisateur.getMotDePasse().equals(motDePasse)) {
+				return utilisateur;
 			}
 		}
-		
-		return correspondance;
+		return null;
 	}
 
 	public Utilisateur selectById(int identifiant) {
-	return utilisateurDAO.selectById(identifiant);
+		return utilisateurDAO.selectById(identifiant);
 	}
 	
 	public void delete(int id) throws DALException {
