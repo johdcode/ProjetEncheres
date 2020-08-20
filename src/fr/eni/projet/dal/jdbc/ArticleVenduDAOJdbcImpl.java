@@ -7,12 +7,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
-
 import fr.eni.projet.bo.ArticleVendu;
 import fr.eni.projet.dal.ArticleVenduDAO;
 import fr.eni.projet.dal.ConnectionProvider;
 import fr.eni.projet.dal.DALException;
+
+
+
 
 public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 
@@ -169,6 +170,21 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 			} catch (SQLException e) {
 				throw new DALException("Delete ArticleVendu FAIL - ", e);
 			}
+		}
+		@Override
+		public void insert(ArticleVendu a, int noUtilisteur, int noCategorie) throws DALException {
+			// TODO Auto-generated method stub
+			
+		}
+		@Override
+		public ArticleVendu selectById(int noArticle) throws DALException {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		@Override
+		public void update(ArticleVendu a) throws DALException {
+			// TODO Auto-generated method stub
+			
 		}
 		
 	

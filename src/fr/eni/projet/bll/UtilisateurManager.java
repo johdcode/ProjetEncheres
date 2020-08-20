@@ -1,8 +1,8 @@
 package fr.eni.projet.bll;
 
 import java.util.List;
-
 import fr.eni.projet.bo.Utilisateur;
+import fr.eni.projet.dal.DALException;
 import fr.eni.projet.dal.DAOFactory;
 import fr.eni.projet.dal.UtilisateurDAO;
 
@@ -46,7 +46,15 @@ public class UtilisateurManager {
 		return correspondance;
 	}
 
-	public Utilisateur selectById(String identifiant) {
+	public Utilisateur selectById(int identifiant) {
 	return utilisateurDAO.selectById(identifiant);
+	}
+	
+	public void delete(int id) throws DALException {
+		this.utilisateurDAO.delete(id);
+	}
+	
+	public void update(Utilisateur utilisateur) throws DALException {
+		this.utilisateurDAO.update(utilisateur);
 	}
 }

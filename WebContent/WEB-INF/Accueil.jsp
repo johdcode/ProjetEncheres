@@ -13,10 +13,10 @@
 </div>
 
 <div>
-<a href="#">Enchères</a>
-<a href="#">Vendre un article</a>
-<a href="#">Mon profil</a>
-<a href="#">Déconnexion</a>
+	<a href="#">Enchères</a>
+	<a href="#">Vendre un article</a>
+	<a href="#">Mon profil</a>
+	<a href="#">Déconnexion</a>
 </div>
 </header>
 </body>

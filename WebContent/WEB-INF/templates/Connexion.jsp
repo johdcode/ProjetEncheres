@@ -25,9 +25,11 @@
 	
 	</form>
 	
-	<p>
-		<c:if test="${authentification == false}">Le mot de passe ou l'identifiant est incorrect</c:if>
-	</p>
+	<c:if test="${authentification == false}">
+		<p>
+			Le mot de passe ou l'identifiant est incorrect
+		</p>
+	</c:if>
 	
 	<button><a href="#">Créer un compte</a></button>
 

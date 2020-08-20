@@ -9,14 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import fr.eni.projet.bll.ArticleVenduManager;
 import fr.eni.projet.bll.UtilisateurManager;
-import fr.eni.projet.bo.ArticleVendu;
 import fr.eni.projet.bo.Utilisateur;
-import fr.eni.projet.dal.ArticleVenduDAO;
+
 import fr.eni.projet.dal.DALException;
-import fr.eni.projet.dal.DAOFactory;
-import fr.eni.projet.dal.jdbc.ArticleVenduDAOJdbcImpl;
+
 
 /**
  * Servlet implementation class Tests
@@ -30,8 +27,32 @@ public class Tests extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		UtilisateurManager um = UtilisateurManager.getInstance();
+	UtilisateurManager um = UtilisateurManager.getInstance();
 //		System.out.println(um.authentification("kim", "motDePasse"));
+
+	//System.out.println(um.selectAll());
+
+		
+		Utilisateur u = new Utilisateur(6,"kim", "Kim", "Maroé", "kim@mail.com", "0707070707", "Rue des lilas", "44200", "Nantes", "motDePasse", 10.0f, false);
+		u.setNom("Coco");
+
+		//um.insert(u);
+		try {
+			um.update(u);
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	//	ArticleVenduDAOJdbcImpl a = (ArticleVenduDAOJdbcImpl) DAOFactory.getArticleVenduDAO();
+		//ArticleVendu b = new ArticleVendu("guitare", "6 cordes", new Timestamp(1901-01-01), new Timestamp(1901-01-01), 2, 3, 1, 2);
+		//try {
+		//	a.insert(b, 1, 2);
+		//} catch (DALException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+		//}
+
+
 //	System.out.println(um.selectAll());
 //		System.out.println(um.selectById("jo"));
 //		Utilisateur u = new Utilisateur("kim", "Kim", "Maroé", "kim@mail.com", "0707070707", "Rue des lilas", "44200", "Nantes", "motDePasse", 10.0f, false);
@@ -104,6 +125,7 @@ public class Tests extends HttpServlet {
 //			e.printStackTrace();
 //		}
 		
+
 	}
 
 	/**

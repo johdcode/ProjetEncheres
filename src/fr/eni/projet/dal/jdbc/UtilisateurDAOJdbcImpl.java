@@ -8,18 +8,22 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.eni.projet.bo.ArticleVendu;
 import fr.eni.projet.bo.Utilisateur;
 import fr.eni.projet.dal.ConnectionProvider;
+import fr.eni.projet.dal.DALException;
 import fr.eni.projet.dal.UtilisateurDAO;
 
 public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	
 	private final String INSERT = "INSERT INTO utilisateurs (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-	private final String SELECT_ALL = "SELECT no_utilisateur pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur from utilisateurs;";
-	private final String SELECT_BY_ID = "SELECT no_utilisateur pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur from utilisateurs where pseudo=?;";
+	private final String SELECT_ALL = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur from utilisateurs;";
+	private final String SELECT_BY_ID = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur from utilisateurs where no_utilisateur=?;";
+	private final String UPDATE = "UPDATE Utilisateurs set pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=?, administrateur=? where no_utilisateur=?;";
+	private final String DELETE = "DELETE FROM utilisateurs WHERE no_utilisateur =?;";
+
 	@Override
 	public void insert(Utilisateur utilisateur) {
-		Utilisateur u = null;
 		PreparedStatement req = null;
 		ResultSet rs = null;
 		
@@ -66,7 +70,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(SELECT_ALL);
 			while(rs.next()) {
-				Utilisateur utilisateur = new Utilisateur( Integer.parseInt(rs.getString("no_utilisateur")), rs.getString("pseudo").trim(), 
+				Utilisateur utilisateur = new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo").trim(), 
 						rs.getString("nom").trim(), rs.getString("prenom").trim(), rs.getString("email").trim(),rs.getString("telephone").trim(),
 						rs.getString("rue").trim(),rs.getString("code_postal").trim(),rs.getString("ville").trim(),rs.getString("mot_de_passe").trim(),
 						rs.getFloat("credit"),rs.getBoolean("administrateur"));
@@ -80,13 +84,17 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		
 	}
 	@Override
-	public Utilisateur selectById(String identifiant) {
+	public Utilisateur selectById(int identifiant) {
 		Utilisateur utilisateur = null;
+		
 		try (Connection connection = ConnectionProvider.getConnection()){
+			
 		PreparedStatement pstmt = connection.prepareStatement(SELECT_BY_ID);
+		pstmt.setInt(1, identifiant);
 		ResultSet rs = pstmt.executeQuery();
+		
 		while(rs.next()) {
-		utilisateur = new Utilisateur(rs.getInt(1), rs.getString("pseudo").trim(), 
+		utilisateur = new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo").trim(), 
 					rs.getString("nom").trim(), rs.getString("prenom").trim(), rs.getString("email").trim(),rs.getString("telephone").trim(),
 					rs.getString("rue").trim(),rs.getString("code_postal").trim(),rs.getString("ville").trim(),rs.getString("mot_de_passe").trim(),
 					rs.getFloat("credit"),rs.getBoolean("administrateur"));
@@ -99,6 +107,54 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		return utilisateur;
 		
 	}
+	@Override
+	public void update(Utilisateur utilisateur) throws DALException {
+		try(Connection cnx = ConnectionProvider.getConnection()){
+			PreparedStatement pstmt = cnx.prepareStatement(UPDATE);
+			
+			pstmt.setString(1, utilisateur.getPseudo());
+			pstmt.setString(2, utilisateur.getNom());
+			pstmt.setString(3, utilisateur.getPrenom());
+			pstmt.setString(4, utilisateur.getEmail());
+			pstmt.setString(5, utilisateur.getTelephone());
+			pstmt.setString(6, utilisateur.getRue());
+			pstmt.setString(7, utilisateur.getCodePostal());
+			pstmt.setString(8, utilisateur.getVille());
+			pstmt.setString(9, utilisateur.getMotDePasse());
+			pstmt.setFloat(10, utilisateur.getCredit());
+			pstmt.setBoolean(11, utilisateur.isAdministrateur());
+			pstmt.setInt(12, utilisateur.getNoUtilisateur());
+			
+			pstmt.executeUpdate();
+		}catch (SQLException e) {
+			e.printStackTrace();
+			throw new DALException("Update Utilisateur FAIL", e);
+		}
+		}	
 	
-	
+	@Override
+	public void delete(int id) throws DALException {
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			//Desactiver les foreign keys
+			Statement desactiveEnchere = cnx.createStatement();
+			desactiveEnchere.executeUpdate("ALTER TABLE encheres NOCHECK CONSTRAINT encheres_utilisateur_fk;");
+			Statement desactiveArticlesVendus = cnx.createStatement();
+			desactiveArticlesVendus.executeUpdate("ALTER TABLE articles_vendus NOCHECK CONSTRAINT ventes_utilisateur_fk;");
+			
+			//Executer la suppresion
+			PreparedStatement pstmt = cnx.prepareStatement(DELETE);
+			pstmt.setInt(1,id);
+			pstmt.executeUpdate();
+			System.out.println("ok");
+			//Reactiver les foreign keys
+			Statement activeEnchere = cnx.createStatement();
+			activeEnchere.executeUpdate("ALTER TABLE encheres CHECK CONSTRAINT encheres_utilisateur_fk;");
+			Statement activeArticlesVendus = cnx.createStatement();
+			activeArticlesVendus.executeUpdate("ALTER TABLE articles_vendus CHECK CONSTRAINT ventes_utilisateur_fk;");
+			
+			
+		} catch (SQLException e) {
+			throw new DALException("Delete Utilisateur FAIL - ", e);
+		}
+	}
 }
