@@ -171,21 +171,6 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 				throw new DALException("Delete ArticleVendu FAIL - ", e);
 			}
 		}
-		@Override
-		public void insert(ArticleVendu a, int noUtilisteur, int noCategorie) throws DALException {
-			// TODO Auto-generated method stub
-			
-		}
-		@Override
-		public ArticleVendu selectById(int noArticle) throws DALException {
-			// TODO Auto-generated method stub
-			return null;
-		}
-		@Override
-		public void update(ArticleVendu a) throws DALException {
-			// TODO Auto-generated method stub
-			
-		}
 		
 	
 }
