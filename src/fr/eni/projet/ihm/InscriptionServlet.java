@@ -1,4 +1,4 @@
-package fr.eni.projet;
+package fr.eni.projet.ihm;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -6,6 +6,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import fr.eni.projet.bll.UtilisateurManager;
+import fr.eni.projet.bo.Utilisateur;
 
 /**
  * Servlet implementation class InscriptionServlet
@@ -13,11 +17,19 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/inscription")
 public class InscriptionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	UtilisateurManager utilisateurManager = UtilisateurManager.getInstance();
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// Utilisateur connecté
+		HttpSession session = request.getSession();
+		System.out.println(session.getAttribute("utilisateurSession"));
+		if(session.getAttribute("utilisateurSession") != null) {
+			request.setAttribute("connecte", true);
+		}
+				
 		request.getRequestDispatcher("/WEB-INF/templates/Inscription.jsp").forward(request, response);
 	}
 
@@ -25,6 +37,10 @@ public class InscriptionServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		
+		int creditInitial = 100;
+		
 		String pseudo = request.getParameter("pseudo");
 		String nom = request.getParameter("nom");
 		String prenom = request.getParameter("prenom");
@@ -119,12 +135,16 @@ public class InscriptionServlet extends HttpServlet {
 			erreur++;
 		}
 		
-		System.out.println(erreur);
-		
-		if(erreur < 1) {			
-			request.getRequestDispatcher("/WEB-INF/templates/Inscription.jsp").forward(request, response);
+		if((erreur == 0) && (session.getAttribute("utilisateurSession") == null)) {
+			Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, creditInitial, false);
+			utilisateurManager.insert(utilisateur);
+			
+			session.setAttribute("utilisateurSession", utilisateur);
+			
+			request.getRequestDispatcher("/WEB-INF/templates/ListeEncheres.jsp").forward(request, response);
 		} else {
 			response.getWriter().print("Echec inscription.");
+			request.getRequestDispatcher("/WEB-INF/templates/Inscription.jsp").forward(request, response);
 		}
 	}
 

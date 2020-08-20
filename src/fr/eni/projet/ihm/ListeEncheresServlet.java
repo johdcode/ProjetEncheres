@@ -1,4 +1,4 @@
-package fr.eni.projet;
+package fr.eni.projet.ihm;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -6,11 +6,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class ListeEncheresServlet
  */
-@WebServlet("/liste-encheres")
+@WebServlet("/encheres")
 public class ListeEncheresServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -19,8 +20,12 @@ public class ListeEncheresServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
-		request.getRequestDispatcher("/WEB-INF/templates/ListeEncheres.jsp").forward(request, response);;
+		HttpSession session = request.getSession();
+		if(session.getAttribute("utilisateurSession") != null) {
+			request.setAttribute("connecte", true);
+		}
+		
+		request.getRequestDispatcher("/WEB-INF/templates/ListeEncheres.jsp").forward(request, response);
 	}
 
 	/**
@@ -51,9 +56,9 @@ public class ListeEncheresServlet extends HttpServlet {
 		System.out.println("ventesEnCours : " + ventesEnCours);
 		System.out.println("ventesNonDebutees : " + ventesNonDebutees);
 		System.out.println("ventesTerminees : " + ventesTerminees);
-		
+
 		int erreur = 0;
-		
+
 		if(recherche == null || recherche == "") {
 			erreur++;
 		}
@@ -118,7 +123,7 @@ public class ListeEncheresServlet extends HttpServlet {
 		}
 		
 		if(erreur == 0) {
-			response.sendRedirect(request.getContextPath() + "/liste-encheres");
+			response.sendRedirect(request.getContextPath() + "/encheres");
 		} else {
 			response.getWriter().print("Il y a eu une erreur dans la recherche.");
 		}

@@ -22,7 +22,7 @@ public class DeconnexionServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.invalidate();
 		
-		response.sendRedirect(request.getContextPath() + "/liste-encheres");
+		response.sendRedirect(request.getContextPath() + "/encheres");
 	}
 
 	/**

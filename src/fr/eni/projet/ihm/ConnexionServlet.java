@@ -70,7 +70,7 @@ public class ConnexionServlet extends HttpServlet {
 			if(u != null) {
 				session.setAttribute("utilisateurSession", u);
 				
-				response.sendRedirect(request.getContextPath() + "/liste-encheres"); 
+				response.sendRedirect(request.getContextPath() + "/encheres"); 
 				System.out.println("Utilisateur connecté");
 			} else  {
 				System.out.println("La connexion a échoué");
