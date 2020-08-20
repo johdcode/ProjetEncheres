@@ -11,9 +11,6 @@ public class Enchere {
 	int noArticleVenduEnchere;
 	int noUtilisateurEnchere;
 	
-	Utilisateur utilisateur;
-	ArticleVendu articleVendu;
-	
 	// Getter & Setter
 	public Timestamp getDateEnchere() {
 		return dateEnchere;
@@ -32,18 +29,6 @@ public class Enchere {
 	}
 	public void setMontantEnchere(int montantEnchere) {
 		this.montantEnchere = montantEnchere;
-	}
-	public Utilisateur getUtilisateur() {
-		return utilisateur;
-	}
-	public void setUtilisateur(Utilisateur utilisateur) {
-		this.utilisateur = utilisateur;
-	}
-	public ArticleVendu getArticleVendu() {
-		return articleVendu;
-	}
-	public void setArticleVendu(ArticleVendu articleVendu) {
-		this.articleVendu = articleVendu;
 	}
 	
 	public int getNoArticleVenduEnchere() {
@@ -91,7 +76,7 @@ public class Enchere {
 	public String toString() {
 		return "Enchere [noEnchere=" + noEnchere + ", dateEnchere=" + dateEnchere + ", montantEnchere=" + montantEnchere
 				+ ", noArticleVenduEnchere=" + noArticleVenduEnchere + ", noUtilisateurEnchere=" + noUtilisateurEnchere
-				+ ", utilisateur=" + utilisateur + ", articleVendu=" + articleVendu + "]";
+				+ ", utilisateur="  + ", articleVendu=" + "]";
 	}
 	
 	

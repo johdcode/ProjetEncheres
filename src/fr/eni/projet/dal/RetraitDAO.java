@@ -1,10 +1,10 @@
 package fr.eni.projet.dal;
 
 import java.util.List;
-
 import fr.eni.projet.bo.Retrait;
 
 public interface RetraitDAO {
+
 
 	void insert(Retrait r) throws DALException;
 
@@ -15,6 +15,5 @@ public interface RetraitDAO {
 	void update(Retrait r) throws DALException;
 
 	void delete(int noArticleRetrait) throws DALException;
-	
 
 }
