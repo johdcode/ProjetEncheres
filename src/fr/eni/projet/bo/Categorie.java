@@ -34,13 +34,12 @@ public class Categorie {
 		super();
 		this.libelle = libelle;
 	}
-	public Categorie(int noCategorie, String libelle, List<ArticleVendu> listeArticleCategorie) {
+	
+	public Categorie(int noCategorie, String libelle) {
 		super();
+		this.noCategorie = noCategorie;
 		this.libelle = libelle;
-		this.listeArticleCategorie = listeArticleCategorie;
 	}
-	
-	
 	//toString
 	@Override
 	public String toString() {

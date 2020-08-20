@@ -55,16 +55,15 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 				
 				
 				//3 - Executer la requete
-				pStmt.executeUpdate();
-				System.out.println("ok");
+				int nbLignes = pStmt.executeUpdate();
+				
 				//4 - Récupérer l'id
-				ResultSet rsKey = pStmt.getGeneratedKeys(); 
-				if(rsKey.next()) {
-					a.setNoArticle(rsKey.getInt(1));	
+				if (nbLignes == 1) {
+					ResultSet rsKey = pStmt.getGeneratedKeys(); 
+					if(rsKey.next()) {
+						a.setNoArticle(rsKey.getInt(1));	
+					}
 				}
-				
-				
-				//5 - Fermer la connexion = Remettre la connexion disponible dans le pool
 				
 				
 			} catch (SQLException e) {
