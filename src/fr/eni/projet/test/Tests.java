@@ -7,7 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.projet.bll.CategorieManager;
 import fr.eni.projet.bll.RetraitManager;
+import fr.eni.projet.bo.Categorie;
 import fr.eni.projet.bo.Retrait;
 import fr.eni.projet.dal.DALException;
 
@@ -58,11 +60,11 @@ public class Tests extends HttpServlet {
 		
 		
 		//Test ArticleVenduDAO
-				//Insert
-//		RetraitManager avm = RetraitManager.getInstance();
-//		Retrait b = new Retrait(2, "25 place de la bourse", "44000", "Nantes"); 
+//				//Insert
+//		CategorieManager avm = CategorieManager.getInstance();
+//		Categorie c = new Categorie("cable"); 
 //		try {
-//			avm.insert(b);
+//			avm.insert(c);
 //		} catch (DALException e) {
 //
 //			e.printStackTrace();
@@ -87,16 +89,16 @@ public class Tests extends HttpServlet {
 //			e.printStackTrace();
 //		}
 		
-//		RetraitManager avm = RetraitManager.getInstance();
+//		CategorieManager avm = CategorieManager.getInstance();
 //		try {
-//			System.out.println(avm.selectById(11));
+//			System.out.println(avm.selectById(4));
 //		} catch (DALException e) {
 //
 //			e.printStackTrace();
 //		}
 		
 				//SelectAll
-//		RetraitManager avm = RetraitManager.getInstance();
+//		CategorieManager avm = CategorieManager.getInstance();
 //		try {
 //			System.out.println(avm.selectAll());
 //		} catch (DALException e) {
@@ -105,23 +107,23 @@ public class Tests extends HttpServlet {
 //		}
 		
 //				//Update
-//		RetraitManager avm = RetraitManager.getInstance();
-//		Retrait b = new Retrait(2, "2 place de la bourse", "44000", "Naoned"); 
+//		CategorieManager avm = CategorieManager.getInstance();
+//		Categorie b = new Categorie(1, "modifcat"); 
 //		try {
 //			avm.update(b);
 //		} catch (DALException e) {
 //			
 //			e.printStackTrace();
 //		}
-//		
+		
 				//Delete
-//		RetraitManager avm = RetraitManager.getInstance();
-//		try {
-//			avm.delete(2);
-//		} catch (DALException e) {
-//
-//			e.printStackTrace();
-//		}
+		CategorieManager avm = CategorieManager.getInstance();
+		try {
+			avm.delete(2);
+		} catch (DALException e) {
+
+			e.printStackTrace();
+		}
 		
 
 	}

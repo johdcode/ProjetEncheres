@@ -19,7 +19,7 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
 	private static final String SQL_SELECT_BY_ID = "SELECT no_categorie, libelle FROM CATEGORIES WHERE no_categorie = ?;";
 	private static final String SQL_SELECT_ALL = "SELECT no_categorie, libelle FROM CATEGORIES;";
 	private static final String SQL_UPDATE = "UPDATE CATEGORIES SET libelle=? WHERE no_categorie = ?;";
-	private static final String SQL_DELETE = "DELETE  FROM  CATEGORIES WHERE no_article = ?";
+	private static final String SQL_DELETE = "DELETE  FROM  CATEGORIES WHERE no_categorie = ?";
 
 	
 	//Constructor vide
@@ -119,9 +119,19 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
 	@Override
 	public void delete(int noCategorie) throws DALException {
 		try (Connection connection = ConnectionProvider.getConnection()) {
+			//Desactiver les foreign keys
+			Statement desactiveEnchere = connection.createStatement();
+			desactiveEnchere.executeUpdate("ALTER TABLE ARTICLES_VENDUS NOCHECK CONSTRAINT articles_vendus_categories_fk;");
+			
+			//Delete
 			PreparedStatement stmt = connection.prepareStatement(SQL_DELETE);
 			stmt.setInt(1,noCategorie);
 			stmt.executeUpdate();
+			
+			//Reactiver les foreign keys
+			Statement activeEnchere = connection.createStatement();
+			activeEnchere.executeUpdate("ALTER TABLE ARTICLES_VENDUS CHECK CONSTRAINT articles_vendus_categories_fk;");
+			
 		} catch (SQLException e) {
 			throw new DALException("Delete Categorie FAIL - ", e);
 		}
