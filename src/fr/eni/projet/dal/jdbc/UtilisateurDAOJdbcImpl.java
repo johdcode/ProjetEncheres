@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.eni.projet.bll.ArticleVenduManager;
 import fr.eni.projet.bo.ArticleVendu;
 import fr.eni.projet.bo.Utilisateur;
 import fr.eni.projet.dal.ConnectionProvider;
@@ -21,6 +22,8 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	private final String SELECT_BY_ID = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur from utilisateurs where no_utilisateur=?;";
 	private final String UPDATE = "UPDATE Utilisateurs set pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=?, administrateur=? where no_utilisateur=?;";
 	private final String DELETE = "DELETE FROM utilisateurs WHERE no_utilisateur =?;";
+	private final String DELETE_FROM_ENCHERES = "DELETE FROM encheres WHERE no_utilisateur =?;";
+	private final String DELETE_FROM_ARTICLES = "DELETE FROM articles_vendus WHERE no_utilisateur =?;";
 
 	@Override
 	public void insert(Utilisateur utilisateur) {
@@ -133,24 +136,22 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		}	
 	
 	@Override
-	public void delete(int id) throws DALException {
+	public void delete(Utilisateur utilisateur) throws DALException {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
-			//Desactiver les foreign keys
-			Statement desactiveEnchere = cnx.createStatement();
-			desactiveEnchere.executeUpdate("ALTER TABLE encheres NOCHECK CONSTRAINT encheres_utilisateur_fk;");
-			Statement desactiveArticlesVendus = cnx.createStatement();
-			desactiveArticlesVendus.executeUpdate("ALTER TABLE articles_vendus NOCHECK CONSTRAINT ventes_utilisateur_fk;");
-			
-			//Executer la suppresion
-			PreparedStatement pstmt = cnx.prepareStatement(DELETE);
-			pstmt.setInt(1,id);
+			PreparedStatement pstmt = cnx.prepareStatement(UPDATE);
+			pstmt.setString(1, "désactivé");
+			pstmt.setString(2, "x");
+			pstmt.setString(3, "x");
+			pstmt.setString(4, "x");
+			pstmt.setString(5, "x");
+			pstmt.setString(6, "x");
+			pstmt.setString(7, "x");
+			pstmt.setString(8, "x");
+			pstmt.setString(9, "x");
+			pstmt.setFloat(10, 0);
+			pstmt.setBoolean(11, utilisateur.isAdministrateur());
+			pstmt.setInt(12, utilisateur.getNoUtilisateur());
 			pstmt.executeUpdate();
-			System.out.println("ok");
-			//Reactiver les foreign keys
-			Statement activeEnchere = cnx.createStatement();
-			activeEnchere.executeUpdate("ALTER TABLE encheres CHECK CONSTRAINT encheres_utilisateur_fk;");
-			Statement activeArticlesVendus = cnx.createStatement();
-			activeArticlesVendus.executeUpdate("ALTER TABLE articles_vendus CHECK CONSTRAINT ventes_utilisateur_fk;");
 			
 			
 		} catch (SQLException e) {
