@@ -1,11 +1,12 @@
 package fr.eni.projet.bo;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
 
 public class Enchere {
 	//Variable
 	int noEnchere;
-	LocalDate dateEnchere;
+	Timestamp dateEnchere;
 	int montantEnchere;
 	int noArticleVenduEnchere;
 	int noUtilisateurEnchere;
@@ -14,7 +15,7 @@ public class Enchere {
 	ArticleVendu articleVendu;
 	
 	// Getter & Setter
-	public LocalDate getDateEnchere() {
+	public Timestamp getDateEnchere() {
 		return dateEnchere;
 	}
 	public int getNoEnchere() {
@@ -23,7 +24,7 @@ public class Enchere {
 	public void setNoEnchere(int noEnchere) {
 		this.noEnchere = noEnchere;
 	}
-	public void setDateEnchere(LocalDate dateEnchère) {
+	public void setDateEnchere(Timestamp dateEnchère) {
 		this.dateEnchere = dateEnchère;
 	}
 	public int getMontantEnchere() {
@@ -61,33 +62,30 @@ public class Enchere {
 	public Enchere() {
 		super();
 	}
-	public Enchere(LocalDate dateEnchere, int montantEnchere) {
+	public Enchere(Timestamp dateEnchere, int montantEnchere) {
 		super();
 		this.dateEnchere = dateEnchere;
 		this.montantEnchere = montantEnchere;
 	}
 	
-	public Enchere(LocalDate dateEnchere, int montantEnchere, Utilisateur utilisateur, ArticleVendu articleVendu) {
-		super();
-		this.dateEnchere = dateEnchere;
-		this.montantEnchere = montantEnchere;
-		this.utilisateur = utilisateur;
-		this.articleVendu = articleVendu;
-	}
 	
-	public Enchere(LocalDate dateEnchere, int montantEnchere, int noArticleVenduEnchere, int noUtilisateurEnchere,
-			Utilisateur utilisateur, ArticleVendu articleVendu) {
+	public Enchere(Timestamp dateEnchere, int montantEnchere, int noArticleVenduEnchere, int noUtilisateurEnchere) {
 		super();
 		this.dateEnchere = dateEnchere;
 		this.montantEnchere = montantEnchere;
 		this.noArticleVenduEnchere = noArticleVenduEnchere;
 		this.noUtilisateurEnchere = noUtilisateurEnchere;
-		this.utilisateur = utilisateur;
-		this.articleVendu = articleVendu;
 	}
 	
-	
-	
+	public Enchere(int noEnchere, Timestamp dateEnchere, int montantEnchere, int noArticleVenduEnchere,
+			int noUtilisateurEnchere) {
+		super();
+		this.noEnchere = noEnchere;
+		this.dateEnchere = dateEnchere;
+		this.montantEnchere = montantEnchere;
+		this.noArticleVenduEnchere = noArticleVenduEnchere;
+		this.noUtilisateurEnchere = noUtilisateurEnchere;
+	}
 	//toString
 	@Override
 	public String toString() {

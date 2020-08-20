@@ -3,11 +3,12 @@ package fr.eni.projet.bo;
 public class Retrait {
 
 	//variables
-	ArticleVendu article;
+	int noArticleRetrait;
 	String rue;
 	String codePostal;
 	String ville;
 	
+	ArticleVendu article;
 	
 	// getters & setter
 	public ArticleVendu getArticle() {
@@ -35,6 +36,12 @@ public class Retrait {
 		this.ville = ville;
 	}
 	
+	public int getNoArticleRetrait() {
+		return noArticleRetrait;
+	}
+	public void setNoArticleRetrait(int noArticleRetrait) {
+		this.noArticleRetrait = noArticleRetrait;
+	}
 	//Constructor
 	public Retrait() {
 		super();
@@ -46,20 +53,21 @@ public class Retrait {
 		this.codePostal = codePostal;
 		this.ville = ville;
 	}
-	public Retrait(ArticleVendu article, String rue, String codePostal, String ville) {
+	public Retrait(int noArticleRetrait, String rue, String codePostal, String ville) {
 		super();
-		this.article = article;
+		this.noArticleRetrait = noArticleRetrait;
 		this.rue = rue;
 		this.codePostal = codePostal;
 		this.ville = ville;
 	}
 	
 	//toString
+	
 	@Override
 	public String toString() {
-		return "Retrait [article=" + article + ", rue=" + rue + ", codePostal=" + codePostal + ", ville=" + ville + "]";
+		return "Retrait [noArticleRetrait=" + noArticleRetrait + ", rue=" + rue + ", codePostal=" + codePostal
+				+ ", ville=" + ville + "]";
 	}
-	
 	
 	
 	
