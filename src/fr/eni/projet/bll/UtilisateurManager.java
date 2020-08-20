@@ -50,8 +50,8 @@ public class UtilisateurManager {
 	return utilisateurDAO.selectById(identifiant);
 	}
 	
-	public void delete(int id) throws DALException {
-		this.utilisateurDAO.delete(id);
+	public void delete(Utilisateur utilisateur) throws DALException {
+		this.utilisateurDAO.delete(utilisateur);
 	}
 	
 	public void update(Utilisateur utilisateur) throws DALException {
