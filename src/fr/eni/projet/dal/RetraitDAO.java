@@ -4,7 +4,7 @@ import fr.eni.projet.bo.Retrait;
 
 public interface RetraitDAO {
 
-	public abstract void insert(Retrait r);
+	void insert(Retrait r);
 	
 	
 	
