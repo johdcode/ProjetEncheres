@@ -139,16 +139,16 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	public void delete(Utilisateur utilisateur) throws DALException {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = cnx.prepareStatement(UPDATE);
-			pstmt.setString(1, utilisateur.getPseudo());
-			pstmt.setString(2, utilisateur.getNom());
-			pstmt.setString(3, utilisateur.getPrenom());
-			pstmt.setString(4, utilisateur.getEmail());
-			pstmt.setString(5, utilisateur.getTelephone());
-			pstmt.setString(6, utilisateur.getRue());
-			pstmt.setString(7, utilisateur.getCodePostal());
-			pstmt.setString(8, utilisateur.getVille());
-			pstmt.setString(9, utilisateur.getMotDePasse());
-			pstmt.setFloat(10, utilisateur.getCredit());
+			pstmt.setString(1, "désactivé");
+			pstmt.setString(2, "x");
+			pstmt.setString(3, "x");
+			pstmt.setString(4, "x");
+			pstmt.setString(5, "x");
+			pstmt.setString(6, "x");
+			pstmt.setString(7, "x");
+			pstmt.setString(8, "x");
+			pstmt.setString(9, "x");
+			pstmt.setFloat(10, 0);
 			pstmt.setBoolean(11, utilisateur.isAdministrateur());
 			pstmt.setInt(12, utilisateur.getNoUtilisateur());
 			pstmt.executeUpdate();

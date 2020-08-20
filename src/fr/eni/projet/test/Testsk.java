@@ -24,14 +24,6 @@ public class Testsk extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		UtilisateurManager um = UtilisateurManager.getInstance();
-		try {
-			um.delete(4);
-		} catch (DALException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 		//		EnchereManager em = EnchereManager.getInstance();
 //		Enchere e = new Enchere(new Timestamp(2020-8-20), 12,2,6);
