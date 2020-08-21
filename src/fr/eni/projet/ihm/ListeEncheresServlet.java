@@ -1,6 +1,9 @@
 package fr.eni.projet.ihm;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fr.eni.projet.bo.Utilisateur;
+import fr.eni.projet.bll.ArticleVenduManager;
+import fr.eni.projet.bll.CategorieManager;
+import fr.eni.projet.bo.ArticleVendu;
+import fr.eni.projet.bo.Categorie;
+import fr.eni.projet.dal.DALException;
 
 /**
  * Servlet implementation class ListeEncheresServlet
@@ -30,6 +38,35 @@ public class ListeEncheresServlet extends HttpServlet {
 		
 		SessionService ss = new SessionService();
 		Utilisateur u = ss.checkUtilisateurSession(request, response);
+		
+		// liste des catégories
+		List <Categorie> listeCategorie = new ArrayList<Categorie>();
+		CategorieManager cm = CategorieManager.getInstance();
+		try {
+			listeCategorie = cm.selectAll();
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		request.setAttribute("listeCategorie", listeCategorie);
+		
+		
+		// liste fictive pour mise en place affichage des articles
+				// à mettre en jour ensuite avec la liste générée par la recherche
+		
+		List <ArticleVendu> listeArticle = new ArrayList<ArticleVendu>();
+		ArticleVenduManager avm = ArticleVenduManager.getInstance();
+		
+		try {
+			listeArticle = avm.selectAll();
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		request.setAttribute("listeArticle", listeArticle);
+		
+		
+		
 		
 		request.getRequestDispatcher("/WEB-INF/templates/ListeEncheres.jsp").forward(request, response);
 	}

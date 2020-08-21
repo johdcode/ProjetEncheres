@@ -1,17 +1,22 @@
 package fr.eni.projet.test;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.projet.bll.ArticleVenduManager;
 import fr.eni.projet.bll.CategorieManager;
 import fr.eni.projet.bll.RetraitManager;
 import fr.eni.projet.bll.UtilisateurManager;
+import fr.eni.projet.bo.ArticleVendu;
 import fr.eni.projet.bo.Categorie;
 import fr.eni.projet.bo.Retrait;
+import fr.eni.projet.bo.Utilisateur;
 import fr.eni.projet.dal.DALException;
 
 
@@ -61,11 +66,14 @@ public class Tests extends HttpServlet {
 		
 		
 		//Test ArticleVenduDAO
-//				//Insert
-//		CategorieManager avm = CategorieManager.getInstance();
-//		Categorie c = new Categorie("cable"); 
+				//Insert
+//		ArticleVenduManager avm = ArticleVenduManager.getInstance();
+//		ArticleVendu u = new ArticleVendu("triangle 2", "3 cotés", new Timestamp(2020-05-21), new Timestamp(2020-05-25), 7, 8, 10, 3); 
+//		System.out.println(u);
 //		try {
-//			avm.insert(c);
+//			
+//			Retrait r = new Retrait("rue test2", "44003", "nantes");
+//			avm.insert(u,r);
 //		} catch (DALException e) {
 //
 //			e.printStackTrace();

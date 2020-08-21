@@ -13,7 +13,7 @@
 <body>
 
 	<!-- conteneur Bootstrap -->
-	<div class="container">
+	<div class="container-fluid">
 		<!-- Navbarre -->
 		<nav class="navbar navbar-light bg-light">
 			<span class="navbar-brand mb-0 h1">ENI-Enchère</span> <span
@@ -82,8 +82,8 @@
 							</div>
 					</fieldset>
 					<div>
-					<input name="enregistrer" type="submit" value="Enregistrer" >
-					<input name="annuler" type="reset" value="Annuler" >
+					<input class="btn btn-primary" name="enregistrer" type="submit" value="Enregistrer" >
+					<a class="btn btn-primary" href="${pageContext.request.contextPath}/encheres">Annuler</a>
 					</div>
 				</form>
 			</div>
