@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import fr.eni.projet.bo.Utilisateur;
+
 /**
  * Servlet implementation class ListeEncheresServlet
  */
@@ -20,10 +22,14 @@ public class ListeEncheresServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		if(session.getAttribute("utilisateurSession") != null) {
-			request.setAttribute("connecte", true);
-		}
+//		HttpSession session = request.getSession();
+//		if(session.getAttribute("utilisateurSession") != null) {
+//			request.setAttribute("connecte", true);
+//		}
+//		Utilisateur u = SessionService.checkUtilisateurSession(request, response);
+		
+		SessionService ss = new SessionService();
+		Utilisateur u = ss.checkUtilisateurSession(request, response);
 		
 		request.getRequestDispatcher("/WEB-INF/templates/ListeEncheres.jsp").forward(request, response);
 	}

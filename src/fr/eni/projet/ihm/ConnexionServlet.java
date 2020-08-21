@@ -25,14 +25,10 @@ public class ConnexionServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Utilisateur connecté
-		HttpSession session = request.getSession();
-		System.out.println(session.getAttribute("utilisateurSession"));
-		if(session.getAttribute("utilisateurSession") != null) {
-			request.setAttribute("connecte", true);
-		}
+		SessionService ss = new SessionService();
+		Utilisateur u = ss.checkUtilisateurSession(request, response);
 		
 		this.getServletContext().getRequestDispatcher("/WEB-INF/templates/Connexion.jsp").forward(request, response);
-		
 	}
 
 	/**
@@ -68,7 +64,9 @@ public class ConnexionServlet extends HttpServlet {
 			Utilisateur u = utilisateurManager.authentification(identifiant, motDePasse);
 			
 			if(u != null) {
-				session.setAttribute("utilisateurSession", u);
+//				session.setAttribute("utilisateurSession", u);
+				SessionService ss = new SessionService();
+				ss.setUtilisateurSession(request, response, u.getNoUtilisateur());
 				
 				response.sendRedirect(request.getContextPath() + "/encheres"); 
 				System.out.println("Utilisateur connecté");
