@@ -48,24 +48,24 @@ public class NouvelleVenteServlet extends HttpServlet {
 		HttpSession noUtilisateurArticle = request.getSession();
 		String noUtilisateurToString = noUtilisateurArticle.toString();
 		
-		//récupération de la saisie utilisateur
+//		//récupération de la saisie utilisateur
 		String article = request.getParameter("article");
 		String description = request.getParameter("description");
 		String categorie = request.getParameter("categorie");
-			switch (categorie) {
-			int noCategorie;
-			case "Informatique": noCategorie = 1;
-				break;
-			case "Ameublement": noCategorie = 3;
-				break;
-			case "Vêtements": noCategorie = 4;
-				break;
-			case "Sports et loisirs": noCategorie = 5;
-				break;
-			default: 
-				break;
-			}
-	
+//			switch (categorie) {
+//			int noCategorie;
+//			case "Informatique": noCategorie = 1;
+//				break;
+//			case "Ameublement": noCategorie = 3;
+//				break;
+//			case "Vêtements": noCategorie = 4;
+//				break;
+//			case "Sports et loisirs": noCategorie = 5;
+//				break;
+//			default: 
+//				break;
+//			}
+//	
 		
 		
 		String photo = request.getParameter("photo");
@@ -79,9 +79,9 @@ public class NouvelleVenteServlet extends HttpServlet {
 		
 		//création du retrait
 		
-		Retrait retrait = new Retrait(rue, cp, ville);
-		ArticleVendu articleVendu = new ArticleVendu(article, description, debutEnchere, finEnchere, prix, null, noUtilisateurArticle, noCategorie, "démarré", utilisateur, categorie)
-		
+//		Retrait retrait = new Retrait(rue, cp, ville);
+//		ArticleVendu articleVendu = new ArticleVendu(article, description, debutEnchere, finEnchere, prix, null, noUtilisateurArticle, noCategorie, "démarré", utilisateur, categorie)
+//		
 		//appel instance de manager
 		
 		
