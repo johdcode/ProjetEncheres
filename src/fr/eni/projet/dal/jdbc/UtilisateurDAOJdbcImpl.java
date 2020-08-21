@@ -20,6 +20,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	private final String INSERT = "INSERT INTO utilisateurs (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 	private final String SELECT_ALL = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur from utilisateurs;";
 	private final String SELECT_BY_ID = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur from utilisateurs where no_utilisateur=?;";
+	private final String SELECT_BY_PSEUDO = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur from utilisateurs where pseudo=?;";
 	private final String UPDATE = "UPDATE Utilisateurs set pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=?, administrateur=? where no_utilisateur=?;";
 	private final String DELETE = "DELETE FROM utilisateurs WHERE no_utilisateur =?;";
 	private final String DELETE_FROM_ENCHERES = "DELETE FROM encheres WHERE no_utilisateur =?;";
@@ -110,6 +111,32 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		return utilisateur;
 		
 	}
+	
+	@Override
+	public Utilisateur selectByPseudo(String pseudo) {
+		Utilisateur utilisateur = null;
+		
+		try (Connection connection = ConnectionProvider.getConnection()){
+			
+		PreparedStatement pstmt = connection.prepareStatement(SELECT_BY_PSEUDO);
+		pstmt.setString(1, pseudo);
+		ResultSet rs = pstmt.executeQuery();
+		
+		while(rs.next()) {
+		utilisateur = new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo").trim(), 
+					rs.getString("nom").trim(), rs.getString("prenom").trim(), rs.getString("email").trim(),rs.getString("telephone").trim(),
+					rs.getString("rue").trim(),rs.getString("code_postal").trim(),rs.getString("ville").trim(),rs.getString("mot_de_passe").trim(),
+					rs.getFloat("credit"),rs.getBoolean("administrateur"));
+		}
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return utilisateur;
+		
+	}
+	
 	@Override
 	public void update(Utilisateur utilisateur) throws DALException {
 		try(Connection cnx = ConnectionProvider.getConnection()){
