@@ -24,8 +24,8 @@ public class ArticleVenduManager {
 		return instance;
 	}
 	
-	public void insert(ArticleVendu a, int noUtilisteur, int noCategorie, Retrait r) throws DALException {
-			articleVenduDAO.insert(a, noUtilisteur, noCategorie, r);
+	public void insert(ArticleVendu a, Retrait r) throws DALException {
+			articleVenduDAO.insert(a, r);
 	}
 	public ArticleVendu selectById(int noArticle) throws DALException {
 		return articleVenduDAO.selectById(noArticle);
@@ -43,5 +43,7 @@ public class ArticleVenduManager {
 	public void delete(int id) throws DALException {
 		articleVenduDAO.delete(id);
 	}
+
+	
 
 }

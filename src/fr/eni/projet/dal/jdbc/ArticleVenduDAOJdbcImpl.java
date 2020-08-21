@@ -8,7 +8,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.eni.projet.bll.CategorieManager;
 import fr.eni.projet.bll.RetraitManager;
+import fr.eni.projet.bll.UtilisateurManager;
 import fr.eni.projet.bo.ArticleVendu;
 import fr.eni.projet.bo.Retrait;
 import fr.eni.projet.dal.ArticleVenduDAO;
@@ -39,7 +41,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 		
 	// Methode Insert nouvel Article
 		@Override
-		public void insert(ArticleVendu a, int noUtilisteur, int noCategorie, Retrait r) throws DALException {
+		public void insert(ArticleVendu a, Retrait r) throws DALException {
 			
 			//1- Obtenir une connexion à la base de données
 			
@@ -53,8 +55,8 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 				pStmt.setTimestamp(4, a.getDateFinEnchere());
 				pStmt.setInt(5, a.getMiseAPrix());
 				pStmt.setInt(6, a.getPrixVente());
-				pStmt.setInt(7, noUtilisteur);
-				pStmt.setInt(8, noCategorie);
+				pStmt.setInt(7, a.getNoUtilisateurArticle());
+				pStmt.setInt(8, a.getNoCategorieArticle());
 				
 				
 				//3 - Executer la requete
@@ -66,10 +68,16 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 					if(rsKey.next()) {
 						a.setNoArticle(rsKey.getInt(1));	
 					}
+//					int noUtilisateur = a.getNoUtilisateurArticle();
+					
+					r.setNoArticleRetrait(a.getNoArticle());
 					RetraitManager rm = RetraitManager.getInstance();
-					int noUtilisateur = noUtilisteur;
-					rm.insert(r, noUtilisateur );
+					rm.insert(r);
+//					RetraitManager.getInstance().insert(r);
 				}
+				//5 -
+				a.setUtilisateur(UtilisateurManager.getInstance().selectById(a.getNoUtilisateurArticle()));
+				a.setCategorie(CategorieManager.getInstance().selectById(a.getNoCategorieArticle()));
 				
 				
 			} catch (SQLException e) {

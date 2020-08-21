@@ -15,8 +15,8 @@ public interface ArticleVenduDAO {
 	void update(ArticleVendu a) throws DALException;
 	
 	void delete(int id) throws DALException;
-	
-	void insert(ArticleVendu a, int noUtilisteur, int noCategorie, Retrait r) throws DALException;
+
+	void insert(ArticleVendu a, Retrait r) throws DALException;
 	
 	
 }
