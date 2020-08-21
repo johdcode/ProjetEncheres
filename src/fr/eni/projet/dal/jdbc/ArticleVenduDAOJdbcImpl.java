@@ -7,7 +7,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import fr.eni.projet.bll.RetraitManager;
 import fr.eni.projet.bo.ArticleVendu;
+import fr.eni.projet.bo.Retrait;
 import fr.eni.projet.dal.ArticleVenduDAO;
 import fr.eni.projet.dal.ConnectionProvider;
 import fr.eni.projet.dal.DALException;
@@ -36,7 +39,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 		
 	// Methode Insert nouvel Article
 		@Override
-		public void insert(ArticleVendu a, int noUtilisteur, int noCategorie) throws DALException {
+		public void insert(ArticleVendu a, int noUtilisteur, int noCategorie, Retrait r) throws DALException {
 			
 			//1- Obtenir une connexion à la base de données
 			
@@ -63,6 +66,9 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 					if(rsKey.next()) {
 						a.setNoArticle(rsKey.getInt(1));	
 					}
+					RetraitManager rm = RetraitManager.getInstance();
+					int noUtilisateur = noUtilisteur;
+					rm.insert(r, noUtilisateur );
 				}
 				
 				

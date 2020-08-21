@@ -28,7 +28,7 @@ public class RetraitManager {
 	
 	//Methodes CRUD
 		//Insert
-	public void insert(Retrait r) throws DALException {
+	public void insert(Retrait r, int numeroArticle) throws DALException {
 		retraitDAO.insert(r);
 	}
 		//Select by ID

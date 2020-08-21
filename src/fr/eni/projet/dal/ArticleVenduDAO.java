@@ -3,11 +3,10 @@ package fr.eni.projet.dal;
 import java.util.List;
 
 import fr.eni.projet.bo.ArticleVendu;
+import fr.eni.projet.bo.Retrait;
 
 public interface ArticleVenduDAO {
 
-	
-	void insert(ArticleVendu a, int noUtilisteur, int noCategorie) throws DALException;
 	
 	ArticleVendu selectById(int noArticle) throws DALException;
 	
@@ -16,6 +15,8 @@ public interface ArticleVenduDAO {
 	void update(ArticleVendu a) throws DALException;
 	
 	void delete(int id) throws DALException;
+	
+	void insert(ArticleVendu a, int noUtilisteur, int noCategorie, Retrait r) throws DALException;
 	
 	
 }

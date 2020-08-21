@@ -3,6 +3,7 @@ package fr.eni.projet.bll;
 import java.util.List;
 
 import fr.eni.projet.bo.ArticleVendu;
+import fr.eni.projet.bo.Retrait;
 import fr.eni.projet.dal.ArticleVenduDAO;
 import fr.eni.projet.dal.DALException;
 import fr.eni.projet.dal.DAOFactory;
@@ -23,8 +24,8 @@ public class ArticleVenduManager {
 		return instance;
 	}
 	
-	public void insert(ArticleVendu a, int noUtilisteur, int noCategorie) throws DALException {
-			articleVenduDAO.insert(a, noUtilisteur, noCategorie);
+	public void insert(ArticleVendu a, int noUtilisteur, int noCategorie, Retrait r) throws DALException {
+			articleVenduDAO.insert(a, noUtilisteur, noCategorie, r);
 	}
 	public ArticleVendu selectById(int noArticle) throws DALException {
 		return articleVenduDAO.selectById(noArticle);
