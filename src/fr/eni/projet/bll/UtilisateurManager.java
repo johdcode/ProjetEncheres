@@ -52,4 +52,8 @@ public class UtilisateurManager {
 	public void update(Utilisateur utilisateur) throws DALException {
 		this.utilisateurDAO.update(utilisateur);
 	}
+	public Utilisateur selectByEmail(String email) {
+		return utilisateurDAO.selectByEmail(email);
+	}
+	
 }

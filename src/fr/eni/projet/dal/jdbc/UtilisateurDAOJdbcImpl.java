@@ -17,13 +17,11 @@ import fr.eni.projet.dal.UtilisateurDAO;
 
 public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	
+	private final String SELECT_BY_EMAIL = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur from utilisateurs where email=?;";
 	private final String INSERT = "INSERT INTO utilisateurs (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 	private final String SELECT_ALL = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur from utilisateurs;";
 	private final String SELECT_BY_ID = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur from utilisateurs where no_utilisateur=?;";
 	private final String UPDATE = "UPDATE Utilisateurs set pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=?, administrateur=? where no_utilisateur=?;";
-	private final String DELETE = "DELETE FROM utilisateurs WHERE no_utilisateur =?;";
-	private final String DELETE_FROM_ENCHERES = "DELETE FROM encheres WHERE no_utilisateur =?;";
-	private final String DELETE_FROM_ARTICLES = "DELETE FROM articles_vendus WHERE no_utilisateur =?;";
 
 	@Override
 	public void insert(Utilisateur utilisateur) {
@@ -157,5 +155,28 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		} catch (SQLException e) {
 			throw new DALException("Delete Utilisateur FAIL - ", e);
 		}
+	}
+	@Override
+	public Utilisateur selectByEmail(String email) {
+Utilisateur utilisateur = null;
+		
+		try (Connection connection = ConnectionProvider.getConnection()){
+			
+		PreparedStatement pstmt = connection.prepareStatement(SELECT_BY_EMAIL);
+		pstmt.setString(1, email);
+		ResultSet rs = pstmt.executeQuery();
+		
+		while(rs.next()) {
+		utilisateur = new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo").trim(), 
+					rs.getString("nom").trim(), rs.getString("prenom").trim(), rs.getString("email").trim(),rs.getString("telephone").trim(),
+					rs.getString("rue").trim(),rs.getString("code_postal").trim(),rs.getString("ville").trim(),rs.getString("mot_de_passe").trim(),
+					rs.getFloat("credit"),rs.getBoolean("administrateur"));
+		}
+		
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return utilisateur;
 	}
 }
