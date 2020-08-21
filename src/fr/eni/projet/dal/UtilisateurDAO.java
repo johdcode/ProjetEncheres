@@ -11,5 +11,7 @@ public interface UtilisateurDAO {
 	Utilisateur selectById(int identifiant);
 	void delete(Utilisateur utilisateur) throws DALException;
 	Utilisateur selectByEmail (String email);
+	Utilisateur selectByPseudo(String pseudo);
+
 	
 }

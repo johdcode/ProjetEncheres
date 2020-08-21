@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.projet.bll.CategorieManager;
 import fr.eni.projet.bll.RetraitManager;
+import fr.eni.projet.bll.UtilisateurManager;
 import fr.eni.projet.bo.Categorie;
 import fr.eni.projet.bo.Retrait;
 import fr.eni.projet.dal.DALException;
@@ -116,15 +117,11 @@ public class Tests extends HttpServlet {
 //			e.printStackTrace();
 //		}
 		
-				//Delete
-		CategorieManager avm = CategorieManager.getInstance();
-		try {
-			avm.delete(2);
-		} catch (DALException e) {
+//			
 
-			e.printStackTrace();
-		}
-		
+			//Select by Pseudo
+//		UtilisateurManager avm = UtilisateurManager.getInstance();
+//		System.out.println(avm.selectByPseudo("jo"));
 
 	}
 
