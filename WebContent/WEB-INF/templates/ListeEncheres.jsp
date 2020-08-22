@@ -10,10 +10,10 @@
 	<main>
 		<header>			
 			<h1>ENI-Enchères</h1>
-			<c:if test="${requestScope.connecte != true }">
+			<c:if test="${utilisateurSessionId == null }">
 				<a href="${pageContext.request.contextPath}/connexion">S'incrire - Se connecter</a>
 			</c:if>
-			<c:if test="${requestScope.connecte == true }">
+			<c:if test="${utilisateurSessionId != null }">
 				<a href="${pageContext.request.contextPath}/connexion">Enchères</a>
 				<a href="${pageContext.request.contextPath}/connexion">Vendre un article</a>
 				<a href="${pageContext.request.contextPath}/profil?id=${utilisateurSession.noUtilisateur}" >Mon profil</a>

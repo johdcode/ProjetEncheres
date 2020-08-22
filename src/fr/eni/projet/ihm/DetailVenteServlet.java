@@ -24,10 +24,7 @@ public class DetailVenteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		HttpSession session = request.getSession();
-		if(session.getAttribute("utilisateurSession") != null) {
-			request.setAttribute("connecte", true);
-		}
+		SessionService.checkUtilisateurSession(request);
 		// reccupérer l'ID de l'utilisateur
 		
 		

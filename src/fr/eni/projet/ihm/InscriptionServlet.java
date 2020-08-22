@@ -25,8 +25,7 @@ public class InscriptionServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Vérifie si utilisateur est connecté
-		SessionService ss = new SessionService();
-		ss.checkUtilisateurSession(request, response);
+		SessionService.checkUtilisateurSession(request);
 				
 		request.getRequestDispatcher("/WEB-INF/templates/Inscription.jsp").forward(request, response);
 	}
@@ -210,12 +209,11 @@ public class InscriptionServlet extends HttpServlet {
 			}
 		}
 		
-		if((erreur == 0) && (session.getAttribute("utilisateurSession") == null)) {
+		if((erreur == 0) && (SessionService.getUtilisateurSessionId(request) == null)) {
 			Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, creditInitial, false);
 			utilisateurManager.insert(utilisateur);
 			
-			SessionService ss = new SessionService();
-			ss.setUtilisateurSession(request, response, utilisateur.getNoUtilisateur());
+			SessionService.setUtilisateurSessionId(request, utilisateur.getNoUtilisateur());
 			
 //			request.getRequestDispatcher("/WEB-INF/templates/ListeEncheres.jsp").forward(request, response);
 			response.sendRedirect(request.getContextPath() + "/encheres");

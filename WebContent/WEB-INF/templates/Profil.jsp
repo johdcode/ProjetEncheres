@@ -8,7 +8,7 @@
 </head>
 <body>
 	<% // TODO: Dans la jsp %>
-	<c:if test="${utilisateurId == null}">
+	<c:if test="${utilisateur != null}">
 		<h1>ENI-Enchères</h1>
 		<br>
 		<br>
@@ -38,7 +38,7 @@
 		</c:if>
 	</c:if>
 	
-	<c:if test="${utilisateurId != null}">
+	<c:if test="${utilisateur == null}">
 		<h2>Utilisateur inconnu</h2>
 		<p>
 			L'utilisateur n'a pas été trouvé.

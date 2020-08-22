@@ -9,22 +9,27 @@ import fr.eni.projet.bo.Utilisateur;
 
 public class SessionService {
 	
-	public Utilisateur checkUtilisateurSession(HttpServletRequest request, HttpServletResponse response) {
+	public static Utilisateur checkUtilisateurSession(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Utilisateur u = null;
 		
-		if((session.getAttribute("utilisateurId")) != null && (session.getAttribute("utilisateurId") != "")) {			
-			u = UtilisateurManager.getInstance().selectById((Integer)session.getAttribute("utilisateurId"));
+		if((session.getAttribute("utilisateurSessionId")) != null && (session.getAttribute("utilisateurSessionId") != "")) {			
+			u = UtilisateurManager.getInstance().selectById((Integer)session.getAttribute("utilisateurSessionId"));
 		}
 		if(u != null) {
-//			request.setAttribute("connecte", true);
 			request.setAttribute("utilisateurSession", u);
+//			request.setAttribute("connecte", true);
 		}
 		return u;
 	}
 	
-	public void setUtilisateurSession(HttpServletRequest request, HttpServletResponse response, int id) {
+	public static void setUtilisateurSessionId(HttpServletRequest request, int id) {
 		HttpSession session = request.getSession();
-		session.setAttribute("utilisateurId", id);
+		session.setAttribute("utilisateurSessionId", id);
+	}
+	
+	public static String getUtilisateurSessionId(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		return (String) session.getAttribute("utilisateurSessionId");
 	}
 }

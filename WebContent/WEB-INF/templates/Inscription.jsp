@@ -8,7 +8,7 @@
 </head>
 <body>
 	<main>
-		<c:if test="${utilisateurId == null}">
+		<c:if test="${utilisateurSessionId == null}">
 			<h1>ENI-Enchères</h1>
 			<br>
 			<br>
@@ -48,7 +48,7 @@
 				<a href="#"><button type="button"> Annuler</button></a> 
 			</form>
 		</c:if>
-		<c:if test="${utilisateurId != null}">
+		<c:if test="${utilisateurSessionId != null}">
 			<h2>Vous êtes déjà connecté</h2>
 			<a href="${pageContext.request.contextPath}/deconnexion"><button>Déconnexion</button></a>
 			<a href="${pageContext.request.contextPath}/encheres"><button>Accueil</button></a>

@@ -25,8 +25,7 @@ public class ProfilServlet extends HttpServlet {
 		
 		Utilisateur u = null;
 		
-		SessionService ss = new SessionService();
-		Utilisateur utilisateurSession = ss.checkUtilisateurSession(request, response);
+		Utilisateur utilisateurSession = SessionService.checkUtilisateurSession(request);
 		
 		int id = 0;
 		try {

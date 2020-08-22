@@ -36,8 +36,7 @@ public class ListeEncheresServlet extends HttpServlet {
 //		}
 //		Utilisateur u = SessionService.checkUtilisateurSession(request, response);
 		
-		SessionService ss = new SessionService();
-		Utilisateur u = ss.checkUtilisateurSession(request, response);
+		SessionService.checkUtilisateurSession(request);
 		
 		// liste des catégories
 		List <Categorie> listeCategorie = new ArrayList<Categorie>();
