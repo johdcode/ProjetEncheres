@@ -40,16 +40,16 @@ public class InscriptionServlet extends HttpServlet {
 		
 		int creditInitial = 100;
 		
-		String pseudo = request.getParameter("pseudo").trim().toLowerCase();
-		String nom = request.getParameter("nom").trim().toLowerCase();
-		String prenom = request.getParameter("prenom").trim().toLowerCase();
-		String email = request.getParameter("email").trim().toLowerCase();
-		String telephone = request.getParameter("telephone").trim().toLowerCase();
-		String rue = request.getParameter("rue").trim().toLowerCase();
-		String codePostal = request.getParameter("code_postal").trim().toLowerCase();
-		String ville = request.getParameter("ville").trim().toLowerCase();
-		String motDePasse = request.getParameter("mot_de_passe").trim().toLowerCase();
-		String confirmationMotDePasse = request.getParameter("confirmation_mot_de_passe").trim().toLowerCase();
+		String pseudo = request.getParameter("pseudo").trim();
+		String nom = request.getParameter("nom").trim();
+		String prenom = request.getParameter("prenom").trim();
+		String email = request.getParameter("email").trim();
+		String telephone = request.getParameter("telephone").trim();
+		String rue = request.getParameter("rue").trim();
+		String codePostal = request.getParameter("code_postal").trim();
+		String ville = request.getParameter("ville").trim();
+		String motDePasse = request.getParameter("mot_de_passe").trim();
+		String confirmationMotDePasse = request.getParameter("confirmation_mot_de_passe").trim();
 		
 		System.out.println("pseudo : " + pseudo);
 		System.out.println("nom : " + nom);

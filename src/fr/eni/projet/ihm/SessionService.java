@@ -49,6 +49,6 @@ public class SessionService {
 	 */
 	public static String getUtilisateurSessionId(HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		return (String) session.getAttribute("utilisateurSessionId");
+		return String.valueOf((int)session.getAttribute("utilisateurSessionId"));
 	}
 }

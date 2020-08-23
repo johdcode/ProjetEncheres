@@ -45,7 +45,7 @@
 				<input type="password" id="confirmation_mot_de_passe" name="confirmation_mot_de_passe"> <br>
 				<br>
 				<button type="submit">Creer</button>
-				<a href="#"><button type="button"> Annuler</button></a> 
+				<a href="${pageContext.request.contextPath}/connexion"><button type="button"> Annuler</button></a> 
 			</form>
 		</c:if>
 		<c:if test="${utilisateurSessionId != null}">
