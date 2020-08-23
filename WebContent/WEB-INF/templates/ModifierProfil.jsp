@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Inscription</title>
+<title>Modifier son profil</title>
 </head>
 <body>
 	<main>
@@ -13,30 +13,30 @@
 			<br>
 			<br>
 			<h1>Mon profil</h1>
-			<form action="${pageContext.request.contextPath}/inscription" method="POST">
+			<form action="${pageContext.request.contextPath}/modifier-profil" method="POST">
 				<label for="pseudo">Pseudo :</label>
-				<input required type="text" id="pseudo" name="pseudo">
+				<input required type="text" id="pseudo" name="pseudo" value="${utilisateurSession.pseudo}">
 				
 				<label for="nom">Nom :</label>
-				<input type="text" id="nom" name="nom"> <br>
+				<input type="text" id="nom" name="nom" value="${utilisateurSession.nom}"> <br>
 				
 				<label for="prenom">Prénom :</label>
-				<input type="text" id="prenom" name="prenom">
+				<input type="text" id="prenom" name="prenom" value="${utilisateurSession.prenom}">
 				
 				<label for="email">Email :</label>
-				<input type="text" id="email" name="email"> <br>
+				<input type="text" id="email" name="email" value="${utilisateurSession.email}"> <br>
 				
 				<label for="telephone">Téléphone :</label>
-				<input type="text" id="telephone" name="telephone">
+				<input type="text" id="telephone" name="telephone" value="${utilisateurSession.telephone}">
 				
 				<label for="rue">Rue :</label>
-				<input type="text" id="rue" name="rue"> <br>
+				<input type="text" id="rue" name="rue" value="${utilisateurSession.rue}"> <br>
 				
 				<label for="code_postal">Code postale :</label>
-				<input type="text" id="code_postal" name="code_postal">
+				<input type="text" id="code_postal" name="code_postal" value="${utilisateurSession.codePostal}">
 				
 				<label for="ville">Ville :</label>
-				<input type="text" id="ville" name="ville"> <br>
+				<input type="text" id="ville" name="ville" value="${utilisateurSession.ville}"> <br>
 				
 				<label for="mot_de_passe">Mot de passe actuel :</label>
 				<input type="password" id="mot_de_passe" name="mot_de_passe"> <br>
@@ -48,7 +48,7 @@
 				<input type="password" id="confirmation_nouveau_mot_de_passe" name="confirmation_nouveau_mot_de_passe"> <br>
 				
 				<label for="confirmation_nouveau_mot_de_passe">Crédit :</label>
-				<span>640</span> <br>
+				<span>${utilisateurSession.credit}</span> <br>
 				<br>
 				
 				<!-- TODO : faire boutton supprimer membre -->
