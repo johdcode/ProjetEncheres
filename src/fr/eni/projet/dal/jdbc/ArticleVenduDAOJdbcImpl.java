@@ -27,6 +27,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 		private static final String SQL_INSERT_ARTICLE = "INSERT INTO ARTICLES_VENDUS(nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie) VALUES (?,?,?,?,?,?,?,?)";
 		private static final String SQL_SELECT_BY_ID = "SELECT no_article,nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie FROM ARTICLES_VENDUS WHERE no_article = ?;";
 		private static final String SQL_SELECT_ALL = "SELECT no_article,nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie FROM ARTICLES_VENDUS;";
+		private static final String SQL_SELECT_RECHERCHE = "SELECT no_article,nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie FROM ARTICLES_VENDUS WHERE nom_article LIKE ?";
 		private static final String SQL_UPDATE = "UPDATE  ARTICLES_VENDUS SET nom_article=?,description=?,date_debut_encheres=?,date_fin_encheres=?,prix_initial=?,prix_vente=?,no_utilisateur=?,no_categorie=? WHERE no_article = ?;";
 		private static final String SQL_DELETE = "DELETE  FROM  ARTICLES_VENDUS WHERE no_article = ?";
 //		
@@ -111,11 +112,43 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 								);
 					}
 			
-		} catch (SQLException e) {
-			throw new DALException("SelectById ArticleVendu FAIL - ", e);
+			} catch (SQLException e) {
+				throw new DALException("SelectById ArticleVendu FAIL - ", e);
+			}
+			return a;
 		}
-		return a;
-	}
+		
+		// Methode Select by ID
+		@Override	
+		public List<ArticleVendu> selectByRecherche(String recherche) throws DALException {
+			ArticleVendu a = null;
+			List<ArticleVendu> articles = new ArrayList<ArticleVendu>();
+			
+			try(Connection conn = ConnectionProvider.getConnection()){
+				PreparedStatement stmt = conn.prepareStatement(SQL_SELECT_RECHERCHE);
+				System.out.println("Dans la DAL");
+				stmt.setString(1, "%" + recherche + "%" );
+				ResultSet rs = stmt.executeQuery();
+				while(rs.next()) {
+					ArticleVendu article = new ArticleVendu(
+							rs.getInt("no_article"),  
+					        rs.getString("nom_article"),
+					        rs.getString("description"),
+					        rs.getTimestamp("date_debut_encheres"),
+					        rs.getTimestamp("date_fin_encheres"),
+					        rs.getInt("prix_initial"),
+					        rs.getInt("prix_vente"),
+					        rs.getInt("no_utilisateur"),
+					        rs.getInt("no_categorie"));
+					articles.add(article);
+				}
+				
+			} catch (SQLException e) {
+				System.err.println(e.getMessage());
+				throw new DALException("SelectById ArticleVendu FAIL - ", e);
+			}
+			return articles;
+		}
 					
 		
 	// Methode Select all

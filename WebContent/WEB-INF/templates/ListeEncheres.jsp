@@ -22,22 +22,21 @@
 		</header>
 		
 		<h2>Liste des enchères</h2>
-		<form action="${pageContext.request.contextPath}/encheres" method="POST">
+		<form action="${pageContext.request.contextPath}/encheres" method="GET">
 			<label for="recherche">Filtres :</label> <br>
-			<input type="text" name ="recherche" id="recherche" placeholder="Le nom de l'article contient"> <br>
+			<input type="text" name ="recherche" id="recherche" placeholder="Le nom de l'article contient" value="${recherche}"> <br>
 			<br>
 			<label for="categorie">Catégories :</label>
 			<select name="categorie" id="categorie">
-			   		 <option value="toutes">Toutes</option>
-			   <c:forEach var = "categorie" items = "${listeCategorie}">
-			   		 <option value="${categorie.libelle}">${categorie.libelle}</option>
-			   
-			   </c:forEach>
-			   
-			   
-			</select> <br><br>
+	   			<option value="">Toutes</option>
+				<c:forEach var = "categorieDeListe" items = "${listeCategorie}">
+					<option value="${categorieDeListe.libelle}" ${categorieDeListe.libelle == categorie ? "selected" : ""}>${categorieDeListe.libelle}</option>
+				</c:forEach>
+			</select>
+			<br>
+			<br>
 			
-			<c:if test="${requestScope.connecte == true }">
+			<c:if test="${utilisateurSessionId != null }">
 				<div>
 				  <input type="radio" id="achat" name="type" value="achat" checked>
 				  <label for="achat">Achats</label>
@@ -84,31 +83,36 @@
 			<span>Vendeur : jojo44</span>
 		</div>
 		<br>
-			<label for="listeArticle">Liste des Articles :</label>
-			
 		
-			   <c:forEach var = "listeArticle" items = "${listeArticle}">
-			   		
-			   		<fieldset>
-			   		<br>
-			   		IMAGE ARTICLE
-			   		<br><br>
-			   		<a href="${pageContext.request.contextPath}/DetailVente?idArticle=${listeArticle.noArticle}"><c:out value = "${listeArticle.nomArticle}"/></a>
-			   		<br>
-			   		<c:out value = "${listeArticle.description}"/>
-			   		<br><br>
-			   		<c:out value = "Date de fin des enchères : ${listeArticle.dateFinEnchere}"/>
-			   		<br>
-			   		Prix : <c:out value = "${listeArticle.miseAPrix}"/>
-			   		<br>
-			   		Vendeur : <c:out value = "${listeArticle.noUtilisateurArticle}"/>
-			   		<br><br>
-			   		</fieldset>
-			   		
-			   </c:forEach>
-			   
-			   
-			<br>
+		<label for="listeArticle">Liste des Articles :</label>	
+		<c:if test="${listeArticle.size() <= 0 }">
+			<div>
+				<p>Aucun article disponible.</p>
+			</div>
+		</c:if>
+		<c:forEach var = "listeArticle" items = "${listeArticle}">
+				
+				<fieldset>
+					<br>
+					IMAGE ARTICLE
+					<br>
+					<br>
+					<a href="${pageContext.request.contextPath}/DetailVente?idArticle=${listeArticle.noArticle}"><c:out value = "${listeArticle.nomArticle}"/></a>
+					<br>
+					<c:out value = "${listeArticle.description}"/>
+					<br>
+					<br>
+					<c:out value = "Date de fin des enchères : ${listeArticle.dateFinEnchere}"/>
+					<br>
+					Prix : <c:out value = "${listeArticle.miseAPrix}"/>
+					<br>
+					Vendeur : <c:out value = "${listeArticle.utilisateur.pseudo}"/>
+					<br>
+					<br>
+				</fieldset>
+				
+		</c:forEach>
+		<br>
 		
 	</main>
 </body >

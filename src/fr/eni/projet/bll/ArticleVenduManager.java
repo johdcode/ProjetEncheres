@@ -31,6 +31,10 @@ public class ArticleVenduManager {
 		return articleVenduDAO.selectById(noArticle);
 		
 	}
+	public List<ArticleVendu> selectByRecherche(String recherche) throws DALException {
+		return articleVenduDAO.selectByRecherche(recherche);
+		
+	}
 	
 	public List<ArticleVendu> selectAll() throws DALException{
 		return articleVenduDAO.selectAll();
