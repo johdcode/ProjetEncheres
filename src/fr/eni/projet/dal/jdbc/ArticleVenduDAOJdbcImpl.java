@@ -52,8 +52,8 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 				PreparedStatement pStmt = conn.prepareStatement(SQL_INSERT_ARTICLE, Statement.RETURN_GENERATED_KEYS);
 				pStmt.setString(1, a.getNomArticle());
 				pStmt.setString(2, a.getDescription());
-				pStmt.setTimestamp(3, a.getDateDebutEnchere());
-				pStmt.setTimestamp(4, a.getDateFinEnchere());
+				pStmt.setTimestamp(3, java.sql.Timestamp.valueOf(a.getDateDebutEnchere()));
+				pStmt.setTimestamp(4, java.sql.Timestamp.valueOf(a.getDateFinEnchere()));
 				pStmt.setInt(5, a.getMiseAPrix());
 				pStmt.setInt(6, a.getPrixVente());
 				pStmt.setInt(7, a.getNoUtilisateurArticle());
@@ -103,8 +103,8 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 										rs.getInt("no_article"),  
 								        rs.getString("nom_article"),
 								        rs.getString("description"),
-								        rs.getTimestamp("date_debut_encheres"),
-								        rs.getTimestamp("date_fin_encheres"),
+								        rs.getTimestamp("date_debut_encheres").toLocalDateTime(),
+								        rs.getTimestamp("date_fin_encheres").toLocalDateTime(),
 								        rs.getInt("prix_initial"),
 								        rs.getInt("prix_vente"),
 								        rs.getInt("no_utilisateur"),
@@ -164,8 +164,8 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 							rs.getInt("no_article"),  
 					        rs.getString("nom_article"),
 					        rs.getString("description"),
-					        rs.getTimestamp("date_debut_encheres"),
-					        rs.getTimestamp("date_fin_encheres"),
+					        rs.getTimestamp("date_debut_encheres").toLocalDateTime(),
+					        rs.getTimestamp("date_fin_encheres").toLocalDateTime(),
 					        rs.getInt("prix_initial"),
 					        rs.getInt("prix_vente"),
 					        rs.getInt("no_utilisateur"),
@@ -189,8 +189,8 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 				
 				stmt.setString(1, a.getNomArticle());
 				stmt.setString(2, a.getDescription());
-				stmt.setTimestamp(3, a.getDateDebutEnchere());
-				stmt.setTimestamp(4, a.getDateFinEnchere());
+				stmt.setTimestamp(3, java.sql.Timestamp.valueOf(a.getDateDebutEnchere()));
+				stmt.setTimestamp(4, java.sql.Timestamp.valueOf(a.getDateFinEnchere()));
 				stmt.setInt(5, a.getMiseAPrix());
 				stmt.setInt(6, a.getPrixVente());
 				stmt.setInt(7, a.getNoUtilisateurArticle());
