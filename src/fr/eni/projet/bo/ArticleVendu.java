@@ -1,17 +1,23 @@
 package fr.eni.projet.bo;
 
 
+import java.io.Serializable;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
-public class ArticleVendu {
+public class ArticleVendu implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// Variables
 	int noArticle;
 	String nomArticle;
 	String description;
-	Timestamp dateDebutEnchere;
-	Timestamp dateFinEnchere;
+	LocalDateTime dateDebutEnchere;
+	LocalDateTime dateFinEnchere;
 	int miseAPrix;
 	int prixVente;
 	int noUtilisateurArticle;
@@ -51,19 +57,19 @@ public class ArticleVendu {
 		this.description = description;
 	}
 
-	public Timestamp getDateDebutEnchere() {
+	public LocalDateTime getDateDebutEnchere() {
 		return dateDebutEnchere;
 	}
 
-	public void setDateDebutEnchere(Timestamp dateDebutEnchere) {
+	public void setDateDebutEnchere(LocalDateTime dateDebutEnchere) {
 		this.dateDebutEnchere = dateDebutEnchere;
 	}
 
-	public Timestamp getDateFinEnchere() {
+	public LocalDateTime getDateFinEnchere() {
 		return dateFinEnchere;
 	}
 
-	public void setDateFinEnchere(Timestamp dateFinEnchere) {
+	public void setDateFinEnchere(LocalDateTime dateFinEnchere) {
 		this.dateFinEnchere = dateFinEnchere;
 	}
 
@@ -144,8 +150,8 @@ public class ArticleVendu {
 		super();
 	}
 
-	public ArticleVendu(String nomArticle, String description, Timestamp dateDebutEnchere,
-			Timestamp dateFinEnchere, int miseAPrix, int prixVente, Enum<EnumEtatVente> etatVente) {
+	public ArticleVendu(String nomArticle, String description, LocalDateTime dateDebutEnchere,
+			LocalDateTime dateFinEnchere, int miseAPrix, int prixVente, Enum<EnumEtatVente> etatVente) {
 		super();
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -158,7 +164,7 @@ public class ArticleVendu {
 
 	
 
-	public ArticleVendu(String nomArticle, String description, Timestamp dateDebutEnchere, Timestamp dateFinEnchere,
+	public ArticleVendu(String nomArticle, String description, LocalDateTime dateDebutEnchere, LocalDateTime dateFinEnchere,
 			int miseAPrix, int prixVente, int noUtilisateurArticle, int noCategorieArticle,
 			Enum<EnumEtatVente> etatVente, Utilisateur utilisateur, Categorie categorie, Retrait retrait,
 			List<Enchere> listEncheres) {
@@ -180,7 +186,7 @@ public class ArticleVendu {
 
 	
 	
-	public ArticleVendu(String nomArticle, String description, Timestamp dateDebutEnchere, Timestamp dateFinEnchere,
+	public ArticleVendu(String nomArticle, String description, LocalDateTime dateDebutEnchere, LocalDateTime dateFinEnchere,
 			int miseAPrix, int prixVente, int noUtilisateurArticle, int noCategorieArticle,
 			Enum<EnumEtatVente> etatVente, Utilisateur utilisateur, Categorie categorie) {
 		super();
@@ -197,8 +203,8 @@ public class ArticleVendu {
 		this.categorie = categorie;
 	}
 
-	public ArticleVendu(int noArticle, String nomArticle, String description, Timestamp dateDebutEnchere,
-			Timestamp dateFinEnchere, int miseAPrix, int prixVente, int noUtilisateurArticle, int noCategorieArticle) {
+	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDateTime dateDebutEnchere,
+			LocalDateTime dateFinEnchere, int miseAPrix, int prixVente, int noUtilisateurArticle, int noCategorieArticle) {
 		super();
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
@@ -211,8 +217,8 @@ public class ArticleVendu {
 		this.noCategorieArticle = noCategorieArticle;
 	}
 	
-	public ArticleVendu(String nomArticle, String description, Timestamp dateDebutEnchere,
-			Timestamp dateFinEnchere, int miseAPrix, int prixVente, int noUtilisateurArticle, int noCategorieArticle) {
+	public ArticleVendu(String nomArticle, String description, LocalDateTime dateDebutEnchere,
+			LocalDateTime dateFinEnchere, int miseAPrix, int prixVente, int noUtilisateurArticle, int noCategorieArticle) {
 		super();
 		this.nomArticle = nomArticle;
 		this.description = description;

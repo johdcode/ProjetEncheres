@@ -2,7 +2,13 @@ package fr.eni.projet.ihm;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -70,8 +76,20 @@ public class NouvelleVenteServlet extends HttpServlet {
 		
 		String photo = request.getParameter("photo");
 		int prix = Integer.parseInt(request.getParameter("prix"));
-		Timestamp debutEnchere = Timestamp.valueOf(request.getParameter("debut-enchere")) ;
-		Timestamp finEnchere = Timestamp.valueOf(request.getParameter("fin-enchere"));
+		//Gestion de la date
+		//Récupération des saisies utilisateur et conversion en LocalDate
+//		String datePattern = "dd.MM.yyyy hh:mm:ss";
+//		DateTimeFormatter fDatePattern = DateTimeFormatter.ofPattern(datePattern);
+		
+		LocalDate dateDebutEnchereSaisie = LocalDate.parse(request.getParameter("debut-enchere"));
+		LocalDate dateFinEnchereSaisie = LocalDate.parse(request.getParameter("fin-enchere"));
+		//Création du local time à now
+		LocalTime heureDebutEnchere = LocalTime.now();
+		LocalTime heureFinEnchere = heureDebutEnchere;
+		//Création du LocalDateTime avec la nouvelle LocalDate
+		LocalDateTime dateDebutEnchere = LocalDateTime.of(dateDebutEnchereSaisie, heureDebutEnchere);
+		LocalDateTime dateFinEnchere = LocalDateTime.of(dateFinEnchereSaisie,heureFinEnchere);
+		//
 		String rue = request.getParameter("rue");
 		String cp = request.getParameter("cp");
 		String ville = request.getParameter("ville");
@@ -83,8 +101,8 @@ public class NouvelleVenteServlet extends HttpServlet {
 		System.out.println("article :"+categorie);
 		System.out.println("article :"+photo);
 		System.out.println("article :"+prix);
-		System.out.println("article :"+debutEnchere);
-		System.out.println("article :"+finEnchere);
+		System.out.println("article :"+dateDebutEnchere);
+		System.out.println("article :"+dateFinEnchere);
 		System.out.println("article :"+rue);
 		System.out.println("article :"+cp);
 		System.out.println("article :"+ville);
@@ -95,11 +113,11 @@ public class NouvelleVenteServlet extends HttpServlet {
 		if(article == null || article == "") {
 			erreur++;
 			}
-//		
+		
 		if(article != null && article.length() >= 50) {
 			erreur++;
 			}
-//		
+		
 		if(description == null || description == "") {
 			erreur++;
 		}
@@ -112,22 +130,22 @@ public class NouvelleVenteServlet extends HttpServlet {
 		if(categorie != null && categorie.length() >= 50) {
 			erreur++;
 			}
-//		//TODO erreur fichier(taille? format?)
-//
+		//TODO erreur fichier(taille? format?)
+
 		if(prix <= 0) {
 			erreur++;
 		}
-//		
+		
+		//TODO format date?
+		if(dateDebutEnchere == null ) {
+			erreur++;
+		}
+		
 //		//TODO format date?
-//		if(debutEnchere == null ) {
-//			erreur++;
-//		}
-//		
-//		//TODO format date?
-//		if(finEnchere == null) {
-//			erreur++;
-//		}
-//	
+		if(dateFinEnchere == null) {
+			erreur++;
+		}
+	
 		if(rue == null || rue == "") {
 			erreur++;
 		}
@@ -137,7 +155,7 @@ public class NouvelleVenteServlet extends HttpServlet {
 		if(cp == null || cp == "") {
 		erreur++;
 		}
-		if(cp != null && cp.length() >= 5) {
+		if(cp != null && cp.length() > 5) {
 			erreur++;
 			}
 		RequestDispatcher rs = null;
@@ -150,7 +168,7 @@ public class NouvelleVenteServlet extends HttpServlet {
 //			//création du retrait
 //			
 			Retrait retrait = new Retrait(rue, cp, ville);
-			ArticleVendu articleVendu = new ArticleVendu(article, description, debutEnchere, finEnchere, prix, prix, noUtilisateur, noCategorie);
+			ArticleVendu articleVendu = new ArticleVendu(article, description, dateDebutEnchere, dateFinEnchere, prix, prix, noUtilisateur, noCategorie);
 ////			
 //			//appel instance de manager
 			
