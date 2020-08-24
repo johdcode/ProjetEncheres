@@ -22,9 +22,12 @@ public class ProfilServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int id = 0;
+		
 		Utilisateur u = null;
 		
+		Utilisateur utilisateurSession = SessionService.checkUtilisateurSession(request);
+		
+		int id = 0;
 		try {
 			id = Integer.parseInt(request.getParameter("id"));	
 		} catch(NumberFormatException e) {
@@ -38,19 +41,16 @@ public class ProfilServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		if(u != null) {
-			request.setAttribute("utilisateur", u);
-			request.getRequestDispatcher("/WEB-INF/templates/Profil.jsp").forward(request, response);
-		} else {
-			
-		}
+		request.setAttribute("utilisateurSession", utilisateurSession);
+		request.setAttribute("utilisateur", u);
+		
+		request.getRequestDispatcher("/WEB-INF/templates/Profil.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

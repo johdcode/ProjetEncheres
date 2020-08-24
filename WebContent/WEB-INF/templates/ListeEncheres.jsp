@@ -10,10 +10,10 @@
 	<main>
 		<header>			
 			<h1>ENI-Enchères</h1>
-			<c:if test="${requestScope.connecte != true }">
+			<c:if test="${utilisateurSessionId == null }">
 				<a href="${pageContext.request.contextPath}/connexion">S'incrire - Se connecter</a>
 			</c:if>
-			<c:if test="${requestScope.connecte == true }">
+			<c:if test="${utilisateurSessionId != null }">
 				<a href="${pageContext.request.contextPath}/connexion">Enchères</a>
 				<a href="${pageContext.request.contextPath}/connexion">Vendre un article</a>
 				<a href="${pageContext.request.contextPath}/profil?id=${utilisateurSession.noUtilisateur}" >Mon profil</a>
@@ -75,8 +75,14 @@
 		<br>
 		<br>
 		
-		<!-- Affichage auto des articles en vente -->
-		
+		<div>
+			<div>IMAGE ENCHERE</div>
+			<span>PC Gamer pour travailler</span>
+			<span>Prix : 210 points</span> <br>
+			<span>Fin de l'enchère : 10/08/2018</span> <br>
+			<br>
+			<span>Vendeur : jojo44</span>
+		</div>
 		<br>
 			<label for="listeArticle">Liste des Articles :</label>
 			

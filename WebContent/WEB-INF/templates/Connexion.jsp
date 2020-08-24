@@ -9,7 +9,7 @@
 <body>
 	<main>
 		<h1>ENI-Enchères</h1>
-		<c:if test="${connecte != true }">
+		<c:if test="${utilisateurSessionId == null }">
 			<form method="post">
 				<label for="identifiant">Identifiant :</label>
 				<input required type="text" id="identifiant" name="identifiant"> <br>
@@ -26,9 +26,9 @@
 			
 			</form>
 			
-			<button><a href="#">Créer un compte</a></button>
+			<a href="${pageContext.request.contextPath}/inscription"><button>Créer un compte</button></a>
 		</c:if>
-		<c:if test="${connecte == true }">
+		<c:if test="${utilisateurSessionId != null }">
 			<h2>Vous êtes déjà connecté</h2>
 			<a href="${pageContext.request.contextPath}/deconnexion"><button>Déconnexion</button></a>
 			<a href="${pageContext.request.contextPath}/encheres"><button>Accueil</button></a>

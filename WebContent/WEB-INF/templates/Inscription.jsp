@@ -8,11 +8,11 @@
 </head>
 <body>
 	<main>
-		<c:if test="${connecte != true }">
+		<c:if test="${utilisateurSessionId == null}">
 			<h1>ENI-Enchères</h1>
 			<br>
 			<br>
-			<h1>Mon profil</h1>
+			<h1>Inscription</h1>
 			<form action="${pageContext.request.contextPath}/inscription" method="POST">
 				<label for="pseudo">Pseudo :</label>
 				<input required type="text" id="pseudo" name="pseudo">
@@ -45,10 +45,10 @@
 				<input type="password" id="confirmation_mot_de_passe" name="confirmation_mot_de_passe"> <br>
 				<br>
 				<button type="submit">Creer</button>
-				<a href="#"><button type="button"> Annuler</button></a> 
+				<a href="${pageContext.request.contextPath}/connexion"><button type="button"> Annuler</button></a> 
 			</form>
 		</c:if>
-		<c:if test="${connecte == true }">
+		<c:if test="${utilisateurSessionId != null}">
 			<h2>Vous êtes déjà connecté</h2>
 			<a href="${pageContext.request.contextPath}/deconnexion"><button>Déconnexion</button></a>
 			<a href="${pageContext.request.contextPath}/encheres"><button>Accueil</button></a>

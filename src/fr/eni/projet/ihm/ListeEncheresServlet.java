@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import fr.eni.projet.bo.Utilisateur;
 import fr.eni.projet.bll.ArticleVenduManager;
 import fr.eni.projet.bll.CategorieManager;
 import fr.eni.projet.bo.ArticleVendu;
@@ -29,10 +30,13 @@ public class ListeEncheresServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		if(session.getAttribute("utilisateurSession") != null) {
-			request.setAttribute("connecte", true);
-		}
+//		HttpSession session = request.getSession();
+//		if(session.getAttribute("utilisateurSession") != null) {
+//			request.setAttribute("connecte", true);
+//		}
+//		Utilisateur u = SessionService.checkUtilisateurSession(request, response);
+		
+		SessionService.checkUtilisateurSession(request);
 		
 		// liste des catégories
 		List <Categorie> listeCategorie = new ArrayList<Categorie>();
