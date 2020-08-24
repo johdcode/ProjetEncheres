@@ -4,39 +4,50 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+	integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+	crossorigin="anonymous">
 <title>Liste des enchères</title>
 </head>
 <body>
-	<main>
-		<header>			
-			<h1>ENI-Enchères</h1>
-			<c:if test="${utilisateurSessionId == null }">
+	<div class="container-fluid">
+		<header>	
+		<nav class="navbar navbar-light bg-light">
+			<span class="navbar-brand mb-0 h1">ENI-Enchère</span> 
+			<span
+				class="navbar-brand mb-0 h1">
+				<c:if test="${utilisateurSessionId == null }">
 				<a href="${pageContext.request.contextPath}/connexion">S'incrire - Se connecter</a>
 			</c:if>
-			<c:if test="${utilisateurSessionId != null }">
+				</span>
+				<span>
+				<c:if test="${utilisateurSessionId != null }">
 				<a href="${pageContext.request.contextPath}/connexion">Enchères</a>
 				<a href="${pageContext.request.contextPath}/connexion">Vendre un article</a>
 				<a href="${pageContext.request.contextPath}/profil?id=${utilisateurSession.noUtilisateur}" >Mon profil</a>
 				<a href="${pageContext.request.contextPath}/deconnexion">Déconnexion</a>
 			</c:if>
+				</span>
+		</nav>		
 		</header>
 		
 		<h2>Liste des enchères</h2>
 		<form action="${pageContext.request.contextPath}/encheres" method="POST">
+		 <div class="form-group">
 			<label for="recherche">Filtres :</label> <br>
-			<input type="text" name ="recherche" id="recherche" placeholder="Le nom de l'article contient"> <br>
-			<br>
+			<input class="form-control" type="text" name ="recherche" id="recherche" placeholder="Le nom de l'article contient"> <br>
+			</div>
+			<div class="form-group">
 			<label for="categorie">Catégories :</label>
-			<select name="categorie" id="categorie">
+			<select class="form-control" name="categorie" id="categorie">
 			   		 <option value="toutes">Toutes</option>
 			   <c:forEach var = "categorie" items = "${listeCategorie}">
 			   		 <option value="${categorie.libelle}">${categorie.libelle}</option>
 			   
 			   </c:forEach>
-			   
-			   
-			</select> <br><br>
-			
+			</select>
+			</div>
 			<c:if test="${requestScope.connecte == true }">
 				<div>
 				  <input type="radio" id="achat" name="type" value="achat" checked>
@@ -70,7 +81,7 @@
 				</div>
 			</c:if>
 			
-			<button type="submit">Recherche</button>
+			<button class="btn btn-primary" type="submit">Recherche</button>
 		</form>
 		<br>
 		<br>
@@ -110,6 +121,6 @@
 			   
 			<br>
 		
-	</main>
+	</div>
 </body >
 </html>
