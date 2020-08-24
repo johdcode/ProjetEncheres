@@ -1,8 +1,13 @@
 package fr.eni.projet.bo;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Utilisateur {
+public class Utilisateur implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//variables
 	int noUtilisateur;
 	String pseudo;

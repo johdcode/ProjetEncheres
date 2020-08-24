@@ -1,9 +1,14 @@
 package fr.eni.projet.bo;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Categorie {
+public class Categorie implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//Variable
 	int noCategorie;
 	String libelle;

@@ -1,8 +1,13 @@
 package fr.eni.projet.bo;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class Enchere {
+public class Enchere implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//Variable
 	int noEnchere;
 	Timestamp dateEnchere;
