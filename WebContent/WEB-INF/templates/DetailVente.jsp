@@ -27,11 +27,12 @@
 <!-- nom article vendu -->
 	<br><br>
 	<h3>  </h3>
-Description : 
+	Description : ${articleAAfficher.description}
 <!-- affichage description -->
 
 <br><br>
-Catégorie :
+	Catégorie : ${categorieArticle.libelle}
+
 <!-- affichage catégorie -->
 
 <br><br>
