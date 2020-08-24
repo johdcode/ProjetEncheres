@@ -2,11 +2,7 @@ package fr.eni.projet.ihm;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -195,7 +191,7 @@ public class DetailVenteServlet extends HttpServlet {
 	}
 	request.setAttribute("utilisateurArticle", u);
 	
-	// enregsitrer l'enchère :
+	// enregistrer l'enchère :
 				// recupérer la nouvelle enchère
 			int montantEnchereSaisie = Integer.parseInt(request.getParameter("enchereSaisie").trim());
 			System.out.println(montantEnchereSaisie);
@@ -212,12 +208,14 @@ public class DetailVenteServlet extends HttpServlet {
 			System.out.println("date : "+ dateNow);
 			
 			// enregistrer la proposition si elle est plus grande que le prix actuel
-//			if (montantEnchereSaisie > enchereActuelle) {
-//				Enchere enchereAIntegrer = new Enchere(dateNow, montantEnchereSaisie, idArticle, idUtilisateurSession);
-//				enchereManager.insert(enchereAIntegrer);
-//			}
+			if (montantEnchereSaisie > enchereActuelle) {
+				Enchere enchereAIntegrer = new Enchere(dateNow, montantEnchereSaisie, idArticle, idUtilisateurSession);
+				enchereManager.insert(enchereAIntegrer);
+				//passe le prix max en attribut
+				request.setAttribute("enchereActuelle", enchereAIntegrer.getMontantEnchere());
+			}
 	
-	
+			
 		
 	request.getRequestDispatcher("/WEB-INF/templates/DetailVente.jsp").forward(request, response);
 	}

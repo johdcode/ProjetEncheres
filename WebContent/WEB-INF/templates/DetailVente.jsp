@@ -21,7 +21,12 @@
 		</c:if>
 	</header>
 
+<c:if test="${utilisateurSessionId == null }">
+<h3>Veuillez vous connecter pour accéder au detail de l'enchère.</h3>
 
+</c:if>
+
+<c:if test="${utilisateurSessionId != null }">
 	<h2>Détail vente</h2>
 
 <!-- nom article vendu -->
@@ -29,45 +34,40 @@
 	Description : ${articleAAfficher.description}
 <!-- affichage description -->
 
-<br><br>
+	<br><br>
 	Catégorie : ${categorieArticle.libelle}
 
 <!-- affichage catégorie -->
 
-<br><br>
-Meilleur offre : ${enchereActuelle} 
+	<br><br>
+	Meilleur offre : ${enchereActuelle} 
 <!-- affichage du montant de l'offre + de l'utilisateur qui a fait l'offre -->
 
-<br><br>
-Mise à prix : ${articleAAfficher.miseAPrix}
+	<br><br>
+	Mise à prix : ${articleAAfficher.miseAPrix}
 <!-- prix de départ article vendu -->
 
-<br><br>
-Fin de l'enchère : ${articleAAfficher.dateFinEnchere}
+	<br><br>
+	Fin de l'enchère : ${articleAAfficher.dateFinEnchere}
 <!-- date fin de l'enchère -->
 
-<br><br>
-Retrait : ${retraitArticle.rue} ${retraitArticle.codePostal} ${retraitArticle.ville} 
+	<br><br>
+	Retrait : ${retraitArticle.rue} ${retraitArticle.codePostal} ${retraitArticle.ville} 
 <!-- rue + CP + Ville -->
 
-<br><br>
-Vendeur : ${utilisateurArticle.pseudo}
+	<br><br>
+	Vendeur : ${utilisateurArticle.pseudo}
 <!--  nom du vendeur qui visite cette page -->
 
 
-	<c:if test="${utilisateurSessionId != null }">
-<br><br>
-<form action="${pageContext.request.contextPath}/DetailVente?idArticle=${idArticle}" method="POST">
-				<label for="enchereSaisie">Votre enchère : </label>
-				<input required type="text" id="enchereSaisie" name="enchereSaisie">
-				<button type="submit">Proposer Enchère</button> 
-			</form>
-	</c:if>
-<!-- 
-Formu
-Liste déroulante de sélection du montant (de 5 en 5 ?)
-Bouton de validation
- -->
+	
+	<br><br>
+	<form action="${pageContext.request.contextPath}/DetailVente?idArticle=${idArticle}" method="POST">
+					<label for="enchereSaisie">Votre enchère : </label>
+					<input required type="text" id="enchereSaisie" name="enchereSaisie">
+					<button type="submit">Proposer Enchère</button> 
+				</form>
+</c:if>
 
 
 </body>
