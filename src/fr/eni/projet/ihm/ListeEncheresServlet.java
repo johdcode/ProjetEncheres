@@ -14,6 +14,7 @@ import fr.eni.projet.bll.CategorieManager;
 import fr.eni.projet.bll.UtilisateurManager;
 import fr.eni.projet.bo.ArticleVendu;
 import fr.eni.projet.bo.Categorie;
+import fr.eni.projet.bo.Utilisateur;
 import fr.eni.projet.dal.DALException;
 
 /**
