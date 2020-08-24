@@ -22,23 +22,23 @@
 
 		<div class="row">
 			<div class="col-4">
-				<div class="card" style="width: 18rem;">
+			<!-- 	<div class="card" style="width: 18rem;">
 					<img src="..." class="card-img-top" alt="...">
 					<div class="card-body">
 						<p class="card-text">Some quick example text to build on the
 							card title and make up the bulk of the card's content.</p>
 					</div>
-				</div>
+				</div> -->
 			</div>
 			<div class="col">
-				<form class="form">
+				<form action="${pageContext.request.contextPath}/NouvelleVenteServlet" method="post"class="form">
 					<div class="form-group row">
 						<label class="col-form-label" for="article">Article : </label> 
-						<input name="article" type="text"class="form-control" id="article">
+						<input name="article" type="text"class="form-control" id="article" maxlength="50">
 					</div>
 					<div class="form-group row">
 						<label class="col-form-label" for="description">Description : </label> 
-						<input name="description" type="text" class="form-control" id="description">
+						<input name="description" type="text" class="form-control" id="description"maxlength="100">
 					</div>
 					<div class="form-group row">
 					<label class="col-form-label" for="categorie">Catégorie </label> 
@@ -49,10 +49,10 @@
 							</c:forEach>
 						</select>
 					</div>
-					<div class="form-group row">
+					<!-- <div class="form-group row">
 						<label class="col-form-label" for="photo">Photo de l'article </label> 
 						<input name="photo" type="file"class="form-control" id="photo">
-					</div>
+					</div> -->
 					<div class="form-group row">
 						<label class="col-form-label" for="prix">Mise à prix : </label> 
 						<input name="prix"type="number"class="form-control" id="prix">
@@ -70,15 +70,15 @@
 						<legend>Retrait</legend>
 							<div class="form-group row">
 								<label class="col-form-label" for="rue">Rue : </label> 
-								<input name="rue" type="text" class="form-control" id="rue">
+								<input name="rue" type="text" class="form-control" id="rue" maxlength="50" value="${vendeur.rue}">
 							</div>
 							<div class="form-group row">
 								<label class="col-form-label" for="cp">Code Postal : </label> 
-								<input name="cp" type="text" class="form-control" id="cp">
+								<input name="cp" type="text" class="form-control" id="cp" maxlength="5"value="${vendeur.codePostal}">
 							</div>
 							<div class="form-group row">
 								<label class="col-form-label" for="ville">Ville : </label> 
-								<input name="ville" type="text" class="form-control" id="ville">
+								<input name="ville" type="text" class="form-control" id="ville" maxlength="50"value="${vendeur.ville}">
 							</div>
 					</fieldset>
 					<div>
