@@ -34,6 +34,7 @@ public class DAOFactory {
 			return new CategorieDAOJdbcImpl();
 			}
 
+	//Enchère
 	public static EnchereDAO getEnchereDAO() {
 		return new EnchereDAOJdbcImpl();
 	}

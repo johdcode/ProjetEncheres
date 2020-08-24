@@ -1,16 +1,20 @@
 package fr.eni.projet.bll;
 
+import java.util.ArrayList;
 import java.util.List;
 import fr.eni.projet.bo.Enchere;
 import fr.eni.projet.dal.DALException;
 import fr.eni.projet.dal.DAOFactory;
 import fr.eni.projet.dal.EnchereDAO;
-import fr.eni.projet.dal.UtilisateurDAO;
 
 public class EnchereManager {
 	
 	private static EnchereManager instance;
 	private EnchereDAO enchereDAO;
+	
+	//Appel des managers
+	private ArticleVenduManager articleVenduManager = ArticleVenduManager.getInstance();
+
 	
 	private EnchereManager() {
 		this.enchereDAO = DAOFactory.getEnchereDAO();
@@ -42,5 +46,34 @@ public class EnchereManager {
 	
 	public void update(Enchere enchere) throws DALException {
 		this.enchereDAO.update(enchere);
+	}
+	
+	public List<Enchere> selectByArticle(int id) {
+		return enchereDAO.selectByArticle(id);
+		}
+	
+	// recuperer l'enchère la plus haute 
+		
+	public Enchere getEnchereMax (int idArticle) {
+		
+			Enchere enchereMax = null;
+			List<Enchere> listeEncheresArticle = new ArrayList<Enchere>();
+			
+				// création de la liste des enchères par raport à l'article
+			listeEncheresArticle = instance.selectByArticle(idArticle);
+			
+				// sélection de l'enchère la plus haute 
+			for (int i = 0; i < listeEncheresArticle.size(); i++) {
+				try {
+					if (listeEncheresArticle.get(i).getMontantEnchere() > articleVenduManager.selectById(idArticle).getMiseAPrix()) {
+						enchereMax = listeEncheresArticle.get(i);
+					}
+				} catch (DALException e) {
+					e.printStackTrace();
+				};	
+			}
+			return enchereMax;
+		
+	
 	}
 }

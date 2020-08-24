@@ -18,6 +18,8 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	private final String SELECT_BY_ID = "SELECT no_enchere, date_enchere, montant_enchere, no_article, no_utilisateur from encheres where no_enchere=?;";
 	private final String UPDATE = "UPDATE encheres set date_enchere=?, montant_enchere=?, no_article=?, no_utilisateur=? where no_enchere=?;";
 	private final String DELETE = "DELETE FROM encheres WHERE no_enchere =?;";
+	private final String SELECT_BY_ARTICLE = "SELECT no_enchere, date_enchere, montant_enchere, no_article, no_utilisateur from encheres where no_article=?;";
+	
 	@Override
 	public void insert(Enchere enchere) {
 		PreparedStatement pstmt = null;
@@ -141,4 +143,28 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		return enchere;
 	}
 
+	@Override
+	public List<Enchere> selectByArticle(int id) {
+			List<Enchere> encheres = new ArrayList<Enchere>();
+		
+		try ( Connection connection = ConnectionProvider.getConnection()){
+			
+			PreparedStatement pstmt = connection.prepareStatement(SELECT_BY_ARTICLE);
+			pstmt.setInt(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Enchere enchere = new Enchere(rs.getInt("no_enchere"),
+						rs.getTimestamp("date_enchere"), 
+						rs.getInt("montant_enchere"),
+						rs.getInt("no_article"),
+						rs.getInt("no_utilisateur"));
+				encheres.add(enchere);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return encheres;
+	}
 }

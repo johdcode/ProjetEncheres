@@ -10,4 +10,5 @@ public interface EnchereDAO {
 	public void update(Enchere enchere) throws DALException;
 	void delete(int id) throws DALException;
 	Enchere selectById(int id);
+	List<Enchere> selectByArticle(int id);
 }

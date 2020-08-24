@@ -1,7 +1,6 @@
 package fr.eni.projet.bo;
 
 import java.sql.Timestamp;
-import java.time.LocalDate;
 
 public class Enchere {
 	//Variable
