@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import fr.eni.projet.bll.ArticleVenduManager;
 import fr.eni.projet.bll.CategorieManager;
+import fr.eni.projet.bll.UtilisateurManager;
 import fr.eni.projet.bo.ArticleVendu;
 import fr.eni.projet.bo.Categorie;
+import fr.eni.projet.bo.Utilisateur;
 import fr.eni.projet.dal.DALException;
 
 /**
@@ -20,50 +22,104 @@ import fr.eni.projet.dal.DALException;
  */
 @WebServlet("/encheres")
 public class ListeEncheresServlet extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
+	
+	private CategorieManager categorieManager = CategorieManager.getInstance();
+	private UtilisateurManager utilisateurManager = UtilisateurManager.getInstance();
+	private ArticleVenduManager articleVenduManager = ArticleVenduManager.getInstance();
 
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		HttpSession session = request.getSession();
-//		if(session.getAttribute("utilisateurSession") != null) {
-//			request.setAttribute("connecte", true);
-//		}
-//		Utilisateur u = SessionService.checkUtilisateurSession(request, response);
+		request.setCharacterEncoding("UTF-8");
 		
 		SessionService.checkUtilisateurSession(request);
+		List <ArticleVendu> listeArticle = new ArrayList<ArticleVendu>();
+		try {
+			listeArticle = articleVenduManager.selectAll();
+		} catch (DALException e1) {
+			e1.printStackTrace();
+		}
+		
+		if((request.getParameter("recherche") != null && !request.getParameter("recherche").isEmpty()) 
+				|| (request.getParameter("categorie") != null && !request.getParameter("categorie").isEmpty())) {
+			String recherche = request.getParameter("recherche").trim();
+			String categorie = request.getParameter("categorie").trim();
+			
+			Categorie targetCategorie = null;
+			
+			int erreur = 0;
+			
+			if(recherche != null && !recherche.isEmpty()) {
+				if(recherche.length() >= 30) {
+					erreur++;
+				}
+			}
+			if(categorie != null && !categorie.isEmpty()) {
+				if(categorie.length() >= 30) {
+					erreur++;
+				}
+				
+				// Vérifie que la catégorie existe
+				List<Categorie> categories = new ArrayList<>();
+				try {
+					categories = categorieManager.selectAll();
+				} catch (DALException e) {
+					e.printStackTrace();
+				}
+				for(Categorie cat : categories) {
+					if(cat.getLibelle().toLowerCase().equals(categorie.toLowerCase())) {
+						targetCategorie = cat;
+					}
+				}
+				if(targetCategorie == null) {
+					erreur++;
+				}
+			}
+			
+			if(erreur == 0) {
+				try {
+					// Recherche
+					if(recherche != null && !recherche.isEmpty()) {
+						listeArticle = articleVenduManager.selectByRecherche(recherche);
+					}
+					// Catégorie
+					if(categorie != null && !categorie.isEmpty()){
+						List<ArticleVendu> outListeArticle =  new ArrayList<ArticleVendu>();
+						// Trie les articles
+						for(ArticleVendu art : listeArticle) {
+							Utilisateur u = utilisateurManager.selectById(art.getNoUtilisateurArticle());
+							art.setUtilisateur(u);
+							if(art.getNoCategorieArticle() == targetCategorie.getNoCategorie()) {
+								outListeArticle.add(art);
+							}
+						}
+						listeArticle = outListeArticle;
+					}
+				} catch (DALException e) {
+					e.printStackTrace();
+				}
+				
+				request.setAttribute("recherche", recherche);
+				request.setAttribute("categorie", categorie);
+			}
+			
+		}
 		
 		// liste des catégories
 		List <Categorie> listeCategorie = new ArrayList<Categorie>();
-		CategorieManager cm = CategorieManager.getInstance();
 		try {
-			listeCategorie = cm.selectAll();
+			listeCategorie = categorieManager.selectAll();
 		} catch (DALException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		request.setAttribute("listeCategorie", listeCategorie);
-		
-		
-		// liste fictive pour mise en place affichage des articles
-				// à mettre en jour ensuite avec la liste générée par la recherche
-		
-		List <ArticleVendu> listeArticle = new ArrayList<ArticleVendu>();
-		ArticleVenduManager avm = ArticleVenduManager.getInstance();
-		
-		try {
-			listeArticle = avm.selectAll();
-		} catch (DALException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		request.setAttribute("listeArticle", listeArticle);
-		
-		
-		
-		
+
 		request.getRequestDispatcher("/WEB-INF/templates/ListeEncheres.jsp").forward(request, response);
 	}
 
@@ -71,6 +127,8 @@ public class ListeEncheresServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		
 		String recherche = request.getParameter("recherche");
 		String categorie = request.getParameter("categorie");
 		
