@@ -8,6 +8,7 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
 	integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
 	crossorigin="anonymous">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/styles.css">
 <title>Nouvelle vente</title>
 </head>
 <body>
@@ -15,11 +16,11 @@
 	<!-- conteneur Bootstrap -->
 	<div class="container-fluid">
 		<!-- Navbarre -->
-		<nav class="navbar navbar-light bg-light">
-			<span class="navbar-brand mb-0 h1">ENI-Enchère</span> <span
-				class="navbar-brand mb-0 h1">Nouvelle vente</span>
+		<nav id="barre" class="navbar navbar-light">
+			<span class="navbar-brand mb-0 h1">ENI-Enchère</span> 
+			<span class="navbar-brand mb-0 h1">Nouvelle vente</span>
 		</nav>
-
+<h1>Vendre</h1>
 		<div class="row">
 			<div class="col-4">
 			<!-- 	<div class="card" style="width: 18rem;">
