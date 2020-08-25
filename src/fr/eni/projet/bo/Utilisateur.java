@@ -19,7 +19,7 @@ public class Utilisateur implements Serializable{
 	String codePostal;
 	String ville;
 	String motDePasse;
-	float credit;
+	int credit;
 	boolean administrateur;
 	
 	List <ArticleVendu> listeArticlesVendus;
@@ -86,10 +86,10 @@ public class Utilisateur implements Serializable{
 	public void setMotDePasse(String motDePasse) {
 		this.motDePasse = motDePasse;
 	}
-	public float getCredit() {
+	public int getCredit() {
 		return credit;
 	}
-	public void setCredit(float credit) {
+	public void setCredit(int credit) {
 		this.credit = credit;
 	}
 	public boolean isAdministrateur() {
@@ -110,7 +110,7 @@ public class Utilisateur implements Serializable{
 		super();
 	}
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone,
-			String rue, String codePostal, String ville, String motDePasse, float credit, boolean administrateur) {
+			String rue, String codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
 		super();
 		this.pseudo = pseudo;
 		this.nom = nom;
@@ -125,7 +125,7 @@ public class Utilisateur implements Serializable{
 		this.administrateur = administrateur;
 	}
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone,
-			String rue, String codePostal, String ville, String motDePasse, float credit, boolean administrateur,
+			String rue, String codePostal, String ville, String motDePasse, int credit, boolean administrateur,
 			List<ArticleVendu> listeArticlesVendus, List<Enchere> listeEncheres) {
 		super();
 		this.pseudo = pseudo;
@@ -148,7 +148,7 @@ public class Utilisateur implements Serializable{
 	
 	//Constructeur avec IF et sans les listeArticlesVendus et listeEncheres
 	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
-			String rue, String codePostal, String ville, String motDePasse, float credit, boolean administrateur) {
+			String rue, String codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
 		this.noUtilisateur=noUtilisateur;
 		this.pseudo = pseudo;
 		this.nom = nom;

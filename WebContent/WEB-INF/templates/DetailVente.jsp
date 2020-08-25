@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,9 +69,20 @@
 	<form action="${pageContext.request.contextPath}/DetailVente?idArticle=${idArticle}" method="POST">
 					<label for="enchereSaisie">Votre enchère : </label>
 					<input required type="text" id="enchereSaisie" name="enchereSaisie">
+					
+					<c:if test="${!empty erreurMontant }">
+					<p style="color : red"><c:out value="${erreurMontant}" ></c:out><p>
+					</c:if>
+					<c:if test="${!empty erreurCredit }">
+					<p style="color : red"><c:out value="${erreurCredit}" ></c:out><p>
+					</c:if>
+					<c:if test="${!empty erreurDate }">
+					<p style="color : red"><c:out value="${erreurDate}" ></c:out><p>
+					</c:if>
 					<button type="submit">Proposer Enchère</button> 
 				</form>
 </c:if>
+
 
 
 </body>

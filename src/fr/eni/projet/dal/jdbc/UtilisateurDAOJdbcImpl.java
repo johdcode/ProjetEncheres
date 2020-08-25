@@ -75,7 +75,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 				Utilisateur utilisateur = new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo").trim(), 
 						rs.getString("nom").trim(), rs.getString("prenom").trim(), rs.getString("email").trim(),rs.getString("telephone").trim(),
 						rs.getString("rue").trim(),rs.getString("code_postal").trim(),rs.getString("ville").trim(),rs.getString("mot_de_passe").trim(),
-						rs.getFloat("credit"),rs.getBoolean("administrateur"));
+						rs.getInt("credit"),rs.getBoolean("administrateur"));
 				utilisateurs.add(utilisateur);
 			}
 		} catch (SQLException e) {
@@ -99,7 +99,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		utilisateur = new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo").trim(), 
 					rs.getString("nom").trim(), rs.getString("prenom").trim(), rs.getString("email").trim(),rs.getString("telephone").trim(),
 					rs.getString("rue").trim(),rs.getString("code_postal").trim(),rs.getString("ville").trim(),rs.getString("mot_de_passe").trim(),
-					rs.getFloat("credit"),rs.getBoolean("administrateur"));
+					rs.getInt("credit"),rs.getBoolean("administrateur"));
 		}
 		
 		} catch (SQLException e) {
@@ -124,7 +124,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		utilisateur = new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo").trim(), 
 					rs.getString("nom").trim(), rs.getString("prenom").trim(), rs.getString("email").trim(),rs.getString("telephone").trim(),
 					rs.getString("rue").trim(),rs.getString("code_postal").trim(),rs.getString("ville").trim(),rs.getString("mot_de_passe").trim(),
-					rs.getFloat("credit"),rs.getBoolean("administrateur"));
+					rs.getInt("credit"),rs.getBoolean("administrateur"));
 		}
 		
 		} catch (SQLException e) {
@@ -197,7 +197,7 @@ Utilisateur utilisateur = null;
 		utilisateur = new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo").trim(), 
 					rs.getString("nom").trim(), rs.getString("prenom").trim(), rs.getString("email").trim(),rs.getString("telephone").trim(),
 					rs.getString("rue").trim(),rs.getString("code_postal").trim(),rs.getString("ville").trim(),rs.getString("mot_de_passe").trim(),
-					rs.getFloat("credit"),rs.getBoolean("administrateur"));
+					rs.getInt("credit"),rs.getBoolean("administrateur"));
 		}
 		
 		} catch (SQLException e) {
