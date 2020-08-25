@@ -118,10 +118,16 @@ public class DetailVenteServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	/**
+	 *
+	 */
+	/**
+	 *
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// Affichage des Infos après l'enchère
-			SessionService.checkUtilisateurSession(request);
+			Utilisateur acheteur =SessionService.checkUtilisateurSession(request);
 				
 		// reccuperer l'ID de l'article et le passer en attribut
 			int idArticle = Integer.parseInt(request.getParameter("idArticle"));
@@ -207,10 +213,48 @@ public class DetailVenteServlet extends HttpServlet {
 			LocalDateTime dateNow = LocalDateTime.now();
 			System.out.println("date : "+ dateNow);
 			
-			// enregistrer la proposition si elle est plus grande que le prix actuel
-			if (montantEnchereSaisie > enchereActuelle) {
-				Enchere enchereAIntegrer = new Enchere(dateNow, montantEnchereSaisie, idArticle, idUtilisateurSession);
+			
+			
+			//vérification des conditions de l'enchère saisie par rapport à l'enchère actuelle, le crédit utilisateur et les dates de début et fin de l'enchère
+			
+				//verification du montant de l'enchère saisie par rapport au montant de l'enchère actuelle
+			boolean MontantEnchereSaisieEstPlusElevé=false;
+			if(montantEnchereSaisie> enchereActuelle)
+			{
+				MontantEnchereSaisieEstPlusElevé=true;
+			}
+			else {
+				String erreurMontant = "Veuillez insérer un montant plus élevé que le montant de la plus haute enchère en cours";
+				request.setAttribute("erreurMontant", erreurMontant);
+			}
+			
+				//vérification de la date de l'enchère saisie par rapport à la date de début et fin d'enchère
+			boolean enchereSaisieDateValide = false;
+		
+			Enchere enchereAIntegrer = new Enchere(dateNow, montantEnchereSaisie, idArticle, idUtilisateurSession);
+			if(enchereAIntegrer.getDateEnchere().isBefore(av.getDateFinEnchere())&& enchereAIntegrer.getDateEnchere().isAfter(av.getDateDebutEnchere())) {
+				enchereSaisieDateValide=true;
+			}
+			else {
+				String erreurDate = "Les enchères ne sont pas possibles sur cette vente";
+				request.setAttribute("erreurDate", erreurDate);
+			}
+			//vérification crédit utilisateur
+			boolean creditSuperieurAMontantEnchere = false;
+			if( acheteur.getCredit()> montantEnchereSaisie) {
+				creditSuperieurAMontantEnchere=true;
+			}
+			else {
+				String erreurCredit="Votre crédit est insuffisant";
+				request.setAttribute("erreurCredit", erreurCredit);
+				
+			}
+			
+			
+			// enregistrer l'enchère si elle répond aux 3 critères précédents : montant, date, crédit utilisateur
+			if (MontantEnchereSaisieEstPlusElevé && enchereSaisieDateValide && creditSuperieurAMontantEnchere)  {
 				enchereManager.insert(enchereAIntegrer);
+				System.out.println("enchère insérée");
 				//passe le prix max en attribut
 				request.setAttribute("enchereActuelle", enchereAIntegrer.getMontantEnchere());
 			}
