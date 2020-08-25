@@ -24,7 +24,8 @@ public class ModifierProfil extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Utilisateur u = SessionService.checkUtilisateurSession(request);
+		SessionService.checkUtilisateurSession(request);
+		
 		request.getRequestDispatcher("/WEB-INF/templates/ModifierProfil.jsp").forward(request, response);
 	}
 
@@ -34,9 +35,11 @@ public class ModifierProfil extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
+		
 		int creditInitial = 100;
 		
 		Utilisateur utilisateurDb = SessionService.checkUtilisateurSession(request);
+
 		
 		String pseudo = request.getParameter("pseudo").trim();
 		String nom = request.getParameter("nom").trim();

@@ -5,6 +5,17 @@ body{
 h1{
 	color : red;
 }
-.navbar{
-	background-color : #EB6424;
+
+header {
+	
+ color : red;	
+}
+
+.navbar {
+background-color: #695958;
+text-align: right;
+}
+
+.container {
+	text-align: right;
 }
