@@ -44,7 +44,7 @@
 						</li>
 						<li class="nav-item">
 							<a 	class="nav-link text_light font-weight-bold text-uppercase px-4 fa fa-text-height"
-								href="${pageContext.request.contextPath}/NouvelleVenteServlet" 
+								href="${pageContext.request.contextPath}/nouvelle-vente" 
 								style="font-size:20px; color:#aed9e0">
 								Vendre un article 
 								</a>

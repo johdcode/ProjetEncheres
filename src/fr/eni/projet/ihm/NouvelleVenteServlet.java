@@ -238,7 +238,6 @@ public class NouvelleVenteServlet extends HttpServlet {
 			}
 			rs = request.getRequestDispatcher("/WEB-INF/templates/ListeEncheres.jsp");
 			
-			response.sendRedirect(request.getContextPath() + "/nouvelle-vente");
 			
 			
 		} else {
