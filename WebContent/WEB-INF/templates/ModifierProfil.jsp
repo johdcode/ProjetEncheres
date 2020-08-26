@@ -5,8 +5,7 @@
 <html>
 <head>
 
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet"href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
@@ -19,8 +18,6 @@
 </head>
 <body>
 <header>
-
-
 
 <!-- Début Navbar -->
 	<div class="container-fluid">
@@ -42,14 +39,14 @@
 					<ul class="navbar-nav" >
 						<li class="nav-item active">
 							<a 	class="nav-link text_light font-weight-bold text-uppercase px-4 fa fa-text-height"
-								href="${pageContext.request.contextPath}/connexion" 
+								href="${pageContext.request.contextPath}/encheres" 
 								style="font-size:20px; color:#aed9e0" >
 								Enchères <span class="sr-only">(current)</span>
 							</a>
 						</li>
 						<li class="nav-item">
 							<a 	class="nav-link text_light font-weight-bold text-uppercase px-4 fa fa-text-height"
-								href="${pageContext.request.contextPath}/connexion" 
+								href="${pageContext.request.contextPath}/NouvelleVenteServlet" 
 								style="font-size:20px; color:#aed9e0">
 								Vendre un article 
 								</a>
@@ -73,13 +70,12 @@
 			</c:if>
 		</nav>
 	</div>
-	
+</header>	
 <!-- Fin Navbar -->
-</header>
-
-<main>
 
 <!-- Début Titre de la page (en <h2> ) -->
+
+<main>
 	<div class="container container-titre">
 		<div>
 			<br><br>	
@@ -91,8 +87,9 @@
 
 <!-- Début corp de la page -->
 	<div class="container container-corps">
+	
 		<c:if test="${utilisateurSessionId != null}">
-			<div class="border border-white">
+			<div >
 			<br>
 			<br>
 			<form action="${pageContext.request.contextPath}/modifier-profil" method="POST">

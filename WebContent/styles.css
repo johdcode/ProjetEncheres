@@ -3,6 +3,10 @@ body{
 	
 }
 
+main {
+	min-height : 65vh;
+}
+
 footer {
 	background-color: #343A40;
 	bottom:0;
@@ -32,6 +36,7 @@ h2{
 }
 
 .container-corps {
+	
 	background-color: #ffffff;
 	border-radius: 50px;
 }
