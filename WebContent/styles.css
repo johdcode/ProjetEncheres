@@ -8,7 +8,8 @@ main {
 }
 
 footer {
-	background-color: #343A40;
+/* 	background-color: #1979a9; */
+ 	background-color: #343A40;
 	bottom:0;
 	left: 0;
 	right: 0;
@@ -31,14 +32,15 @@ h2{
 .navbar {
 	margin: 0px -20px 0px -20px;
 	padding: 10px 0px 10px 50px;
-	background-color: #343A40;
+/* 	background-color: #1979a9; */
+ 	background-color: #343A40;
 
 }
 
 .container-corps {
 	
 	background-color: #ffffff;
-	border-radius: 50px;
+	border-radius: 15px;
 }
 
 .footer-text {
@@ -51,7 +53,7 @@ h2{
 	text-align: center;
 	font-weight: bold;
 	line-height: 150%;
-	border-radius: 30px;
+	border-radius: 15px;
 	border: solid;
 	border-width: 1px 1px;
 	padding: 5px 0px 0px 0px;

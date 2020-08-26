@@ -9,6 +9,7 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/styles.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -84,55 +85,61 @@
 <!-- Fin Titre de la page-->
 
 <!-- Début corp de la page -->
-	<div class="container container-corps">
-
-	<% // TODO: Dans la jsp %>
-	<c:if test="${utilisateur != null}">
-		
-		<br>
-		<br>
-		<label for="pseudo">Pseudo: </label>
-		<span class="pseudo">${utilisateur.pseudo}</span><br>
-		
-		<label for="nom">Nom: </label>
-		<span class="nom">${utilisateur.nom}</span><br>
-		
-		<label for="prenom">Prénom: </label>
-		<span class="prenom">${utilisateur.prenom}</span><br>
-		
-		<label for="email">Email: </label>
-		<span class="email">${utilisateur.email}</span><br>
-		
-		<label for="telephone">Téléphone: </label>
-		<span class="telephone">${utilisateur.telephone}</span><br>
-		
-		<label for="rue">Rue: </label>
-		<span class="rue">${utilisateur.rue}</span><br>
-		
-		<label for="code_postal">Code postal: </label>
-		<span class="code_postal">${utilisateur.codePostal}</span><br>
-		
-		<label for="ville">Ville: </label>
-		<span class="ville">${utilisateur.ville}</span><br>
-		
-		<c:if test="${(utilisateur.nom != null) && (utilisateur.nom == utilisateurSession.nom)}">
-			<a href="${pageContext.request.contextPath}/modifier-profil"><button>Modifier</button></a>
-		</c:if>
-	</c:if>
-		<!-- Partie en cas de non connexion -->
-		<c:if test="${utilisateurSessionId == null}">
-			<br><br>
-			<h2>Vous devez vous connecter</h2>
-			<br><br>
-			<div class="row">	
-					<div class= "col-12 text-center">
-			<a href="${pageContext.request.contextPath}/connexion"><button class="btn btn-dark">Connexion</button></a>
-			<a href="${pageContext.request.contextPath}/encheres"><button class="btn btn-dark">Accueil</button></a>
+	<div class="container container-corps profil">
+		<div class="row">
+			<div class="col-md-3"></div>
+			<div class="col-md-6 text-center">
+				<% // TODO: Dans la jsp %>
+				<c:if test="${utilisateur != null}">
+					
+					<br>
+					<br>
+					<label for="pseudo">Pseudo: </label>
+					<span class="pseudo">${utilisateur.pseudo}</span><br>
+					
+					<label for="nom">Nom: </label>
+					<span class="nom">${utilisateur.nom}</span><br>
+					
+					<label for="prenom">Prénom: </label>
+					<span class="prenom">${utilisateur.prenom}</span><br>
+					
+					<label for="email">Email: </label>
+					<span class="email">${utilisateur.email}</span><br>
+					
+					<label for="telephone">Téléphone: </label>
+					<span class="telephone">${utilisateur.telephone}</span><br>
+					
+					<label for="rue">Rue: </label>
+					<span class="rue">${utilisateur.rue}</span><br>
+					
+					<label for="code_postal">Code postal: </label>
+					<span class="code_postal">${utilisateur.codePostal}</span><br>
+					
+					<label for="ville">Ville: </label>
+					<span class="ville">${utilisateur.ville}</span><br>
+					<br>
+					<c:if test="${(utilisateur.nom != null) && (utilisateur.nom == utilisateurSession.nom)}">
+						<a href="${pageContext.request.contextPath}/modifier-profil" class="btn btn-lg btn-secondary btn-block col-6 ml-auto mr-auto mb-2">Modifier</a>
+					</c:if>
+					<br>
+					<br>
+				</c:if>
+				<!-- Partie en cas de non connexion -->
+				<c:if test="${utilisateurSessionId == null}">
+					<br><br>
+					<h2>Vous devez vous connecter</h2>
+					<br><br>
+					<div class="row">	
+							<div class= "col-12 text-center">
+					<a href="${pageContext.request.contextPath}/connexion"><button class="btn btn-dark">Connexion</button></a>
+					<a href="${pageContext.request.contextPath}/encheres"><button class="btn btn-dark">Accueil</button></a>
+							</div>
 					</div>
+					<br><br>
+					
+				</c:if>
 			</div>
-			<br><br>
-			
-		</c:if>
+		</div>
 	</div>
 	<!-- Fin Partie en cas de non connexion -->
 <!-- Fin corp de la page -->	

@@ -147,9 +147,9 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 					        rs.getInt("prix_vente"),
 					        rs.getInt("no_utilisateur"),
 					        rs.getInt("no_categorie"));
+					article.setListEncheres(EnchereManager.getInstance().selectByArticle(article.getNoArticle()));
 					articles.add(article);
 				}
-				a.setListEncheres(EnchereManager.getInstance().selectByArticle(a.getNoArticle()));
 				
 			} catch (SQLException e) {
 				System.err.println(e.getMessage());

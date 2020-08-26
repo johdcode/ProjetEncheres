@@ -84,15 +84,16 @@
 
 <!-- Début Corps -->
 	<div class="container container-corps">
-	<br><br>
-		<div class="row">
+		<div class="row ml-auto mr-auto">
 			<form action="${pageContext.request.contextPath}/encheres"
-				method="GET">
+				method="GET"
+				class="p-5 m-auto w-50">
 				<div class="col">
-					<label for="recherche">Filtres :</label> <br> <input
-						type="text" name="recherche" id="recherche"
-						placeholder="Le nom de l'article contient" value="${recherche}">
-					<br> <br> <label for="categorie">Catégories :</label> <select
+					<label for="recherche">Filtres :</label> <br> 
+					<input type="text" name="recherche" id="recherche"
+						placeholder="Le nom de l'article contient" value="${recherche}" class='form-control'>
+					<br>
+					<label for="categorie">Catégories :</label> <select
 						name="categorie" id="categorie">
 						<option value="">Toutes</option>
 						<c:forEach var="categorieDeListe" items="${listeCategorie}">
@@ -144,10 +145,11 @@
 				</c:if>
 
 
-				<button class="btn btn-primary" type="submit">Rechercher</button>
+				<button class="btn btn-secondary" type="submit">Rechercher</button>
 			</form>
 		</div>
-		<label for="listeArticle">Liste des Articles :</label>
+		<h4 for="listeArticle">Liste des Articles</h4>
+		<br>
 		<c:if test="${listeArticle.size() <= 0 }">
 			<div>
 				<p>Aucun article disponible.</p>
@@ -158,7 +160,7 @@
 			<c:forEach var="listeArticle" items="${listeArticle}">
 				<div class="col-6">
 					<div class="card">
-						<img src="..." class="card-img-top" alt="...">
+						<img src="${pageContext.request.contextPath}/image/image.jpg" class="card-img-top" alt="...">
 						<div class="card-body">
 							<h5 class="card-title">${listeArticle.nomArticle}</h5>
 							<p class="card-text">${listeArticle.description}</p>
@@ -167,14 +169,15 @@
 								${listeArticle.dateFinEnchere}</p>
 							<p class="card-text">Vendeur :
 								${listeArticle.utilisateur.pseudo}</p>
-							<a class="btn btn-primary"
+							<a class="btn btn-dark"
 								href="${pageContext.request.contextPath}/DetailVente?idArticle=${listeArticle.noArticle}">Détail</a>
 						</div>
 					</div>
 				</div>
 			</c:forEach>
 		</div>
-	
+		<br>
+		<br>
 	</div>
 	</main>
 <!-- Fin du Corps -->
