@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Locale;
 
@@ -15,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import fr.eni.projet.bll.ArticleVenduManager;
 import fr.eni.projet.bll.CategorieManager;
 import fr.eni.projet.bo.ArticleVendu;
@@ -25,8 +27,8 @@ import fr.eni.projet.dal.DALException;
 
 /**
  * Servlet implementation class NouvelleVenteServlet
- */
-@WebServlet("/NouvelleVenteServlet")
+ */	
+@WebServlet("/nouvelle-vente")
 public class NouvelleVenteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	/**
@@ -75,20 +77,43 @@ public class NouvelleVenteServlet extends HttpServlet {
 		
 		
 		String photo = request.getParameter("photo");
-		int prix = Integer.parseInt(request.getParameter("prix"));
+		
+		int prix = 0;
+		try{
+			prix = Integer.parseInt(request.getParameter("prix"));
+		} catch(NumberFormatException e) {}
+		
 		//Gestion de la date
 		//Récupération des saisies utilisateur et conversion en LocalDate
 //		String datePattern = "dd.MM.yyyy hh:mm:ss";
 //		DateTimeFormatter fDatePattern = DateTimeFormatter.ofPattern(datePattern);
+//		if(request.getParameter("debut-enchere") != null)
 		
-		LocalDate dateDebutEnchereSaisie = LocalDate.parse(request.getParameter("debut-enchere"));
-		LocalDate dateFinEnchereSaisie = LocalDate.parse(request.getParameter("fin-enchere"));
+		String debutEnchere = request.getParameter("debut-enchere");
+		String finEnchere = request.getParameter("fin-enchere");
+		LocalDate dateDebutEnchere = null;
+		LocalDate dateFinEnchere = null;
+		LocalDateTime datetimeDebutEnchere = null;
+		LocalDateTime datetimeFinEnchere = null;
 		//Création du local time à now
 		LocalTime heureDebutEnchere = LocalTime.now();
 		LocalTime heureFinEnchere = heureDebutEnchere;
+		
+		try {
+			dateDebutEnchere = LocalDate.parse(request.getParameter("debut-enchere"));
+			dateFinEnchere = LocalDate.parse(request.getParameter("fin-enchere"));
+		} catch(DateTimeParseException e) {}
+		
+//		LocalDate dateDebutEnchereSaisie = LocalDate.parse(request.getParameter("debut-enchere"));
+//		LocalDate dateFinEnchereSaisie = LocalDate.parse(request.getParameter("fin-enchere"));
+//		LocalDate dateFinEnchereSaisie = LocalDate.parse(request.getParameter("fin-enchere"));
+		
 		//Création du LocalDateTime avec la nouvelle LocalDate
-		LocalDateTime dateDebutEnchere = LocalDateTime.of(dateDebutEnchereSaisie, heureDebutEnchere);
-		LocalDateTime dateFinEnchere = LocalDateTime.of(dateFinEnchereSaisie,heureFinEnchere);
+		try {			
+			datetimeDebutEnchere = LocalDateTime.of(dateDebutEnchere, heureDebutEnchere);
+			datetimeFinEnchere = LocalDateTime.of(dateFinEnchere,heureFinEnchere);
+			System.out.println(datetimeDebutEnchere);
+		} catch(NullPointerException e) {}
 		//
 		String rue = request.getParameter("rue");
 		String cp = request.getParameter("cp");
@@ -101,8 +126,8 @@ public class NouvelleVenteServlet extends HttpServlet {
 		System.out.println("article :"+categorie);
 		System.out.println("article :"+photo);
 		System.out.println("article :"+prix);
-		System.out.println("article :"+dateDebutEnchere);
-		System.out.println("article :"+dateFinEnchere);
+		System.out.println("article :"+datetimeDebutEnchere);
+		System.out.println("article :"+datetimeFinEnchere);
 		System.out.println("article :"+rue);
 		System.out.println("article :"+cp);
 		System.out.println("article :"+ville);
@@ -137,12 +162,12 @@ public class NouvelleVenteServlet extends HttpServlet {
 		}
 		
 		//TODO format date?
-		if(dateDebutEnchere == null ) {
+		if(datetimeDebutEnchere == null ) {
 			erreur++;
 		}
 		
 //		//TODO format date?
-		if(dateFinEnchere == null) {
+		if(datetimeFinEnchere == null) {
 			erreur++;
 		}
 	
@@ -161,14 +186,13 @@ public class NouvelleVenteServlet extends HttpServlet {
 		RequestDispatcher rs = null;
 		if(erreur == 0) {
 			
-			
 			int noUtilisateur = (int) request.getSession().getAttribute("utilisateurSessionId");
 			System.out.println(noUtilisateur);
 //			
 //			//création du retrait
 //			
 			Retrait retrait = new Retrait(rue, cp, ville);
-			ArticleVendu articleVendu = new ArticleVendu(article, description, dateDebutEnchere, dateFinEnchere, prix, prix, noUtilisateur, noCategorie);
+			ArticleVendu articleVendu = new ArticleVendu(article, description, datetimeDebutEnchere, datetimeFinEnchere, prix, prix, noUtilisateur, noCategorie);
 ////			
 //			//appel instance de manager
 			
@@ -176,10 +200,11 @@ public class NouvelleVenteServlet extends HttpServlet {
 			try {
 				am.insert(articleVendu, retrait);
 			} catch (DALException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			rs = request.getRequestDispatcher("/WEB-INF/templates/ListeEncheres.jsp");
+			
+			response.sendRedirect(request.getContextPath() + "/nouvelle-vente");
 			
 			
 		} else {

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.projet.bll.CategorieManager;
+import fr.eni.projet.bll.EnchereManager;
 import fr.eni.projet.bll.RetraitManager;
 import fr.eni.projet.bll.UtilisateurManager;
 import fr.eni.projet.bo.ArticleVendu;
@@ -79,6 +80,11 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 				//5 -
 				a.setUtilisateur(UtilisateurManager.getInstance().selectById(a.getNoUtilisateurArticle()));
 				a.setCategorie(CategorieManager.getInstance().selectById(a.getNoCategorieArticle()));
+				try {
+					a.setListEncheres(EnchereManager.getInstance().selectByArticle(a.getNoArticle()));
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
 				
 				
 			} catch (SQLException e) {
@@ -111,6 +117,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 								        rs.getInt("no_categorie")
 								);
 					}
+					a.setListEncheres(EnchereManager.getInstance().selectByArticle(a.getNoArticle()));
 			
 			} catch (SQLException e) {
 				throw new DALException("SelectById ArticleVendu FAIL - ", e);
@@ -142,6 +149,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 					        rs.getInt("no_categorie"));
 					articles.add(article);
 				}
+				a.setListEncheres(EnchereManager.getInstance().selectByArticle(a.getNoArticle()));
 				
 			} catch (SQLException e) {
 				System.err.println(e.getMessage());
@@ -170,6 +178,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 					        rs.getInt("prix_vente"),
 					        rs.getInt("no_utilisateur"),
 					        rs.getInt("no_categorie"));
+					article.setListEncheres(EnchereManager.getInstance().selectByArticle(article.getNoArticle()));
 					articles.add(article);
 				}
 			} catch (SQLException e) {

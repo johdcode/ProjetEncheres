@@ -50,7 +50,10 @@ public class EnchereManager {
 	
 	public List<Enchere> selectByArticle(int id) {
 		return enchereDAO.selectByArticle(id);
-		}
+	}
+	public List<Enchere> selectByUtilisateur(int id) {
+		return enchereDAO.selectByUtilisateur(id);
+	}
 	
 	// recuperer l'enchère la plus haute 
 		

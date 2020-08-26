@@ -1,6 +1,7 @@
 package fr.eni.projet.ihm;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,9 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import fr.eni.projet.bll.ArticleVenduManager;
 import fr.eni.projet.bll.CategorieManager;
+import fr.eni.projet.bll.EnchereManager;
 import fr.eni.projet.bll.UtilisateurManager;
 import fr.eni.projet.bo.ArticleVendu;
 import fr.eni.projet.bo.Categorie;
+import fr.eni.projet.bo.Enchere;
 import fr.eni.projet.bo.Utilisateur;
 import fr.eni.projet.dal.DALException;
 
@@ -28,7 +31,7 @@ public class ListeEncheresServlet extends HttpServlet {
 	private CategorieManager categorieManager = CategorieManager.getInstance();
 	private UtilisateurManager utilisateurManager = UtilisateurManager.getInstance();
 	private ArticleVenduManager articleVenduManager = ArticleVenduManager.getInstance();
-
+	private EnchereManager enchereManager = EnchereManager.getInstance();
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -36,7 +39,21 @@ public class ListeEncheresServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		SessionService.checkUtilisateurSession(request);
+		Utilisateur utilisateur = SessionService.checkUtilisateurSession(request);
+		
+		String recherche = request.getParameter("recherche");
+		String categorie = request.getParameter("categorie");
+		
+		String type = request.getParameter("type");
+		String encheresOuvertes = request.getParameter("encheres_ouvertes");
+		String mesEncheres = request.getParameter("mes_encheres");
+		String mesEncheresRemportees = request.getParameter("mes_encheres_remportees");
+		
+//		String vente = request.getParameter("vente");
+		String ventesEnCours = request.getParameter("ventes_en_cours");
+		String ventesNonDebutees = request.getParameter("ventes_non_debutees");
+		String ventesTerminees = request.getParameter("ventes_terminees");
+		
 		List <ArticleVendu> listeArticle = new ArrayList<ArticleVendu>();
 		try {
 			listeArticle = articleVenduManager.selectAll();
@@ -44,11 +61,8 @@ public class ListeEncheresServlet extends HttpServlet {
 			e1.printStackTrace();
 		}
 		
-		if((request.getParameter("recherche") != null && !request.getParameter("recherche").isEmpty()) 
-				|| (request.getParameter("categorie") != null && !request.getParameter("categorie").isEmpty())) {
-			String recherche = request.getParameter("recherche").trim();
-			String categorie = request.getParameter("categorie").trim();
-			
+		if((recherche != null && !recherche.isEmpty()) 
+				|| (categorie != null && !categorie.isEmpty())) {
 			Categorie targetCategorie = null;
 			
 			int erreur = 0;
@@ -79,7 +93,7 @@ public class ListeEncheresServlet extends HttpServlet {
 					erreur++;
 				}
 			}
-			
+			System.out.println(erreur);
 			if(erreur == 0) {
 				try {
 					// Recherche
@@ -108,7 +122,7 @@ public class ListeEncheresServlet extends HttpServlet {
 			}
 			
 		}
-		
+
 		// liste des catégories
 		List <Categorie> listeCategorie = new ArrayList<Categorie>();
 		try {

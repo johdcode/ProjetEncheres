@@ -19,6 +19,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 	private final String UPDATE = "UPDATE encheres set date_enchere=?, montant_enchere=?, no_article=?, no_utilisateur=? where no_enchere=?;";
 	private final String DELETE = "DELETE FROM encheres WHERE no_enchere =?;";
 	private final String SELECT_BY_ARTICLE = "SELECT no_enchere, date_enchere, montant_enchere, no_article, no_utilisateur from encheres where no_article=?;";
+	private final String SELECT_BY_UTILISATEUR = "SELECT no_enchere, date_enchere, montant_enchere, no_article, no_utilisateur from encheres where no_utilisateur=?;";
 	
 	@Override
 	public void insert(Enchere enchere) {
@@ -156,6 +157,31 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		try ( Connection connection = ConnectionProvider.getConnection()){
 			
 			PreparedStatement pstmt = connection.prepareStatement(SELECT_BY_ARTICLE);
+			pstmt.setInt(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Enchere enchere = new Enchere(rs.getInt("no_enchere"),
+						rs.getTimestamp("date_enchere").toLocalDateTime(), 
+						rs.getInt("montant_enchere"),
+						rs.getInt("no_article"),
+						rs.getInt("no_utilisateur"));
+				encheres.add(enchere);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return encheres;
+	}
+	
+	@Override
+	public List<Enchere> selectByUtilisateur(int id) {
+		List<Enchere> encheres = new ArrayList<Enchere>();
+		
+		try ( Connection connection = ConnectionProvider.getConnection()){
+			
+			PreparedStatement pstmt = connection.prepareStatement(SELECT_BY_UTILISATEUR);
 			pstmt.setInt(1, id);
 			ResultSet rs = pstmt.executeQuery();
 			

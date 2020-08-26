@@ -32,7 +32,7 @@
 				</div> -->
 			</div>
 			<div class="col">
-				<form action="${pageContext.request.contextPath}/NouvelleVenteServlet" method="post"class="form">
+				<form action="${pageContext.request.contextPath}/nouvelle-vente" method="post"class="form">
 					<div class="form-group row">
 						<label class="col-form-label" for="article">Article : </label> 
 						<input name="article" type="text"class="form-control" id="article" maxlength="50">
@@ -44,7 +44,7 @@
 					<div class="form-group row">
 					<label class="col-form-label" for="categorie">Catégorie </label> 
 						<select name="categorie" class="custom-select">
-							<option value="toutes">Toutes</option>
+							<!-- <option value="toutes">Toutes</option> -->
 							<c:forEach var="categorie" items="${categories}">
 								<option value="${categorie.libelle}">${categorie.libelle}</option>
 							</c:forEach>

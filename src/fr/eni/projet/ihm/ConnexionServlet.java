@@ -47,18 +47,19 @@ public class ConnexionServlet extends HttpServlet {
 		if(identifiant == null || identifiant == "") {
 			erreur++;
 		}
-		if(identifiant.length() >= 30) {
+		if(identifiant != null && identifiant.length() >= 30) {
 			erreur++;
 		}
 		if(motDePasse == null || motDePasse == "") {
 			erreur++;
 		}
-		if(motDePasse.length() >= 30) {
+		if(motDePasse != null && motDePasse.length() >= 30) {
 			erreur++;
 		}
 		
+		System.out.println("Erreurs : " + erreur);
 		// Si il n'y a pas d'erreur et que l'utilisateur n'est pas encore connecté
-		if((erreur < 1) && (session.getAttribute("utilisateurSession") == null)) {		
+		if((erreur == 0) && (session.getAttribute("utilisateurSession") == null)) {		
 			UtilisateurManager utilisateurManager = UtilisateurManager.getInstance();
 			Utilisateur u = utilisateurManager.authentification(identifiant, motDePasse);
 			
