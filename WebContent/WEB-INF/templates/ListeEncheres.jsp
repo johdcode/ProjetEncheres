@@ -61,7 +61,7 @@
 							</div>
 							<div>
 								<input type="checkbox" id="encheres_ouvertes"
-									name="encheres_ouvertes" checked> <label
+									name="encheres_ouvertes"> <label
 									for="encheres_ouvertes">enchères ouvertes</label> <br> <input
 									type="checkbox" id="mes_encheres" name="mes_encheres">
 								<label for="mes_encheres">mes enchères</label> <br> <input
@@ -78,7 +78,7 @@
 							</div>
 							<div>
 								<input type="checkbox" id="ventes_en_cours"
-									name="ventes_en_cours" checked> <label
+									name="ventes_en_cours"> <label
 									for="ventes_en_cours">ventes en cours</label> <br> <input
 									type="checkbox" id="ventes_non_debutees"
 									name="ventes_non_debutees"> <label

@@ -1,0 +1,21 @@
+body{
+	background-color: #f8f9fa;
+}
+h1{
+	color : red;
+}
+
+header {
+	color : red;	
+}
+.navbar {
+	background-color: #695958;
+	text-align: right;
+}
+.container {
+	/* text-align: right; */
+}
+
+.vertical-center{
+	padding-top: 50%; transform: translateY(-50%);
+}
