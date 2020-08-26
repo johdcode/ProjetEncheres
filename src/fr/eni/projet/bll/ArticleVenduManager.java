@@ -40,8 +40,8 @@ public class ArticleVenduManager {
 		return articleVenduDAO.selectAll();
 	}
 	
-	public void update(ArticleVendu a) throws DALException {
-		articleVenduDAO.update(a);
+	public void update(ArticleVendu a, Retrait r) throws DALException {
+		articleVenduDAO.update(a, r);
 	}
 	
 	public void delete(int id) throws DALException {

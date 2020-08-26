@@ -12,7 +12,7 @@ public interface ArticleVenduDAO {
 	
 	List<ArticleVendu> selectAll() throws DALException;
 	
-	void update(ArticleVendu a) throws DALException;
+	void update(ArticleVendu a, Retrait r) throws DALException;
 	
 	void delete(int id) throws DALException;
 

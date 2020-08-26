@@ -192,7 +192,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 		
 	// Methode Update article
 		@Override
-		public void update(ArticleVendu a) throws DALException {
+		public void update(ArticleVendu a, Retrait r) throws DALException {
 			try(Connection conn = ConnectionProvider.getConnection()){
 				PreparedStatement stmt = conn.prepareStatement(SQL_UPDATE);
 				
@@ -207,6 +207,9 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 				stmt.setInt(9, a.getNoArticle());
 				
 				stmt.executeUpdate();
+				
+				RetraitManager rm = RetraitManager.getInstance();
+				rm.update(r);
 			}catch (SQLException e) {
 				e.printStackTrace();
 				throw new DALException("Update ArticleVendu FAIL", e);

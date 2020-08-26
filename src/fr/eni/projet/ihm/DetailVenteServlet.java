@@ -1,6 +1,7 @@
 package fr.eni.projet.ihm;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,8 +39,9 @@ public class DetailVenteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		SessionService.checkUtilisateurSession(request);
-		
+		Utilisateur utilisateurEnSession = SessionService.checkUtilisateurSession(request);
+
+		request.setAttribute("UtilisateurEnSession", utilisateurEnSession);
 		// reccuperer l'ID de l'article et le passer en attribut
 		int idArticle = Integer.parseInt(request.getParameter("idArticle"));
 		request.setAttribute("idArticle", idArticle);
@@ -53,6 +55,7 @@ public class DetailVenteServlet extends HttpServlet {
 		} catch (DALException e) {
 			e.printStackTrace();
 		}
+		System.out.println(av.getNoUtilisateurArticle());
 		request.setAttribute("articleAAfficher", av);
 		
 		// récupérer la catégorie
@@ -100,15 +103,15 @@ public class DetailVenteServlet extends HttpServlet {
 		
 		// recup vendeur
 		
-		Utilisateur u = new Utilisateur();
+		Utilisateur vendeur = new Utilisateur();
 		
 		try {
 			int idUti = articleVenduManager.selectById(idArticle).getNoUtilisateurArticle();
-			u = utilisateurManager.selectById(idUti);
+			vendeur = utilisateurManager.selectById(idUti);
 		} catch (DALException e) {
 			e.printStackTrace();
 		}
-		request.setAttribute("utilisateurArticle", u);
+		request.setAttribute("utilisateurArticle", vendeur);
 		
 		request.getRequestDispatcher("/WEB-INF/templates/DetailVente.jsp").forward(request, response);
 	}
@@ -126,8 +129,8 @@ public class DetailVenteServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// Affichage des Infos après l'enchère
-			Utilisateur acheteur =SessionService.checkUtilisateurSession(request);
+		// Récupération de l'utilisateur en session
+			Utilisateur utilisateurEnSession =SessionService.checkUtilisateurSession(request);
 				
 		// reccuperer l'ID de l'article et le passer en attribut
 			int idArticle = Integer.parseInt(request.getParameter("idArticle"));
@@ -187,22 +190,22 @@ public class DetailVenteServlet extends HttpServlet {
 	
 	// recup vendeur
 	
-	Utilisateur u = new Utilisateur();
+	Utilisateur vendeur = new Utilisateur();
 	
 	try {
 		int idUti = articleVenduManager.selectById(idArticle).getNoUtilisateurArticle();
-		u = utilisateurManager.selectById(idUti);
+		vendeur = utilisateurManager.selectById(idUti);
 	} catch (DALException e) {
 		e.printStackTrace();
 	}
-	request.setAttribute("utilisateurArticle", u);
+	request.setAttribute("utilisateurArticle", vendeur);
 	
 	// enregistrer l'enchère :
 				// recupérer la nouvelle enchère
 			int montantEnchereSaisie = Integer.parseInt(request.getParameter("enchereSaisie").trim());
 			System.out.println(montantEnchereSaisie);
 			
-				// recuperer l'utilisateur
+				// recuperer l'id utilisateur
 			int idUtilisateurSession = Integer.parseInt(SessionService.getUtilisateurSessionId(request));
 			System.out.println("idUt : " + idUtilisateurSession);
 			
@@ -241,7 +244,7 @@ public class DetailVenteServlet extends HttpServlet {
 			}
 			//vérification crédit utilisateur
 			boolean creditSuperieurAMontantEnchere = false;
-			if( acheteur.getCredit()> montantEnchereSaisie) {
+			if( utilisateurEnSession.getCredit()> montantEnchereSaisie) {
 				creditSuperieurAMontantEnchere=true;
 			}
 			else {
@@ -258,8 +261,7 @@ public class DetailVenteServlet extends HttpServlet {
 				//passe le prix max en attribut
 				request.setAttribute("enchereActuelle", enchereAIntegrer.getMontantEnchere());
 			}
-	
-			
+		
 		
 	request.getRequestDispatcher("/WEB-INF/templates/DetailVente.jsp").forward(request, response);
 	}
