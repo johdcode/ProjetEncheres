@@ -33,6 +33,28 @@ public class NouvelleVenteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		//==================fonctionnalité modifier vente
+		//		ArticleVenduManager av = ArticleVenduManager.getInstance();
+//		
+//		String idArticle = request.getParameter("idArticle");
+//		if(!idArticle.equals(null)||!idArticle.isEmpty()) {
+//			try {
+//				ArticleVendu articleAModifier = av.selectById(Integer.parseInt(idArticle));
+//				
+//				request.setAttribute("articleAModifier", articleAModifier);
+//				request.setAttribute("dateDebut", articleAModifier.getDateDebutEnchere().toLocalDate());
+//				request.setAttribute("dateFin", articleAModifier.getDateFinEnchere().toLocalDate());
+//			} catch (NumberFormatException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			} catch (DALException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			
+//		}
+//		=========================================================================================================
 		
 		//Chargement des catégories en BDD pour affichage en JSP
 		CategorieManager cm = CategorieManager.getInstance();
@@ -49,6 +71,8 @@ public class NouvelleVenteServlet extends HttpServlet {
 		request.setAttribute("vendeur", vendeur);
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/templates/NouvelleVente.jsp");
 		rd.forward(request, response);
+		
+		
 	}
 
 	/**
@@ -67,7 +91,7 @@ public class NouvelleVenteServlet extends HttpServlet {
 				break;
 			case "Ameublement": noCategorie = 3;
 				break;
-			case "Vêtements": noCategorie = 4;
+			case "Vetements": noCategorie = 4;
 				break;
 			case "Sports et loisirs": noCategorie = 5;
 				break;
@@ -97,15 +121,15 @@ public class NouvelleVenteServlet extends HttpServlet {
 		
 		//affichage saisie pour vérification
 		System.out.println("article :"+article);
-		System.out.println("article :"+description);
-		System.out.println("article :"+categorie);
-		System.out.println("article :"+photo);
-		System.out.println("article :"+prix);
-		System.out.println("article :"+dateDebutEnchere);
-		System.out.println("article :"+dateFinEnchere);
-		System.out.println("article :"+rue);
-		System.out.println("article :"+cp);
-		System.out.println("article :"+ville);
+		System.out.println("description :"+description);
+		System.out.println("categorie :"+categorie);
+		System.out.println("photo :"+photo);
+		System.out.println("prix :"+prix);
+		System.out.println("dateDebutEnchere :"+dateDebutEnchere);
+		System.out.println("dateFinEnchere :"+dateFinEnchere);
+		System.out.println("rue"+rue);
+		System.out.println("cp :"+cp);
+		System.out.println("ville :"+ville);
 		
 		
 		//vérification des erreurs formulaire
@@ -173,6 +197,8 @@ public class NouvelleVenteServlet extends HttpServlet {
 //			//appel instance de manager
 			
 			ArticleVenduManager am = ArticleVenduManager.getInstance();
+			
+			
 			try {
 				am.insert(articleVendu, retrait);
 			} catch (DALException e) {
