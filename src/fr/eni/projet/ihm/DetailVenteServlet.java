@@ -202,7 +202,19 @@ public class DetailVenteServlet extends HttpServlet {
 	
 	// enregistrer l'enchère :
 				// recupérer la nouvelle enchère
-			int montantEnchereSaisie = Integer.parseInt(request.getParameter("enchereSaisie").trim());
+	
+			
+			int montantEnchereSaisie = 0;
+			try {
+				montantEnchereSaisie = Integer.parseInt(request.getParameter("enchereSaisie").trim());
+			} catch (NumberFormatException e) {
+				
+				e.printStackTrace();
+				String erreurTypeMontant = "Veuillez saisir un nombre entier";
+				request.setAttribute("erreurTypeMontant", erreurTypeMontant);
+				
+			}
+		
 			System.out.println(montantEnchereSaisie);
 			
 				// recuperer l'id utilisateur

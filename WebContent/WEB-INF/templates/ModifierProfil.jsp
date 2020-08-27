@@ -142,7 +142,7 @@
 				<div class="row">	
 					<div class= "col-12 text-center">
 					<!--  TODO : faire boutton supprimer membre -->
-					<a href="#"><button type="button" class="btn btn-danger"> Supprimer mon compte</button></a>	
+					<a href="${pageContext.request.contextPath}/supprimer-mon-compte?id=${utilisateurSessionId}"><button type="button" class="btn btn-danger"> Supprimer mon compte</button></a>	
 					 </div>
 				
 				
