@@ -205,13 +205,20 @@
 
 <!-- Début Footer -->
 <script type="text/javascript">
-document.body.onload = ()=>{	
-	setVenteActive();
-	setAchatActive();
-	document.querySelector('.achat-trigger input').checked = true;
-	initRecherche();
+document.body.onload = ()=>{
+	if(document.querySelector('.achat-trigger input').checked){
+		setAchatActive();
+	}else{
+		setVenteActive();
+	}
+	document.querySelector('.achat-trigger input').onchange = ()=>{
+		setAchatActive();
+	}
+	document.querySelector('.vente-trigger input').onchange = ()=>{
+		setVenteActive();
+	}
 }
-function initRecherche(){
+function setAchatActive(){	
 	document.querySelectorAll('.achat input').forEach((e)=>{
 	    e.disabled = false;
 	});
@@ -225,38 +232,19 @@ function initRecherche(){
 	    e.style.color = "grey";
 	});
 }
-function setAchatActive(){	
-	document.querySelector('.achat-trigger input').onchange = ()=>{
-		document.querySelectorAll('.achat input').forEach((e)=>{
-		    e.disabled = false;
-		});
-		document.querySelectorAll('.achat label').forEach((e)=>{
-		    e.style.color = "inherit";
-		});
-		document.querySelectorAll('.vente input').forEach((e)=>{
-		    e.disabled = true;
-		});
-		document.querySelectorAll('.vente label').forEach((e)=>{
-		    e.style.color = "grey";
-		});
-	};
-}
 function setVenteActive(){	
-	document.querySelector('.vente-trigger input').onchange = ()=>{
-		document.querySelectorAll('.vente input').forEach((e)=>{
-		    e.disabled = false;
-		});
-		document.querySelectorAll('.vente label').forEach((e)=>{
-		    e.style.color = "inherit";
-		});
-		document.querySelectorAll('.achat input').forEach((e)=>{
-		    e.disabled = true;
-		});
-		document.querySelectorAll('.achat label').forEach((e)=>{
-		    e.style.color = "grey";
-		});
-	
-	};
+	document.querySelectorAll('.vente input').forEach((e)=>{
+	    e.disabled = false;
+	});
+	document.querySelectorAll('.vente label').forEach((e)=>{
+	    e.style.color = "inherit";
+	});
+	document.querySelectorAll('.achat input').forEach((e)=>{
+	    e.disabled = true;
+	});
+	document.querySelectorAll('.achat label').forEach((e)=>{
+	    e.style.color = "grey";
+	});
 }
 
 </script>
