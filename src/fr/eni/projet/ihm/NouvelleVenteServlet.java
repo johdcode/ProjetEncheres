@@ -171,28 +171,35 @@ System.out.println("dateDebutEnchere" +debutEnchere);
 		int erreur = 0;
 		if(article == null || article == "") {
 			BusinessException.addMessageErreur("Veuillez renseigner un nom");
+			erreur++;
 			}
 		
 		if(article != null && article.length() >= 50) {
 			BusinessException.addMessageErreur("Le nom ne peut contenir que 30 caractères");
+			erreur++;
 			}
 		
-		if(description == null || description == "") {
+		if(description.equals(null) || description.isEmpty()) {
 			BusinessException.addMessageErreur("Veuillez renseigner une description");
+			erreur++;
 		}
 		if(description != null && description.length() >= 100) {
 			BusinessException.addMessageErreur("La description ne peut contenir que 100 caractères");
+			erreur++;
 			}
 		if(categorie == null || categorie == "") {
 			BusinessException.addMessageErreur("Veuillez renseigner une catégorie");
+			erreur++;
 		}
 		if(categorie != null && categorie.length() >= 50) {
 			BusinessException.addMessageErreur("La catégorie ne peut contenir plus de 50 caractères");
+			erreur++;
 			}
 		//TODO erreur fichier(taille? format?)
 
 		if(prix <= 0) {
 			BusinessException.addMessageErreur("Veuillez renseigner un prix supérieur à 0");
+			erreur++;
 		}
 		
 		//TODO format date?
@@ -205,31 +212,36 @@ System.out.println("dateDebutEnchere" +debutEnchere);
 			request.setAttribute("erreurDate", erreurDate);
 			erreur++;
 		}
-		else
+		
 		if(rue == null || rue == "") {
 			BusinessException.addMessageErreur("Veuillez renseigner une adresse");
+			erreur++;
 		}
 		if(rue != null && rue.length() >= 50) {
 			BusinessException.addMessageErreur("L'adresse ne peut contenir plus de 50 caractères");
+			erreur++;
 			}
 		if(cp == null || cp == "") {
 			BusinessException.addMessageErreur("Veuillez renseigner un code postal");
+			erreur++;
 		}
 		if(cp != null && cp.length() != 5) {
 			BusinessException.addMessageErreur("Le code postal doit contenir 5 chiffres");
+			erreur++;
 			}
+		//numero utilisateur
+		int noUtilisateur = (int) request.getSession().getAttribute("utilisateurSessionId");
+		System.out.println(noUtilisateur);
+		//création du retrait
+		
+		Retrait retrait = new Retrait(rue, cp, ville);
+		
+		//création de l'article
+		ArticleVendu articleVendu = new ArticleVendu(article, description, datetimeDebutEnchere, datetimeFinEnchere, prix, prix, noUtilisateur, noCategorie);
 		
 		if(erreur == 0) {
 			
-			int noUtilisateur = (int) request.getSession().getAttribute("utilisateurSessionId");
-			System.out.println(noUtilisateur);
-//			
-//			//création du retrait
-//			
-			Retrait retrait = new Retrait(rue, cp, ville);
-			ArticleVendu articleVendu = new ArticleVendu(article, description, datetimeDebutEnchere, datetimeFinEnchere, prix, prix, noUtilisateur, noCategorie);
-////			
-//			//appel instance de manager
+			//appel instance de manager
 			
 			ArticleVenduManager am = ArticleVenduManager.getInstance();
 			
@@ -250,6 +262,12 @@ System.out.println("dateDebutEnchere" +debutEnchere);
 			try {
 				List <Categorie> categories = cm.selectAll();
 				request.setAttribute("categories", categories);
+				request.setAttribute("retrait", retrait);
+				request.setAttribute("articleVendu", articleVendu);
+				Utilisateur vendeur = SessionService.checkUtilisateurSession(request);
+				request.setAttribute("vendeur", vendeur);
+				request.setAttribute("dateDebutEnchere", dateDebutEnchere);
+				request.setAttribute("dateFinEnchere", dateFinEnchere);
 			} catch (DALException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

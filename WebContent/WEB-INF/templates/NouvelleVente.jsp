@@ -120,35 +120,35 @@
 							<label class="col-form-label" for="article">Article : </label>
 							 <input
 								name="article" type="text" class="form-control" id="article"
-								maxlength="50">
+								maxlength="50" value="${articleVendu.nomArticle}">
 						</div>
 						<div class="form-group row">
 							<label class="col-form-label" for="description">Description : </label> 
 							<input name="description" type="text" class="form-control"
-								id="description" maxlength="100">
+								id="description" maxlength="100"value="${articleVendu.description}">
 						</div>
 						<div class="form-group row">
 						<label class="col-form-label" for="categorie">Catégorie </label> 
 							<select name="categorie" class="custom-select">
 	
 								<c:forEach var="categorie" items="${categories}">
-										<option value="${categorie.libelle}">${categorie.libelle}</option>
+										<option value="${categorie.libelle}"  ${(articleVendu.noCategorieArticle==categorie.noCategorie)?'selected':''}>${categorie.libelle}</option>
 								</c:forEach>
 							</select>
 						</div>
 					<div class="form-group row">
 						<label class="col-form-label" for="prix">Mise à Prix : </label> 	
 
-							<input name="prix" type="number" class="form-control" id="prix" title="Veuillez saisir un nombre entier">
+							<input name="prix" type="number" class="form-control" id="prix" title="Veuillez saisir un nombre entier" value="${articleVendu.miseAPrix}">
 					</div>
 					<div class="form-group row">
 						<label class="col-form-label" for="debut-enchere">Début de l'enchère : </label> 
-							<input name="debut-enchere" type="date" class="form-control" id="debut-enchere">
+							<input name="debut-enchere" type="date" class="form-control" id="debut-enchere"value="${dateDebutEnchere}">
 					</div>
 					
 					<div class="form-group row">
 						<label class="col-form-label" for="fin-enchere">Fin de l'enchère : </label> 
-						<input name="fin-enchere" type="date" class="form-control" id="fin-enchere">
+						<input name="fin-enchere" type="date" class="form-control" id="fin-enchere" value="${dateFinEnchere}">
 					</div>
 
 				
