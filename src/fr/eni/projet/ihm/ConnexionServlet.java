@@ -77,16 +77,21 @@ public class ConnexionServlet extends HttpServlet {
 				
 				SessionService.setUtilisateurSessionId(request, u.getNoUtilisateur());
 				connexionLogger.info("Connexion utilisateur n°"+session.getAttribute("utilisateurSessionId"));
-				rd = request.getRequestDispatcher("/WEB-INF/templates/ListeEncheres.jsp");
+				response.sendRedirect(request.getContextPath() + "/encheres");
+//				rd = request.getRequestDispatcher("/WEB-INF/templates/ListeEncheres.jsp");
 
 			} else  {
-				
 				request.setAttribute("messageAuthentification", messageAuthentification);
 				rd = request.getRequestDispatcher("/WEB-INF/templates/Connexion.jsp");
-				erreur++;
+				rd.forward(request, response);
+//				erreur++;
 			}
-		}	
+		}
+		else {
+			System.out.println("okok");
+			rd = request.getRequestDispatcher("/WEB-INF/templates/ListeEncheres.jsp");
 			rd.forward(request, response);
+		}
 		
 		
 	}

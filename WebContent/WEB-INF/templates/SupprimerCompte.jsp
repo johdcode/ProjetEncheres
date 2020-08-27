@@ -85,16 +85,16 @@
 	<div class="container container-corps">
 	
 		<c:if test="${utilisateurSessionId != null}">
-			<div >
+			<div class="text-center">
 			<br>
 			<br>
 			<h3>Etes-vous sûr.e de vouloir nous quitter?</h3>
 			<form action="${pageContext.request.contextPath}/supprimer-mon-compte" method="POST">
-				<div class="row">
-				<div class= "col-6">
+			<br>
+			<br>
+				
 				<button type="submit" class="btn btn-danger">Supprimer mon compte</button>
-				</div>
-				</div>
+			
 			</form>
 			</div>
 			<br><br>

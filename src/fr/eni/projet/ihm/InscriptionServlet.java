@@ -196,7 +196,7 @@ public class InscriptionServlet extends HttpServlet {
 //				erreur++;
 //			}
 		}
-		System.out.println("Erreurs : " + erreur);
+		
 		if(confirmationMotDePasse == null || confirmationMotDePasse == "") {
 			erreur++;
 		}
@@ -208,8 +208,9 @@ public class InscriptionServlet extends HttpServlet {
 				erreur++;
 			}
 		}
-		
-		if((erreur == 0) && (SessionService.getUtilisateurSessionId(request) == null)) {
+		System.out.println("Erreurs : " + erreur);
+		System.out.println("ok");
+		if((erreur == 0) && session.getAttribute("utilisateurSessionId")  == null) {
 			Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, creditInitial, false);
 			utilisateurManager.insert(utilisateur);
 			
