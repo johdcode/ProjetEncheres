@@ -22,6 +22,8 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	private final String SELECT_ALL = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur from utilisateurs;";
 	private final String SELECT_BY_ID = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur from utilisateurs where no_utilisateur=?;";
 	private final String SELECT_BY_PSEUDO = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur from utilisateurs where pseudo=?;";
+	private final String SELECT_ENCHERE_GAGNEE_ARTICLE = "select * from UTILISATEURS where no_utilisateur = (select no_utilisateur from ENCHERES where montant_enchere = (select MAX(montant_enchere) from ENCHERES where no_article = ? AND DATEDIFF(day, GETDATE() ,(select date_fin_encheres from ARTICLES_VENDUS where no_article = ?)) < 0 ));";
+//	private final String SELECT_ENCHERE_GAGNEE_ARTICLE = "select * from UTILISATEURS where no_utilisateur  = (select no_utilisateur from ENCHERES where montant_enchere = (select MAX(montant_enchere) from ENCHERES where no_article = ?));";
 	private final String UPDATE = "UPDATE Utilisateurs set pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=?, administrateur=? where no_utilisateur=?;";
 
 	@Override
@@ -129,6 +131,30 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return utilisateur;
+		
+	}
+	
+	@Override
+	public Utilisateur selectEnchereGagneeByArticle(int id) {
+		Utilisateur utilisateur = null;
+		
+		try (Connection connection = ConnectionProvider.getConnection()){
+			
+			PreparedStatement pstmt = connection.prepareStatement(SELECT_ENCHERE_GAGNEE_ARTICLE);
+			pstmt.setInt(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				utilisateur = new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo").trim(), 
+						rs.getString("nom").trim(), rs.getString("prenom").trim(), rs.getString("email").trim(),rs.getString("telephone").trim(),
+						rs.getString("rue").trim(),rs.getString("code_postal").trim(),rs.getString("ville").trim(),rs.getString("mot_de_passe").trim(),
+						rs.getInt("credit"),rs.getBoolean("administrateur"));
+			}
+			
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return utilisateur;

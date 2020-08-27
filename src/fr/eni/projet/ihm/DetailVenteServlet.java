@@ -45,7 +45,12 @@ public class DetailVenteServlet extends HttpServlet {
 
 		request.setAttribute("UtilisateurEnSession", utilisateurEnSession);
 		// reccuperer l'ID de l'article et le passer en attribut
-		int idArticle = Integer.parseInt(request.getParameter("idArticle"));
+		int idArticle = 0;
+		try {
+			idArticle = Integer.parseInt(request.getParameter("idArticle"));
+		} catch(NumberFormatException e) {
+			e.printStackTrace();
+		}
 		request.setAttribute("idArticle", idArticle);
 
 		// recuperer l'article a afficher
@@ -56,7 +61,11 @@ public class DetailVenteServlet extends HttpServlet {
 		} catch (DALException e) {
 			e.printStackTrace();
 		}
-		System.out.println(av.getNoUtilisateurArticle());
+		try {
+			System.out.println(av.getNoUtilisateurArticle());			
+		} catch(NullPointerException e) {
+			e.printStackTrace();
+		}
 		request.setAttribute("articleAAfficher", av);
 
 		// récupérer la catégorie
@@ -111,6 +120,11 @@ public class DetailVenteServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		request.setAttribute("utilisateurArticle", vendeur);
+		
+		Utilisateur u = utilisateurManager.selectEnchereGagneeByArticle(idArticle);
+		System.out.println(u);
+		
+		request.setAttribute("gagnantDeLEnchere", utilisateurManager.selectEnchereGagneeByArticle(idArticle));
 
 		request.getRequestDispatcher("/WEB-INF/templates/DetailVente.jsp").forward(request, response);
 	}
@@ -118,12 +132,6 @@ public class DetailVenteServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
-	 */
-	/**
-	 *
-	 */
-	/**
-	 *
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

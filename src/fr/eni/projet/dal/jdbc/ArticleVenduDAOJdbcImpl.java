@@ -127,7 +127,11 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 								        rs.getInt("no_categorie")
 								);
 					}
-					a.setListEncheres(EnchereManager.getInstance().selectByArticle(a.getNoArticle()));
+					try {
+						a.setListEncheres(EnchereManager.getInstance().selectByArticle(a.getNoArticle()));
+					} catch(NullPointerException e) {
+						e.printStackTrace();
+					}
 			
 			} catch (SQLException e) {
 				throw new DALException("SelectById ArticleVendu FAIL - ", e);

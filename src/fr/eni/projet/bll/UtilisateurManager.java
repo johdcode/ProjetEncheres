@@ -49,6 +49,10 @@ public class UtilisateurManager {
 		return utilisateurDAO.selectByPseudo(pseudo);
 	}
 	
+	public Utilisateur selectEnchereGagneeByArticle(int id) {
+		return utilisateurDAO.selectEnchereGagneeByArticle(id);
+	}
+	
 	public void delete(Utilisateur utilisateur) throws DALException {
 		this.utilisateurDAO.delete(utilisateur);
 	}

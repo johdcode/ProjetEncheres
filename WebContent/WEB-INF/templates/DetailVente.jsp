@@ -99,6 +99,21 @@
 		<!-- Fin Partie en cas de non connexion -->
 
 	<c:if test="${utilisateurSessionId != null }">
+		<c:if test="${gagnantDeLEnchere != null }">
+			<div class="text-center">
+				<br>
+				<h4>
+					<c:if test="${gagnantDeLEnchere.pseudo == utilisateurSession.pseudo}">
+						Vous avez remporté l'enchère.
+					</c:if>
+					<c:if test="${gagnantDeLEnchere.pseudo != utilisateurSession.pseudo}">
+						Enchère remportée par ${gagnantDeLEnchere.pseudo}.
+					</c:if>
+					
+				</h4>
+			</div>
+		</c:if>
+		
 		<br><br>
 		<img src="${pageContext.request.contextPath}/image/image.jpg" class="img" alt="...">
 		<div class="row">
@@ -128,10 +143,12 @@
 
 		<div class="text-center">
 			
-			<form	action="${pageContext.request.contextPath}/DetailVente?idArticle=${idArticle}"
+			<form action="${pageContext.request.contextPath}/DetailVente?idArticle=${idArticle}"
 					method="POST">
-			<label 	for="enchereSaisie">Votre enchère : </label> <input required
-					type="text" id="enchereSaisie" name="enchereSaisie">
+			<c:if test="${gagnantDeLEnchere == null }">
+				<label 	for="enchereSaisie">Votre enchère : </label> 
+				<input required type="text" id="enchereSaisie" name="enchereSaisie">
+			</c:if>
 	
 				<c:if test="${!empty erreurMontant }">
 					<div class="alert alert-warning" role="alert">${erreurMontant}</div>
