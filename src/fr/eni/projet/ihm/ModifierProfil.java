@@ -249,7 +249,7 @@ public class ModifierProfil extends HttpServlet {
 				erreurFormat = true;
 			}
 			// Caractère spéciaux
-			if(!nouveauMotDePasse.matches(".*[!-/:-\\?\\[-`\\{-~]+.*\\s")){
+			if(!nouveauMotDePasse.matches(".*[\\n!-/:-\\?\\[-`\\{-~]+.*")){
 				erreur++;
 				erreurFormat = true;
 			}

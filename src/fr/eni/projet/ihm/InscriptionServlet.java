@@ -227,13 +227,14 @@ public class InscriptionServlet extends HttpServlet {
 				erreurFormat = true;
 			}
 			// Caractère spéciaux
-			if(!motDePasse.matches(".*[!-/:-\\?\\[-`\\{-~]+.*\\s")){
+			if(!motDePasse.matches(".*[\\n!-/:-\\?\\[-`\\{-~]+.*")){
 				erreur++;
 				erreurFormat = true;
 			}
 			if(erreurFormat) {
 				BusinessException.addMessageErreur("Votre mot de passe doit contenir au moins 1 minuscules, 1 majuscule, 1 nombre et un caractère spécial.");
 			}
+			System.out.println("Erreur : " + erreur);
 		}
 		
 		if(confirmationMotDePasse == null || confirmationMotDePasse == "") {
