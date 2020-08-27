@@ -44,7 +44,11 @@ public class ProfilServlet extends HttpServlet {
 		request.setAttribute("utilisateurSession", utilisateurSession);
 		request.setAttribute("utilisateur", u);
 		
-		request.getRequestDispatcher("/WEB-INF/templates/Profil.jsp").forward(request, response);
+		if(u != null) {			
+			request.getRequestDispatcher("/WEB-INF/templates/Profil.jsp").forward(request, response);
+		} else {
+			response.sendRedirect(request.getContextPath() + "/encheres");
+		}
 	}
 
 	/**

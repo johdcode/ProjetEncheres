@@ -78,7 +78,7 @@
 	<div class="container container-titre">
 		<div>
 			<br><br>	
-			<h2>Se connecter</h2>
+			<h2>Se connecterr
 			<br><br>
 		</div>	
 	</div>
@@ -119,7 +119,7 @@
 			
 		</c:if>
 		<c:if test="${utilisateurSessionId != null }">
-			<div class="text-center vertical-center">
+			<div class="text-center vertical-center p-5">
 				<h2>Vous êtes déjà connecté</h2>
 				<br>
 				<br>

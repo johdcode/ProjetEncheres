@@ -127,6 +127,11 @@
 				</div>
 				
 				<br><br>
+				<div class="mise-en-avant">
+					<label for="credit">Crédit :</label>
+					<span >${utilisateurSession.credit}</span> <br>
+				</div>
+				<br><br>
 				 <div class="row">
 					<div class= "col-12 text-center">
 						<button type="submit" class="btn btn-dark">Enregistrer</button>
@@ -134,16 +139,11 @@
 					<br><br>
 				 </div>
 				<br><br>
-				<div class="mise-en-avant">
-					<label for="credit">Crédit :</label>
-					<span >${utilisateurSession.credit}</span> <br>
-				</div>
-				<br><br>
 				
 				<div class="row">	
 					<div class= "col-12 text-center">
 					<!--  TODO : faire boutton supprimer membre -->
-					<a href="#"><button type="button" class="btn btn-dark"> Supprimer mon compte</button></a>	
+					<a href="#"><button type="button" class="btn btn-danger"> Supprimer mon compte</button></a>	
 					 </div>
 				
 				
