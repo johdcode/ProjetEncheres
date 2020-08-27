@@ -117,8 +117,8 @@
 								maxlength="50">
 						</div>
 						<div class="form-group row">
-							<label class="col-form-label" for="description">Description
-								: </label> <input name="description" type="text" class="form-control"
+							<label class="col-form-label" for="description">Description : </label> 
+							<input name="description" type="text" class="form-control"
 								id="description" maxlength="100">
 						</div>
 						<div class="form-group row">
@@ -130,43 +130,21 @@
 								</c:forEach>
 							</select>
 						</div>
-						
+					<div class="form-group row">
+						<label class="col-form-label" for="prix">Mise à Prix : </label> 	
 
 							<input name="prix" type="number" class="form-control" id="prix" title="Veuillez saisir un nombre entier">
 					</div>
 					<div class="form-group row">
-						<label class="col-form-label" for="debut-enchere">Début de
-							l'enchère : </label> 
-							<input name="debut-enchere" type="date"
-							class="form-control" id="debut-enchere">
+						<label class="col-form-label" for="debut-enchere">Début de l'enchère : </label> 
+							<input name="debut-enchere" type="date" class="form-control" id="debut-enchere">
 					</div>
 					<div class="form-group row">
-						<label class="col-form-label" for="fin-enchere">Fin de
-							l'enchère : </label> <input name="fin-enchere" type="date"
-							class="form-control" id="fin-enchere">
+						<label class="col-form-label" for="fin-enchere">Fin de l'enchère : </label> 
+						<input name="fin-enchere" type="date" class="form-control" id="fin-enchere">
 					</div>
 
-					<fieldset style="{color:black;} class="form-group row">
-                        <legend>Retrait</legend>
-                            <div class="form-group row">
-                                <label class="col-form-label" for="rue">Rue : </label>
-                                <input name="rue" type="text" class="form-control" id="rue" maxlength="50" value="${vendeur.rue}">
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-form-label" for="cp">Code Postal : </label>
-                                <input name="cp" type="text" class="form-control" id="cp" maxlength="5"value="${vendeur.codePostal}">
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-form-label" for="ville">Ville : </label>
-                                <input name="ville" type="text" class="form-control" id="ville" maxlength="50"value="${vendeur.ville}">
-                            </div>
-                  	</fieldset>
-                    <div>
-                    <input class="btn btn-primary" name="enregistrer" type="submit" value="Enregistrer" >
-                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/encheres">Annuler</a>
-                    </div>
-				</form>
-	
+				
 						<fieldset style="{color:black;} class="form-group row">
 	                        <legend>Retrait</legend>
 	                            <div class="form-group row">
