@@ -1,9 +1,9 @@
 <configuration>
 	<appender name="fichier"
 		class="ch.qos.logback.core.FileAppender">
-		<file>encheres.log</file>
+		<file>C:\Users\kmaroe2020\eclipse-workspace\ProjetEnchere\ProjetEncheres\src\logback-test.log</file>
 		<encoder>
-			<pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n
+			<pattern>%date %msg%n 
 			</pattern>
 		</encoder>
 	</appender>
@@ -14,7 +14,7 @@
 			</pattern>
 		</encoder>
 	</appender>
-	<logger name="fr.eni.encheres">
+	<logger name="fr.eni.projet">
 		<appender-ref ref="fichier" />
 	</logger>
 	<root level="debug">

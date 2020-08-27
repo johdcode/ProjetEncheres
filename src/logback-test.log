@@ -1,0 +1,4 @@
+2020-08-26 21:25:54,405 INFO [http-nio-8081-exec-6] f.e.p.i.ConnexionServlet [ConnexionServlet.java:34] Connexion
+2020-08-26 21:26:45,909 INFO [http-nio-8081-exec-6] f.e.p.i.ConnexionServlet [ConnexionServlet.java:34] Connexion
+2020-08-26 21:26:52,177 INFO [http-nio-8081-exec-4] f.e.p.i.DeconnexionServlet [DeconnexionServlet.java:30] Deconnexion
+2020-08-26 21:26:52,178 INFO [http-nio-8081-exec-4] f.e.p.i.DeconnexionServlet [DeconnexionServlet.java:32] Deconnexion réussie

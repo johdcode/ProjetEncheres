@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.LoggerFactory;
+
+import ch.qos.logback.classic.Logger;
 import fr.eni.projet.bll.UtilisateurManager;
 import fr.eni.projet.bo.Utilisateur;
 
@@ -19,14 +22,17 @@ import fr.eni.projet.bo.Utilisateur;
 @WebServlet("/connexion")
 public class ConnexionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static Logger connexionLogger = (Logger) LoggerFactory.getLogger("fr.eni.projet.ihm.ConnexionServlet");
        
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Utilisateur connecté
-		SessionService.checkUtilisateurSession(request);
 		
+		SessionService.checkUtilisateurSession(request);
+		connexionLogger.info("Connexion");
+	
 		this.getServletContext().getRequestDispatcher("/WEB-INF/templates/Connexion.jsp").forward(request, response);
 	}
 

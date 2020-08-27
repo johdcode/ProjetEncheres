@@ -106,7 +106,7 @@
 	<c:if test="${utilisateurSessionId != null }">
 	
 
-
+Article : ${articleAAfficher.nomArticle}
 		<!-- nom article vendu -->
 		<br>
 		<br>

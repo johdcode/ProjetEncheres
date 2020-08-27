@@ -213,7 +213,7 @@ public class InscriptionServlet extends HttpServlet {
 			Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, creditInitial, false);
 			utilisateurManager.insert(utilisateur);
 			
-			SessionService.setUtilisateurSessionId(request, utilisateur.getNoUtilisateur());
+			SessionService.setUtilisateurSessionId(request,utilisateurManager.selectByPseudo(pseudo).getNoUtilisateur());
 			
 //			request.getRequestDispatcher("/WEB-INF/templates/ListeEncheres.jsp").forward(request, response);
 			response.sendRedirect(request.getContextPath() + "/encheres");
