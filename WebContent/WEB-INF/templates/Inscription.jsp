@@ -119,7 +119,7 @@
 							</div>
 							<div class="row">					
 								<div class="col-md-6">
-									<label for="code_postal">Code postale :</label> <br>
+									<label for="code_postal">Code postal :</label> <br>
 									<input type="text" id="code_postal" name="code_postal" class="form-control mb-3">
 								</div>
 								<div class="col-md-6">
