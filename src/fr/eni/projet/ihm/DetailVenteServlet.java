@@ -277,15 +277,27 @@ public class DetailVenteServlet extends HttpServlet {
 			}
 			
 			// Mise à jour crédit ancien enchérisseur
-			int noUtilisateurAncienEncherisseur = enchereMax.getNoUtilisateurEnchere();
-			Utilisateur ancienEncherisseur = utilisateurManager.selectById(noUtilisateurAncienEncherisseur);
-			int soldeUtilisateurAncienEncherisseur = ancienEncherisseur.getCredit() + enchereMax.getMontantEnchere();
-			ancienEncherisseur.setCredit(soldeUtilisateurAncienEncherisseur);
+
+			
+			int noUtilisateurAncienEncherisseur = 0;
 			try {
-				utilisateurManager.update(ancienEncherisseur);
-			} catch (DALException e) {
+				noUtilisateurAncienEncherisseur = enchereMax.getNoUtilisateurEnchere();
+			} catch (NullPointerException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}
+			
+			if(noUtilisateurAncienEncherisseur != 0) {
+				Utilisateur ancienEncherisseur = utilisateurManager.selectById(noUtilisateurAncienEncherisseur);
+				int soldeUtilisateurAncienEncherisseur = ancienEncherisseur.getCredit() + enchereMax.getMontantEnchere();
+				ancienEncherisseur.setCredit(soldeUtilisateurAncienEncherisseur);
+				try {
+					utilisateurManager.update(ancienEncherisseur);
+				} catch (DALException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
 			}
 
 		}
