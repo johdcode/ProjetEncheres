@@ -95,6 +95,8 @@ public class ListeEncheresServlet extends HttpServlet {
 				}
 			}
 			System.out.println(erreur);
+			
+			
 			if(erreur == 0) {
 				try {
 					// Recherche
@@ -102,11 +104,15 @@ public class ListeEncheresServlet extends HttpServlet {
 						listeArticle = articleVenduManager.selectByRecherche(recherche);
 					}
 					// Catégorie
+					
+					
+					
 					if(categorie != null && !categorie.isEmpty()){
 						List<ArticleVendu> outListeArticle =  new ArrayList<ArticleVendu>();
 						// Trie les articles
 						for(ArticleVendu art : listeArticle) {
 							Utilisateur u = utilisateurManager.selectById(art.getNoUtilisateurArticle());
+							
 							art.setUtilisateur(u);
 							if(art.getNoCategorieArticle() == targetCategorie.getNoCategorie()) {
 								outListeArticle.add(art);

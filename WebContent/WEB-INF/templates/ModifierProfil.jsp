@@ -18,59 +18,53 @@
 <body>
 <header>
 
-<!-- Début Navabar -->
-		<div class="container-fluid">
-			<nav class="navbar navbar-expand-lg navbar-light bg-ligh">
+<!-- Début Navbar -->
+	<div class="container-fluid">
 			
-				<h1>ENI-Enchères</h1>
-				
-				<c:if test="${utilisateurSessionId == null }">
-					<a 	class="nav-link text_light text-uppercase px-4 fa fa-text-height"
-						href="${pageContext.request.contextPath}/connexion" 
-						style="font-size:20px; color:#aed9e0" >S'incrire - Se connecter</a>
-				</c:if>
-				
-				<c:if test="${utilisateurSessionId != null }">
-					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-	   					<span class="navbar-toggler-icon"></span>
-	  				</button>
-					 <div class="collapse navbar-collapse" id="navbarNav">
-						<ul class="navbar-nav" >
-							<li class="nav-item active">
-								<a 	class="nav-link text_light text-uppercase px-4 fa fa-text-height"
-									href="${pageContext.request.contextPath}/encheres" 
-									style="font-size:20px; color:#aed9e0" >
-									Enchères <span class="sr-only">(current)</span>
+			<nav class="navbar navbar-expand-lg navbar-light bg-ligh">
+ 			 <a class="navbar-brand" href="${pageContext.request.contextPath}/encheres" style="font-size:24px; color:#dee2e6"><b>ENI-Enchères</b></a>
+			
+			<c:if test="${utilisateurSessionId == null }">
+				<a 	class="nav-link text_light text-uppercase px-4 fa fa-text-height"
+					href="${pageContext.request.contextPath}/connexion" 
+					style="font-size:20px; color:#aed9e0" >S'incrire - Se connecter</a>
+			</c:if>
+			
+			<c:if test="${utilisateurSessionId != null }">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+   					<span class="navbar-toggler-icon"></span>
+  				</button>
+				 <div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav" >
+						
+						<li class="nav-item">
+							<a 	class="nav-link text_light text-uppercase px-4 fa fa-text-height"
+								href="${pageContext.request.contextPath}/nouvelle-vente" 
+								style="font-size:20px; color:#aed9e0">
+								Vendre un article 
 								</a>
-							</li>
-							<li class="nav-item">
-								<a 	class="nav-link text_light text-uppercase px-4 fa fa-text-height"
-									href="${pageContext.request.contextPath}/nouvelle-vente" 
-									style="font-size:20px; color:#aed9e0">
-									Vendre un article 
-									</a>
-							</li>
-							<li class="nav-item">
-								<a 	class="nav-link text_light text-uppercase px-4 fa fa-text-height"
-									 href="${pageContext.request.contextPath}/profil?id=${utilisateurSession.noUtilisateur}" 
-									 style="font-size:20px; color:#aed9e0">
-									 Mon profil
-								 </a>
-							<li class="nav-item">
-								<a	class="nav-link text_light text-uppercase px-4 fa fa-text-height"
-									 href="${pageContext.request.contextPath}/deconnexion" 
-									 style="font-size:20px; color:#aed9e0">
-									 Déconnexion
-								 </a>
-							</li>
-							
-						</ul> 
-					</div>
-				</c:if>
-			</nav>
-		</div>
-	</header>
-<!-- Fin Navabar -->
+						</li>
+						<li class="nav-item">
+							<a 	class="nav-link text_light text-uppercase px-4 fa fa-text-height"
+								 href="${pageContext.request.contextPath}/profil?id=${utilisateurSession.noUtilisateur}" 
+								 style="font-size:20px; color:#aed9e0">
+								 Mon profil
+							 </a>
+						<li class="nav-item">
+							<a	class="nav-link text_light text-uppercase px-4 fa fa-text-height"
+								 href="${pageContext.request.contextPath}/deconnexion" 
+								 style="font-size:20px; color:#aed9e0">
+								 Déconnexion
+							 </a>
+						</li>
+						
+					</ul> 
+				</div>
+			</c:if>
+		</nav>
+	</div>
+</header>	
+<!-- Fin Navbar -->
 
 <!-- Début Titre de la page (en <h2> ) -->
 
