@@ -83,7 +83,7 @@
 			<div class="col-md-3"></div>
 			<div class="col-md-6 text-center">
 				
-				<c:if test="${utilisateur != null}">
+				<c:if test="${utilisateurSessionId != null}">
 					
 					<br>
 					<br>
