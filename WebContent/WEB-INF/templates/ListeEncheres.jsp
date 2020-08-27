@@ -209,8 +209,10 @@ document.body.onload = ()=>{
 	if(document.querySelector('.achat-trigger input').checked){
 		setAchatActive();
 	}else{
+		document.querySelector('.vente-trigger input').checked = true; 	
 		setVenteActive();
 	}
+	
 	document.querySelector('.achat-trigger input').onchange = ()=>{
 		setAchatActive();
 	}
