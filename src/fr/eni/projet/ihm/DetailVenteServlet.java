@@ -272,6 +272,28 @@ public class DetailVenteServlet extends HttpServlet {
 				System.out.println("enchère insérée");
 				//passe le prix max en attribut
 				request.setAttribute("enchereActuelle", enchereAIntegrer.getMontantEnchere());
+				//Mise à jour crédit enchérisseur
+				int soldeUtilisateur = utilisateurEnSession.getCredit()- enchereAIntegrer.getMontantEnchere();
+				utilisateurEnSession.setCredit(soldeUtilisateur);
+				try {
+					utilisateurManager.update(utilisateurEnSession);
+				} catch (DALException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				//Mise à jour crédit ancien enchérisseur
+				int noUtilisateurAncienEncherisseur= enchereMax.getNoUtilisateurEnchere();
+				Utilisateur ancienEncherisseur = utilisateurManager.selectById(noUtilisateurAncienEncherisseur);
+				int soldeUtilisateurAncienEncherisseur = ancienEncherisseur.getCredit()+enchereMax.getMontantEnchere();
+				ancienEncherisseur.setCredit(soldeUtilisateurAncienEncherisseur);
+				try {
+					utilisateurManager.update(ancienEncherisseur);
+				} catch (DALException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
 			}
 		
 		
