@@ -22,8 +22,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	private final String SELECT_ALL = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur from utilisateurs;";
 	private final String SELECT_BY_ID = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur from utilisateurs where no_utilisateur=?;";
 	private final String SELECT_BY_PSEUDO = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur from utilisateurs where pseudo=?;";
-	private final String SELECT_ENCHERE_GAGNEE_ARTICLE = "select * from UTILISATEURS where no_utilisateur = (select no_utilisateur from ENCHERES where montant_enchere = (select MAX(montant_enchere) from ENCHERES where no_article = ? AND DATEDIFF(day, GETDATE() ,(select date_fin_encheres from ARTICLES_VENDUS where no_article = ?)) < 0 ));";
-//	private final String SELECT_ENCHERE_GAGNEE_ARTICLE = "select * from UTILISATEURS where no_utilisateur  = (select no_utilisateur from ENCHERES where montant_enchere = (select MAX(montant_enchere) from ENCHERES where no_article = ?));";
+	private final String SELECT_ENCHERE_GAGNEE_ARTICLE = "select no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur from UTILISATEURS where no_utilisateur IN (select no_utilisateur from ENCHERES where montant_enchere = (select MAX(montant_enchere) from ENCHERES where no_article = ?)  AND no_article IN (select no_article from ARTICLES_VENDUS where DATEDIFF(day, GETDATE() ,date_fin_encheres) < 0 ) );";
 	private final String UPDATE = "UPDATE Utilisateurs set pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=?, credit=?, administrateur=? where no_utilisateur=?;";
 
 	@Override

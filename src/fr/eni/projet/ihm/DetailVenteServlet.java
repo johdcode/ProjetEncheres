@@ -42,7 +42,6 @@ public class DetailVenteServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		Utilisateur utilisateurEnSession = SessionService.checkUtilisateurSession(request);
-
 		request.setAttribute("UtilisateurEnSession", utilisateurEnSession);
 		// reccuperer l'ID de l'article et le passer en attribut
 		int idArticle = 0;
@@ -142,7 +141,6 @@ public class DetailVenteServlet extends HttpServlet {
 		// reccuperer l'ID de l'article et le passer en attribut
 		int idArticle = Integer.parseInt(request.getParameter("idArticle"));
 		request.setAttribute("idArticle", idArticle);
-
 		// recuperer l'article a afficher
 		ArticleVendu av = new ArticleVendu();
 

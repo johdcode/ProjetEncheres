@@ -143,38 +143,40 @@
 			<div class="col-md-2"></div>
 		</div>
 
-		<div class="text-center">
-			
-			<form action="${pageContext.request.contextPath}/DetailVente?idArticle=${idArticle}"
-					method="POST">
-			<c:if test="${gagnantDeLEnchere == null }">
-				<label 	for="enchereSaisie">Votre enchère : </label> 
-				<input required type="text" id="enchereSaisie" name="enchereSaisie">
-			</c:if>
-	
-				<c:if test="${!empty erreurMontant }">
-					<div class="alert alert-warning" role="alert">${erreurMontant}</div>
-				</c:if>
-				<c:if test="${!empty erreurTypeMontant }">
-					<div class="alert alert-warning" role="alert">${erreurTypeMontant}</div>
-				</c:if>
-				<c:if test="${!empty erreurCredit }">
-					<div class="alert alert-warning" role="alert">${erreurCredit}</div>
-	
-				</c:if>
-				<c:if test="${!empty erreurDate }">
-					<div class="alert alert-warning" role="alert">${erreurDate}</div>
-				</c:if>
+		<c:if test="${gagnantDeLEnchere == null }">
+			<div class="text-center">
 				
-				<button type="submit" class="btn btn-dark">Proposer Enchère</button>
+				<form action="${pageContext.request.contextPath}/DetailVente?idArticle=${idArticle}"
+						method="POST">
+					<label 	for="enchereSaisie">Votre enchère : </label> 
+					<input required type="text" id="enchereSaisie" name="enchereSaisie">
 				
-				</form>
-		</div>
+		
+					<c:if test="${!empty erreurMontant }">
+						<div class="alert alert-warning" role="alert">${erreurMontant}</div>
+					</c:if>
+					<c:if test="${!empty erreurTypeMontant }">
+						<div class="alert alert-warning" role="alert">${erreurTypeMontant}</div>
+					</c:if>
+					<c:if test="${!empty erreurCredit }">
+						<div class="alert alert-warning" role="alert">${erreurCredit}</div>
+		
+					</c:if>
+					<c:if test="${!empty erreurDate }">
+						<div class="alert alert-warning" role="alert">${erreurDate}</div>
+					</c:if>
+					
+					<button type="submit" class="btn btn-dark">Proposer Enchère</button>
+					
+					</form>
+			</div>
+		</c:if>
+		<c:if test="${gagnantDeLEnchere != null }">
+			<div class="text-center">		
+				<a class="btn btn-lg btn-secondary" href="${pageContext.request.contextPath }/encheres">Retour</a>
+			</div>
+		</c:if>
 		<br><br>
-	<!--	<c:if test="${UtilisateurEnSession.noUtilisateur == articleAAfficher.noUtilisateurArticle}">
-			<a class="btn btn-primary"
-				href="${pageContext.request.contextPath}/NouvelleVenteServlet?idArticle=${articleAAfficher.noArticle}">Modifier</a>
-		</c:if> -->
 
 	</c:if>
 		</div>
