@@ -91,51 +91,51 @@
 							<div class="row">
 								<div class="col-md-6">
 									<label for="pseudo">Pseudo :</label> <br>	
-									<input required type="text" id="pseudo" name="pseudo" class="form-control mb-3">
+									<input required type="text" id="pseudo" name="pseudo" class="form-control mb-3" placeholder="SpaceX">
 								</div>
 								<div class="col-md-6">
 									<label for="nom">Nom :</label> <br>
-									<input type="text" id="nom" name="nom" class="form-control mb-3">
+									<input type="text" id="nom" name="nom" class="form-control mb-3" placeholder="Musk">
 								</div>
 							</div>
 							<div class="row">					
 								<div class="col-md-6">
 									<label for="prenom">Prénom :</label> <br>
-									<input type="text" id="prenom" name="prenom" class="form-control mb-3">
+									<input type="text" id="prenom" name="prenom" class="form-control mb-3" placeholder="Elon">
 								</div>
 								<div class="col-md-6">
 									<label for="email">Email :</label> <br>
-									<input type="text" id="email" name="email" class="form-control mb-3">
+									<input type="text" id="email" name="email" class="form-control mb-3" placeholder="user@mail.com">
 								</div>
 							</div>
 							<div class="row">					
 								<div class="col-md-6">
 									<label for="telephone">Téléphone :</label> <br>
-									<input type="text" id="telephone" name="telephone" class="form-control mb-3">
+									<input type="text" id="telephone" name="telephone" class="form-control mb-3" placeholder="0600111222">
 								</div>
 								<div class="col-md-6">
 									<label for="rue">Rue :</label> <br>
-									<input type="text" id="rue" name="rue" class="form-control mb-3">
+									<input type="text" id="rue" name="rue" class="form-control mb-3" placeholder="Rue des Flamboyant">
 								</div>
 							</div>
 							<div class="row">					
 								<div class="col-md-6">
 									<label for="code_postal">Code postal :</label> <br>
-									<input type="text" id="code_postal" name="code_postal" class="form-control mb-3">
+									<input type="text" id="code_postal" name="code_postal" class="form-control mb-3" placeholder="44300">
 								</div>
 								<div class="col-md-6">
 									<label for="ville">Ville :</label> <br>
-									<input type="text" id="ville" name="ville" class="form-control mb-3"> 
+									<input type="text" id="ville" name="ville" class="form-control mb-3" placeholder="Nantes"> 
 								</div>
 							</div>
 							<div class="row">					
 								<div class="col-md-6">
 									<label for="mot_de_passe">Mot de passe :</label> <br>
-									<input type="password" id="mot_de_passe" name="mot_de_passe" class="form-control mb-3">
+									<input placeholder="exemple : uSer*1" type="password" id="mot_de_passe" name="mot_de_passe" class="form-control mb-3">
 								</div>
 								<div class="col-md-6">
 									<label for="confirmation_mot_de_passe">Confirmation :</label> <br>
-									<input type="password" id="confirmation_mot_de_passe" name="confirmation_mot_de_passe" class="form-control mb-3"> <br> 
+									<input placeholder="exemple : uSer*1" type="password" id="confirmation_mot_de_passe" name="confirmation_mot_de_passe" class="form-control mb-3"> <br> 
 								</div>
 							</div>
 							<div class="row mt-3">					

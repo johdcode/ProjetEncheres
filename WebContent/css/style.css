@@ -4,6 +4,7 @@
 body{
 /* 	background-color: #f8f9fa; */
 	background-color: #dee2e6;
+	overflow-x: hidden;
 }
 
 main {
@@ -15,7 +16,10 @@ main {
 	background-color: #ffffff;
 	border-radius: 15px;
 }
-
+/* .container{
+	min-height: 10vh;
+}
+ */
 .white-text {
 	color : #ffffff;
 }
@@ -50,7 +54,6 @@ h5{
 	margin: 0px -20px 0px -20px;
 	padding: 10px 0px 10px 50px;
  	background-color: #343A40;
-
 }
 
 .erreur-messages{
@@ -100,4 +103,10 @@ h5{
 	display: block;
  	margin-left: auto;
   	margin-right: auto;
+}
+
+@media (max-width: 570px) { 
+	body{	
+		background-color: #FFF;
+	}
 }

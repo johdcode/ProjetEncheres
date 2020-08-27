@@ -16,10 +16,8 @@ import fr.eni.projet.bll.EnchereManager;
 import fr.eni.projet.bll.UtilisateurManager;
 import fr.eni.projet.bo.ArticleVendu;
 import fr.eni.projet.bo.Categorie;
-import fr.eni.projet.bo.Enchere;
 import fr.eni.projet.bo.Utilisateur;
 import fr.eni.projet.dal.DALException;
-import fr.eni.projet.dal.jdbc.ArticleVenduDAOJdbcImpl;
 import fr.eni.projet.exception.BusinessException;
 
 /**
