@@ -266,6 +266,8 @@ System.out.println("dateDebutEnchere" +debutEnchere);
 				request.setAttribute("articleVendu", articleVendu);
 				Utilisateur vendeur = SessionService.checkUtilisateurSession(request);
 				request.setAttribute("vendeur", vendeur);
+				request.setAttribute("dateDebutEnchere", dateDebutEnchere);
+				request.setAttribute("dateFinEnchere", dateFinEnchere);
 			} catch (DALException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

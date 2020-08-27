@@ -19,7 +19,6 @@ import fr.eni.projet.bo.Enchere;
 import fr.eni.projet.bo.Retrait;
 import fr.eni.projet.bo.Utilisateur;
 import fr.eni.projet.dal.DALException;
-import fr.eni.projet.exception.BusinessException;
 
 /**
  * Servlet implementation class DetailVente
@@ -278,14 +277,7 @@ public class DetailVenteServlet extends HttpServlet {
 			}
 			
 			// Mise à jour crédit ancien enchérisseur
-			
-			int noUtilisateurAncienEncherisseur = 0;
-			try {
-				noUtilisateurAncienEncherisseur = enchereMax.getNoUtilisateurEnchere();
-			} catch (NullPointerException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			int noUtilisateurAncienEncherisseur = enchereMax.getNoUtilisateurEnchere();
 			Utilisateur ancienEncherisseur = utilisateurManager.selectById(noUtilisateurAncienEncherisseur);
 			int soldeUtilisateurAncienEncherisseur = ancienEncherisseur.getCredit() + enchereMax.getMontantEnchere();
 			ancienEncherisseur.setCredit(soldeUtilisateurAncienEncherisseur);

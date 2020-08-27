@@ -132,7 +132,7 @@
 							<select name="categorie" class="custom-select">
 	
 								<c:forEach var="categorie" items="${categories}">
-										<option value="${categorie.libelle}"  ${(articleVendu.categorie==categorie.libelle)?'':'selected'}>${categorie.libelle}</option>
+										<option value="${categorie.libelle}"  ${(articleVendu.noCategorieArticle==categorie.noCategorie)?'selected':''}>${categorie.libelle}</option>
 								</c:forEach>
 							</select>
 						</div>
@@ -143,12 +143,12 @@
 					</div>
 					<div class="form-group row">
 						<label class="col-form-label" for="debut-enchere">Début de l'enchère : </label> 
-							<input name="debut-enchere" type="date" class="form-control" id="debut-enchere"value="${articleVendu.dateDebutEnchere}">
+							<input name="debut-enchere" type="date" class="form-control" id="debut-enchere"value="${dateDebutEnchere}">
 					</div>
 					
 					<div class="form-group row">
 						<label class="col-form-label" for="fin-enchere">Fin de l'enchère : </label> 
-						<input name="fin-enchere" type="date" class="form-control" id="fin-enchere" value="${articleVendu.dateDebutEnchere}">
+						<input name="fin-enchere" type="date" class="form-control" id="fin-enchere" value="${dateFinEnchere}">
 					</div>
 
 				
