@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import fr.eni.projet.bll.UtilisateurManager;
 import fr.eni.projet.bo.Utilisateur;
+import fr.eni.projet.exception.BusinessException;
 
 /**
  * Servlet implementation class InscriptionServlet
@@ -73,6 +74,7 @@ public class InscriptionServlet extends HttpServlet {
 			}
 			if(!pseudo.matches("^[a-z|A-Z|0-9]{4,29}$")){
 				erreur++;
+				BusinessException.addMessageErreur("Le format du pseudo n'est pas correct.");
 			}
 			// Récupérer et vérifier valeur avec selectByPseudo()
 			if(utilisateurManager.selectByPseudo(pseudo) != null) {
@@ -219,7 +221,7 @@ public class InscriptionServlet extends HttpServlet {
 //			request.getRequestDispatcher("/WEB-INF/templates/ListeEncheres.jsp").forward(request, response);
 			response.sendRedirect(request.getContextPath() + "/encheres");
 		} else {
-			response.getWriter().print("Echec inscription.");
+			request.setAttribute("listeErreur", BusinessException.getListeMessageException());
 			request.getRequestDispatcher("/WEB-INF/templates/Inscription.jsp").forward(request, response);
 		}
 	}

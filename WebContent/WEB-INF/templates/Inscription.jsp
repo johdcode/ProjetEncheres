@@ -74,6 +74,17 @@
 					<div class="col-md-6">
 						<h2>Inscription</h2>
 						<br>
+						
+						<c:if test="${listeErreur != null}">
+							<div class="erreur-messages">
+								<c:forEach var="message" items="${listeErreur}">
+										<p>
+											${message}
+										</p>
+								</c:forEach>
+							</div>
+						</c:if>
+						
 						<form action="${pageContext.request.contextPath}/inscription" method="POST">
 							<div class="row">
 								<div class="col-md-6">
