@@ -105,70 +105,59 @@
 		<!-- Fin Partie en cas de non connexion -->
 
 	<c:if test="${utilisateurSessionId != null }">
+		<br><br>
+		<img src="${pageContext.request.contextPath}/image/image.jpg" class="img" alt="...">
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-8 text-center">
+				<br><br>
+				<b>Article :</b> ${articleAAfficher.nomArticle}
+				<br><br>
+				<b>Description :</b> ${articleAAfficher.description}
+				<br><br>
+				<b>Catégorie :</b> ${categorieArticle.libelle}
+				<br><br>
+				<b>Vendeur :</b>
+				<a href="${pageContext.request.contextPath}/profil?id=${utilisateurArticle.noUtilisateur}"> ${utilisateurArticle.pseudo}</a>
+				<br><br>
+				<b>Meilleur offre :</b> ${enchereActuelle} 
+				<br><br>
+				<b>Mise à prix :</b> ${articleAAfficher.miseAPrix}
+				<br><br>
+				<b>Fin de l'enchère :</b> ${articleAAfficher.dateFinEnchere}
+				<br><br>
+				<b>Retrait :</b> ${retraitArticle.rue} ${retraitArticle.codePostal} ${retraitArticle.ville}
+				<br><br>
+			</div>
+			<div class="col-md-2"></div>
+		</div>
+
+		<div class="text-center">
+			
+			<form	action="${pageContext.request.contextPath}/DetailVente?idArticle=${idArticle}"
+					method="POST">
+			<label 	for="enchereSaisie">Votre enchère : </label> <input required
+					type="text" id="enchereSaisie" name="enchereSaisie">
 	
-
-Article : ${articleAAfficher.nomArticle}
-		<!-- nom article vendu -->
-		<br>
-		<br>
-	Description : ${articleAAfficher.description}
-<!-- affichage description -->
-
-		<br>
-		<br>
-	Catégorie : ${categorieArticle.libelle}
-
-<!-- affichage catégorie -->
-
-		<br>
-		<br>
-	Meilleur offre : ${enchereActuelle} 
-<!-- affichage du montant de l'offre + de l'utilisateur qui a fait l'offre -->
-
-		<br>
-		<br>
-	Mise à prix : ${articleAAfficher.miseAPrix}
-<!-- prix de départ article vendu -->
-
-		<br>
-		<br>
-	Fin de l'enchère : ${articleAAfficher.dateFinEnchere}
-<!-- date fin de l'enchère -->
-
-		<br>
-		<br>
-	Retrait : ${retraitArticle.rue} ${retraitArticle.codePostal} ${retraitArticle.ville} 
-<!-- rue + CP + Ville -->
-
-		<br>
-		<br>
-	Vendeur : ${utilisateurArticle.pseudo}
-<!--  nom du vendeur qui visite cette page -->
-
-
-		<br>
-		<br>
-		<form
-			action="${pageContext.request.contextPath}/DetailVente?idArticle=${idArticle}"
-			method="POST">
-			<label for="enchereSaisie">Votre enchère : </label> <input required
-				type="text" id="enchereSaisie" name="enchereSaisie">
-
-			<c:if test="${!empty erreurMontant }">
-				<div class="alert alert-warning" role="alert">${erreurMontant}</div>
-			</c:if>
-			<c:if test="${!empty erreurTypeMontant }">
-				<div class="alert alert-warning" role="alert">${erreurTypeMontant}</div>
-			</c:if>
-			<c:if test="${!empty erreurCredit }">
-				<div class="alert alert-warning" role="alert">${erreurCredit}</div>
-
-			</c:if>
-			<c:if test="${!empty erreurDate }">
-				<div class="alert alert-warning" role="alert">${erreurDate}</div>
-			</c:if>
-			<button type="submit">Proposer Enchère</button>
-		</form>
+				<c:if test="${!empty erreurMontant }">
+					<div class="alert alert-warning" role="alert">${erreurMontant}</div>
+				</c:if>
+				<c:if test="${!empty erreurTypeMontant }">
+					<div class="alert alert-warning" role="alert">${erreurTypeMontant}</div>
+				</c:if>
+				<c:if test="${!empty erreurCredit }">
+					<div class="alert alert-warning" role="alert">${erreurCredit}</div>
+	
+				</c:if>
+				<c:if test="${!empty erreurDate }">
+					<div class="alert alert-warning" role="alert">${erreurDate}</div>
+				</c:if>
+				
+				<button type="submit" class="btn btn-dark">Proposer Enchère</button>
+				
+				</form>
+		</div>
+		<br><br>
 	<!--	<c:if test="${UtilisateurEnSession.noUtilisateur == articleAAfficher.noUtilisateurArticle}">
 			<a class="btn btn-primary"
 				href="${pageContext.request.contextPath}/NouvelleVenteServlet?idArticle=${articleAAfficher.noArticle}">Modifier</a>
