@@ -40,92 +40,94 @@ public class DetailVenteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		Utilisateur utilisateurEnSession = SessionService.checkUtilisateurSession(request);
-		request.setAttribute("UtilisateurEnSession", utilisateurEnSession);
-		// reccuperer l'ID de l'article et le passer en attribut
-		int idArticle = 0;
 		try {
-			idArticle = Integer.parseInt(request.getParameter("idArticle"));
-		} catch(NumberFormatException e) {
-			e.printStackTrace();
-		}
-		request.setAttribute("idArticle", idArticle);
-
-		// recuperer l'article a afficher
-		ArticleVendu av = new ArticleVendu();
-
-		try {
-			av = articleVenduManager.selectById(idArticle);
-		} catch (DALException e) {
-			e.printStackTrace();
-		}
-		try {
-			System.out.println(av.getNoUtilisateurArticle());			
-		} catch(NullPointerException e) {
-			e.printStackTrace();
-		}
-		request.setAttribute("articleAAfficher", av);
-
-		// récupérer la catégorie
-
-		Categorie c = new Categorie();
-
-		try {
-			int idCat = articleVenduManager.selectById(idArticle).getNoCategorieArticle();
-			c = categorieManager.selectById(idCat);
-		} catch (DALException e) {
-			e.printStackTrace();
-		}
-		request.setAttribute("categorieArticle", c);
-
-		// Methode selectionne l'enchere la plus haute en fonction de l'article
-
-		// variable
-		int enchereActuelle = 0;
-		Enchere enchereMax = enchereManager.getEnchereMax(idArticle);
-
-		// selection du prix à afficher
-		try {
-			if (enchereMax == null) {
-				enchereActuelle = articleVenduManager.selectById(idArticle).getMiseAPrix();
-			} else if (enchereMax != null) {
-				enchereActuelle = enchereMax.getMontantEnchere();
+			Utilisateur utilisateurEnSession = SessionService.checkUtilisateurSession(request);
+			request.setAttribute("UtilisateurEnSession", utilisateurEnSession);
+			// reccuperer l'ID de l'article et le passer en attribut
+			int idArticle = 0;
+			try {
+				idArticle = Integer.parseInt(request.getParameter("idArticle"));
+			} catch(NumberFormatException e) {
+				e.printStackTrace();
 			}
-		} catch (DALException e1) {
-			e1.printStackTrace();
+			request.setAttribute("idArticle", idArticle);
+	
+			// recuperer l'article a afficher
+			ArticleVendu av = new ArticleVendu();
+	
+			try {
+				av = articleVenduManager.selectById(idArticle);
+			} catch (DALException e) {
+				e.printStackTrace();
+			}
+			try {
+				System.out.println(av.getNoUtilisateurArticle());			
+			} catch(NullPointerException e) {
+				e.printStackTrace();
+			}
+			request.setAttribute("articleAAfficher", av);
+	
+			// récupérer la catégorie
+	
+			Categorie c = new Categorie();
+	
+			try {
+				int idCat = articleVenduManager.selectById(idArticle).getNoCategorieArticle();
+				c = categorieManager.selectById(idCat);
+			} catch (DALException e) {
+				e.printStackTrace();
+			}
+			request.setAttribute("categorieArticle", c);
+	
+			// Methode selectionne l'enchere la plus haute en fonction de l'article
+	
+			// variable
+			int enchereActuelle = 0;
+			Enchere enchereMax = enchereManager.getEnchereMax(idArticle);
+	
+			// selection du prix à afficher
+			try {
+				if (enchereMax == null) {
+					enchereActuelle = articleVenduManager.selectById(idArticle).getMiseAPrix();
+				} else if (enchereMax != null) {
+					enchereActuelle = enchereMax.getMontantEnchere();
+				}
+			} catch (DALException e1) {
+				e1.printStackTrace();
+			}
+			// passe le prix max en attribut
+			request.setAttribute("enchereActuelle", enchereActuelle);
+	
+			// Recup du retrait
+			Retrait r = new Retrait();
+	
+			try {
+				r = retraitManager.selectById(idArticle);
+			} catch (DALException e) {
+				e.printStackTrace();
+			}
+			request.setAttribute("retraitArticle", r);
+	
+			// recup vendeur
+	
+			Utilisateur vendeur = new Utilisateur();
+	
+			try {
+				int idUti = articleVenduManager.selectById(idArticle).getNoUtilisateurArticle();
+				vendeur = utilisateurManager.selectById(idUti);
+			} catch (DALException e) {
+				e.printStackTrace();
+			}
+			request.setAttribute("utilisateurArticle", vendeur);
+			
+			Utilisateur u = utilisateurManager.selectEnchereGagneeByArticle(idArticle);
+			System.out.println(u);
+			
+			request.setAttribute("gagnantDeLEnchere", utilisateurManager.selectEnchereGagneeByArticle(idArticle));
+			request.getRequestDispatcher("/WEB-INF/templates/DetailVente.jsp").forward(request, response);
+		}catch(Exception e) {
+			response.sendRedirect(request.getContextPath() + "/encheres");
 		}
-		// passe le prix max en attribut
-		request.setAttribute("enchereActuelle", enchereActuelle);
-
-		// Recup du retrait
-		Retrait r = new Retrait();
-
-		try {
-			r = retraitManager.selectById(idArticle);
-		} catch (DALException e) {
-			e.printStackTrace();
-		}
-		request.setAttribute("retraitArticle", r);
-
-		// recup vendeur
-
-		Utilisateur vendeur = new Utilisateur();
-
-		try {
-			int idUti = articleVenduManager.selectById(idArticle).getNoUtilisateurArticle();
-			vendeur = utilisateurManager.selectById(idUti);
-		} catch (DALException e) {
-			e.printStackTrace();
-		}
-		request.setAttribute("utilisateurArticle", vendeur);
-		
-		Utilisateur u = utilisateurManager.selectEnchereGagneeByArticle(idArticle);
-		System.out.println(u);
-		
-		request.setAttribute("gagnantDeLEnchere", utilisateurManager.selectEnchereGagneeByArticle(idArticle));
-
-		request.getRequestDispatcher("/WEB-INF/templates/DetailVente.jsp").forward(request, response);
 	}
 
 	/**
