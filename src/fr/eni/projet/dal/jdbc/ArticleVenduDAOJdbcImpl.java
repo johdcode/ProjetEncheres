@@ -28,7 +28,17 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 		private static final String SQL_INSERT_ARTICLE = "INSERT INTO ARTICLES_VENDUS(nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie) VALUES (?,?,?,?,?,?,?,?)";
 		private static final String SQL_SELECT_BY_ID = "SELECT no_article,nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie FROM ARTICLES_VENDUS WHERE no_article = ?;";
 		private static final String SQL_SELECT_ALL = "SELECT no_article,nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie FROM ARTICLES_VENDUS;";
+		
 		private static final String SQL_SELECT_RECHERCHE = "SELECT no_article,nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,no_utilisateur,no_categorie FROM ARTICLES_VENDUS WHERE nom_article LIKE ?";
+		
+		private static final String SQL_SELECT_ENCHERES_OUVERTES = "select * from ARTICLES_VENDUS where DATEDIFF(day, GETDATE(), date_fin_encheres) > 0 AND no_article IN (select no_article from ENCHERES where no_utilisateur = ?);";
+		private static final String SQL_SELECT_MES_ENCHERES = "select * from ARTICLES_VENDUS where no_article IN (select no_article from ENCHERES where no_utilisateur = ?);";
+		private static final String SQL_SELECT_MES_ENCHERES_REMPORTEES = "select * from ARTICLES_VENDUS where DATEDIFF(day, GETDATE(), date_fin_encheres) < 0 AND no_article IN (select no_article from ENCHERES where montant_enchere = (select MAX(montant_enchere) from ENCHERES) AND no_utilisateur = ?);";
+		
+		private static final String SQL_SELECT_MES_VENTES_EN_COURS = "select * from ARTICLES_VENDUS where no_utilisateur = ? AND DATEDIFF(day, GETDATE(), date_debut_encheres) < 0 AND DATEDIFF(day, GETDATE(), date_fin_encheres) > 0;";
+		private static final String SQL_SELECT_MES_VENTES_NON_DEBUTEES = "select * from ARTICLES_VENDUS where no_utilisateur = ? AND DATEDIFF(day, GETDATE(), date_debut_encheres) > 0;";
+		private static final String SQL_SELECT_MES_VENTES_TERMINEES = "select * from ARTICLES_VENDUS where no_utilisateur = ? AND DATEDIFF(day, GETDATE(), date_fin_encheres) < 0;";
+		
 		private static final String SQL_UPDATE = "UPDATE  ARTICLES_VENDUS SET nom_article=?,description=?,date_debut_encheres=?,date_fin_encheres=?,prix_initial=?,prix_vente=?,no_utilisateur=?,no_categorie=? WHERE no_article = ?;";
 		private static final String SQL_DELETE = "DELETE  FROM  ARTICLES_VENDUS WHERE no_article = ?";
 //		
@@ -157,6 +167,197 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 			}
 			return articles;
 		}
+		
+		@Override	
+		public List<ArticleVendu> selectByEncheresOuvertes(int id) throws DALException {
+			ArticleVendu a = null;
+			List<ArticleVendu> articles = new ArrayList<ArticleVendu>();
+			
+			try(Connection conn = ConnectionProvider.getConnection()){
+				PreparedStatement stmt = conn.prepareStatement(SQL_SELECT_ENCHERES_OUVERTES);
+				stmt.setInt(1, id );
+				ResultSet rs = stmt.executeQuery();
+				while(rs.next()) {
+					ArticleVendu article = new ArticleVendu(
+							rs.getInt("no_article"),  
+							rs.getString("nom_article"),
+							rs.getString("description"),
+							rs.getTimestamp("date_debut_encheres").toLocalDateTime(),
+							rs.getTimestamp("date_fin_encheres").toLocalDateTime(),
+							rs.getInt("prix_initial"),
+							rs.getInt("prix_vente"),
+							rs.getInt("no_utilisateur"),
+							rs.getInt("no_categorie"));
+					System.out.println(article);
+					try {						
+						article.setListEncheres(EnchereManager.getInstance().selectByArticle(article.getNoArticle()));
+					}catch(Exception e) {
+						e.printStackTrace();
+					}
+					articles.add(article);
+				}
+				
+			} catch (SQLException e) {
+				System.err.println(e.getMessage());
+				throw new DALException("selectByEncheresOuvertes ArticleVendu FAIL - ", e);
+			}
+			return articles;
+		}
+		
+		@Override	
+		public List<ArticleVendu> selectByMesEncheres(int id) throws DALException {
+			ArticleVendu a = null;
+			List<ArticleVendu> articles = new ArrayList<ArticleVendu>();
+			
+			try(Connection conn = ConnectionProvider.getConnection()){
+				PreparedStatement stmt = conn.prepareStatement(SQL_SELECT_MES_ENCHERES);
+				stmt.setInt(1, id );
+				ResultSet rs = stmt.executeQuery();
+				while(rs.next()) {
+					ArticleVendu article = new ArticleVendu(
+							rs.getInt("no_article"),  
+							rs.getString("nom_article"),
+							rs.getString("description"),
+							rs.getTimestamp("date_debut_encheres").toLocalDateTime(),
+							rs.getTimestamp("date_fin_encheres").toLocalDateTime(),
+							rs.getInt("prix_initial"),
+							rs.getInt("prix_vente"),
+							rs.getInt("no_utilisateur"),
+							rs.getInt("no_categorie"));
+					article.setListEncheres(EnchereManager.getInstance().selectByArticle(article.getNoArticle()));
+					articles.add(article);
+				}
+				
+			} catch (SQLException e) {
+				System.err.println(e.getMessage());
+				throw new DALException("selectByEncheresOuvertes ArticleVendu FAIL - ", e);
+			}
+			return articles;
+		}
+		
+		@Override	
+		public List<ArticleVendu> selectByMesEncheresRemportees(int id) throws DALException {
+			ArticleVendu a = null;
+			List<ArticleVendu> articles = new ArrayList<ArticleVendu>();
+			
+			try(Connection conn = ConnectionProvider.getConnection()){
+				PreparedStatement stmt = conn.prepareStatement(SQL_SELECT_MES_ENCHERES_REMPORTEES);
+				stmt.setInt(1, id );
+				ResultSet rs = stmt.executeQuery();
+				while(rs.next()) {
+					ArticleVendu article = new ArticleVendu(
+							rs.getInt("no_article"),  
+							rs.getString("nom_article"),
+							rs.getString("description"),
+							rs.getTimestamp("date_debut_encheres").toLocalDateTime(),
+							rs.getTimestamp("date_fin_encheres").toLocalDateTime(),
+							rs.getInt("prix_initial"),
+							rs.getInt("prix_vente"),
+							rs.getInt("no_utilisateur"),
+							rs.getInt("no_categorie"));
+					article.setListEncheres(EnchereManager.getInstance().selectByArticle(article.getNoArticle()));
+					articles.add(article);
+				}
+				
+			} catch (SQLException e) {
+				System.err.println(e.getMessage());
+				throw new DALException("selectByEncheresOuvertes ArticleVendu FAIL - ", e);
+			}
+			return articles;
+		}
+		
+		@Override	
+		public List<ArticleVendu> selectByMesVentesEnCours(int id) throws DALException {
+			ArticleVendu a = null;
+			List<ArticleVendu> articles = new ArrayList<ArticleVendu>();
+			
+			try(Connection conn = ConnectionProvider.getConnection()){
+				PreparedStatement stmt = conn.prepareStatement(SQL_SELECT_MES_VENTES_EN_COURS);
+				stmt.setInt(1, id );
+				ResultSet rs = stmt.executeQuery();
+				while(rs.next()) {
+					ArticleVendu article = new ArticleVendu(
+							rs.getInt("no_article"),  
+							rs.getString("nom_article"),
+							rs.getString("description"),
+							rs.getTimestamp("date_debut_encheres").toLocalDateTime(),
+							rs.getTimestamp("date_fin_encheres").toLocalDateTime(),
+							rs.getInt("prix_initial"),
+							rs.getInt("prix_vente"),
+							rs.getInt("no_utilisateur"),
+							rs.getInt("no_categorie"));
+					article.setListEncheres(EnchereManager.getInstance().selectByArticle(article.getNoArticle()));
+					articles.add(article);
+				}
+				
+			} catch (SQLException e) {
+				System.err.println(e.getMessage());
+				throw new DALException("selectByEncheresOuvertes ArticleVendu FAIL - ", e);
+			}
+			return articles;
+		}
+		
+		@Override	
+		public List<ArticleVendu> selectByMesVentesNonDebutees(int id) throws DALException {
+			ArticleVendu a = null;
+			List<ArticleVendu> articles = new ArrayList<ArticleVendu>();
+			
+			try(Connection conn = ConnectionProvider.getConnection()){
+				PreparedStatement stmt = conn.prepareStatement(SQL_SELECT_MES_VENTES_NON_DEBUTEES);
+				stmt.setInt(1, id );
+				ResultSet rs = stmt.executeQuery();
+				while(rs.next()) {
+					ArticleVendu article = new ArticleVendu(
+							rs.getInt("no_article"),  
+							rs.getString("nom_article"),
+							rs.getString("description"),
+							rs.getTimestamp("date_debut_encheres").toLocalDateTime(),
+							rs.getTimestamp("date_fin_encheres").toLocalDateTime(),
+							rs.getInt("prix_initial"),
+							rs.getInt("prix_vente"),
+							rs.getInt("no_utilisateur"),
+							rs.getInt("no_categorie"));
+					article.setListEncheres(EnchereManager.getInstance().selectByArticle(article.getNoArticle()));
+					articles.add(article);
+				}
+				
+			} catch (SQLException e) {
+				System.err.println(e.getMessage());
+				throw new DALException("selectByEncheresOuvertes ArticleVendu FAIL - ", e);
+			}
+			return articles;
+		}
+		
+		@Override	
+		public List<ArticleVendu> selectByMesVentesTerminees(int id) throws DALException {
+			ArticleVendu a = null;
+			List<ArticleVendu> articles = new ArrayList<ArticleVendu>();
+			
+			try(Connection conn = ConnectionProvider.getConnection()){
+				PreparedStatement stmt = conn.prepareStatement(SQL_SELECT_MES_VENTES_TERMINEES);
+				stmt.setInt(1, id );
+				ResultSet rs = stmt.executeQuery();
+				while(rs.next()) {
+					ArticleVendu article = new ArticleVendu(
+							rs.getInt("no_article"),  
+							rs.getString("nom_article"),
+							rs.getString("description"),
+							rs.getTimestamp("date_debut_encheres").toLocalDateTime(),
+							rs.getTimestamp("date_fin_encheres").toLocalDateTime(),
+							rs.getInt("prix_initial"),
+							rs.getInt("prix_vente"),
+							rs.getInt("no_utilisateur"),
+							rs.getInt("no_categorie"));
+					article.setListEncheres(EnchereManager.getInstance().selectByArticle(article.getNoArticle()));
+					articles.add(article);
+				}
+				
+			} catch (SQLException e) {
+				System.err.println(e.getMessage());
+				throw new DALException("selectByEncheresOuvertes ArticleVendu FAIL - ", e);
+			}
+			return articles;
+		}
 					
 		
 	// Methode Select all
@@ -183,7 +384,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
-				throw new DALException("SelectAll ArticleVendu FAIL", e);
+				throw new DALException("selectByRecherche ArticleVendu FAIL", e);
 			}
 			return articles;
 			

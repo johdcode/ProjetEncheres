@@ -19,6 +19,18 @@ public interface ArticleVenduDAO {
 	void insert(ArticleVendu a, Retrait r) throws DALException;
 
 	List<ArticleVendu> selectByRecherche(String recherche) throws DALException;
+
+	List<ArticleVendu> selectByEncheresOuvertes(int id) throws DALException;
+
+	List<ArticleVendu> selectByMesEncheres(int id) throws DALException;
+
+	List<ArticleVendu> selectByMesEncheresRemportees(int id) throws DALException;
+
+	List<ArticleVendu> selectByMesVentesEnCours(int id) throws DALException;
+
+	List<ArticleVendu> selectByMesVentesNonDebutees(int id) throws DALException;
+
+	List<ArticleVendu> selectByMesVentesTerminees(int id) throws DALException;
 	
 	
 }

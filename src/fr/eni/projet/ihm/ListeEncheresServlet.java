@@ -19,6 +19,7 @@ import fr.eni.projet.bo.Categorie;
 import fr.eni.projet.bo.Enchere;
 import fr.eni.projet.bo.Utilisateur;
 import fr.eni.projet.dal.DALException;
+import fr.eni.projet.dal.jdbc.ArticleVenduDAOJdbcImpl;
 
 /**
  * Servlet implementation class ListeEncheresServlet
@@ -120,9 +121,141 @@ public class ListeEncheresServlet extends HttpServlet {
 				request.setAttribute("recherche", recherche);
 				request.setAttribute("categorie", categorie);
 			}
+		}
+		
+		//ACHAT
+		if(type != null && type.trim().equals("achat")) {
+			// Encheres ouvertes
+			if(encheresOuvertes != null && encheresOuvertes.equals("on")) {
+				List<ArticleVendu> outListeArticles =  new ArrayList<ArticleVendu>();
+				List<ArticleVendu> articlesBDD =  new ArrayList<ArticleVendu>();
+				try {
+					articlesBDD = articleVenduManager.selectByEncheresOuvertes(utilisateur.getNoUtilisateur());
+				} catch (DALException e) {
+					e.printStackTrace();
+				}
+				// Place les articles en commun dans la outListeArticles
+				for(int i = 0; i < listeArticle.size(); i++) {
+					for(ArticleVendu art : articlesBDD) {
+						if(listeArticle.get(i).getNoArticle() == art.getNoArticle() ) {
+							outListeArticles.add(art);
+						}
+					}
+				}
+				listeArticle = outListeArticles;
+			}
+			
+			// Mes encheres
+			if(mesEncheres != null && mesEncheres.equals("on")) {
+				List<ArticleVendu> outListeArticles =  new ArrayList<ArticleVendu>();
+				List<ArticleVendu> articlesBDD =  new ArrayList<ArticleVendu>();
+				try {
+					articlesBDD = articleVenduManager.selectByMesEncheres(utilisateur.getNoUtilisateur());
+				} catch (DALException e) {
+					e.printStackTrace();
+				}
+				// Place les articles en commun dans la outListeArticles
+				for(int i = 0; i < listeArticle.size(); i++) {
+					for(ArticleVendu art : articlesBDD) {
+						if(listeArticle.get(i).getNoArticle() == art.getNoArticle() ) {
+							outListeArticles.add(art);
+						}
+					}
+				}
+				listeArticle = outListeArticles;
+			}
+			
+			// Mes encheres remportées
+			if(mesEncheresRemportees != null && mesEncheresRemportees.equals("on")) {
+				List<ArticleVendu> outListeArticles =  new ArrayList<ArticleVendu>();
+				List<ArticleVendu> articlesBDD =  new ArrayList<ArticleVendu>();
+				try {
+					articlesBDD = articleVenduManager.selectByMesEncheresRemportees(utilisateur.getNoUtilisateur());
+				} catch (DALException e) {
+					e.printStackTrace();
+				}
+				// Place les articles en commun dans la outListeArticles
+				for(int i = 0; i < listeArticle.size(); i++) {
+					for(ArticleVendu art : articlesBDD) {
+						if(listeArticle.get(i).getNoArticle() == art.getNoArticle() ) {
+							outListeArticles.add(art);
+						}
+					}
+				}
+				listeArticle = outListeArticles;
+			}
+		}
+		//VENTE
+		else if(type != null && type.trim().equals("vente")) {
+			
+			System.out.println(utilisateur.getNoUtilisateur());
+			
+			// Vente en cours
+			if(ventesEnCours != null && ventesEnCours.equals("on")) {
+				List<ArticleVendu> outListeArticles =  new ArrayList<ArticleVendu>();
+				List<ArticleVendu> articlesBDD =  new ArrayList<ArticleVendu>();
+				try {
+					articlesBDD = articleVenduManager.selectByMesVentesEnCours(utilisateur.getNoUtilisateur());	
+				} catch (DALException e) {
+					e.printStackTrace();
+				}
+				// Place les articles en commun dans la outListeArticles
+				for(int i = 0; i < listeArticle.size(); i++) {
+					for(ArticleVendu art : articlesBDD) {
+						if(listeArticle.get(i).getNoArticle() == art.getNoArticle() ) {
+							outListeArticles.add(art);
+						}
+					}
+				}
+				listeArticle = outListeArticles;
+			}
+			// Ventes non debutees
+			if(ventesNonDebutees != null && ventesNonDebutees.equals("on")) {
+				List<ArticleVendu> outListeArticles =  new ArrayList<ArticleVendu>();
+				List<ArticleVendu> articlesBDD =  new ArrayList<ArticleVendu>();
+				try {
+					articlesBDD = articleVenduManager.selectByMesVentesNonDebutees(utilisateur.getNoUtilisateur());
+				} catch (DALException e) {
+					e.printStackTrace();
+				}
+				// Place les articles en commun dans la outListeArticles
+				for(int i = 0; i < listeArticle.size(); i++) {
+					for(ArticleVendu art : articlesBDD) {
+						if(listeArticle.get(i).getNoArticle() == art.getNoArticle() ) {
+							outListeArticles.add(art);
+						}
+					}
+				}
+				listeArticle = outListeArticles;
+			}
+			// Ventes terminées
+			if(ventesTerminees != null && ventesTerminees.equals("on")) {
+				List<ArticleVendu> outListeArticles =  new ArrayList<ArticleVendu>();
+				List<ArticleVendu> articlesBDD =  new ArrayList<ArticleVendu>();
+				try {
+					articlesBDD = articleVenduManager.selectByMesVentesTerminees(utilisateur.getNoUtilisateur());
+				} catch (DALException e) {
+					e.printStackTrace();
+				}
+				// Place les articles en commun dans la outListeArticles
+				for(int i = 0; i < listeArticle.size(); i++) {
+					for(ArticleVendu art : articlesBDD) {
+						if(listeArticle.get(i).getNoArticle() == art.getNoArticle() ) {
+							outListeArticles.add(art);
+						}
+					}
+				}
+				listeArticle = outListeArticles;
+			}
 			
 		}
-
+//		ArticleVenduDAOJdbcImpl db = new ArticleVenduDAOJdbcImpl();
+//		try {
+//			System.out.println(db.selectByEncheresOuvertes(10));
+//		} catch (DALException e1) {
+//			e1.printStackTrace();
+//		}
+		
 		// liste des catégories
 		List <Categorie> listeCategorie = new ArrayList<Categorie>();
 		try {

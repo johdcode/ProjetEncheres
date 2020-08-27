@@ -25,7 +25,7 @@ public class ArticleVenduManager {
 	}
 	
 	public void insert(ArticleVendu a, Retrait r) throws DALException {
-			articleVenduDAO.insert(a, r);
+		articleVenduDAO.insert(a, r);
 	}
 	public ArticleVendu selectById(int noArticle) throws DALException {
 		return articleVenduDAO.selectById(noArticle);
@@ -33,7 +33,30 @@ public class ArticleVenduManager {
 	}
 	public List<ArticleVendu> selectByRecherche(String recherche) throws DALException {
 		return articleVenduDAO.selectByRecherche(recherche);
-		
+	}
+	
+	public List<ArticleVendu> selectByEncheresOuvertes(int id) throws DALException {
+		return articleVenduDAO.selectByEncheresOuvertes(id);
+	}
+	
+	public List<ArticleVendu> selectByMesEncheres(int id) throws DALException {
+		return articleVenduDAO.selectByMesEncheres(id);
+	}
+	
+	public List<ArticleVendu> selectByMesEncheresRemportees(int id) throws DALException {
+		return articleVenduDAO.selectByMesEncheresRemportees(id);
+	}
+	
+	public List<ArticleVendu> selectByMesVentesEnCours(int id) throws DALException {
+		return articleVenduDAO.selectByMesVentesEnCours(id);
+	}
+	
+	public List<ArticleVendu> selectByMesVentesNonDebutees(int id) throws DALException {
+		return articleVenduDAO.selectByMesVentesNonDebutees(id);
+	}
+	
+	public List<ArticleVendu> selectByMesVentesTerminees(int id) throws DALException {
+		return articleVenduDAO.selectByMesVentesTerminees(id);
 	}
 	
 	public List<ArticleVendu> selectAll() throws DALException{

@@ -110,38 +110,31 @@
 				<c:if test="${utilisateurSessionId != null }">
 					<div class="row">
 						<div class="col">
-							<div>
-								<input type="radio" id="achat" name="type" value="achat" checked>
+							<div class="achat-trigger">
+								<input type="radio" id="achat" name="type" value="achat" ${param.type == 'achat' ? 'checked' : ''}>
 								<label for="achat">Achats</label>
 							</div>
-							<div>
-								<input type="checkbox" id="encheres_ouvertes"
-									name="encheres_ouvertes"> <label
-									for="encheres_ouvertes">enchères ouvertes</label> <br> <input
-									type="checkbox" id="mes_encheres" name="mes_encheres">
-								<label for="mes_encheres">mes enchères</label> <br> <input
-									type="checkbox" id="mes_encheres_remportees"
-									name="mes_encheres_remportees"> <label
-									for="mes_encheres_remportees">mes enchères remportées</label> <br>
+							<div class="achat">
+								<input type="checkbox" id="encheres_ouvertes" name="encheres_ouvertes" ${param.encheres_ouvertes == 'on' ? 'checked' : ''}> 
+								<label for="encheres_ouvertes">enchères ouvertes</label> <br> 
+								<input type="checkbox" id="mes_encheres" name="mes_encheres" ${param.mes_encheres == 'on' ? 'checked' : ''}>
+								<label for="mes_encheres">mes enchères</label> <br> 
+								<input type="checkbox" id="mes_encheres_remportees" name="mes_encheres_remportees" ${param.mes_encheres_remportees == 'on' ? 'checked' : ''}> 
+								<label for="mes_encheres_remportees">mes enchères remportées</label> <br>
 							</div>
 						</div>
 						<div class="col">
-
-							<div>
-								<input type="radio" id="vente" name="type" value="vente">
+							<div class="vente-trigger">
+								<input type="radio" id="vente" name="type" value="vente" ${param.type == 'vente' ? 'checked' : ''}>
 								<label for="vente">Mes ventes</label>
 							</div>
-							<div>
-								<input type="checkbox" id="ventes_en_cours"
-									name="ventes_en_cours"> <label
-									for="ventes_en_cours">ventes en cours</label> <br> <input
-									type="checkbox" id="ventes_non_debutees"
-									name="ventes_non_debutees"> <label
-									for="ventes_non_debutees">ventes non débutées</label> <br>
-
-								<input type="checkbox" id="ventes_terminees"
-									name="ventes_terminees"> <label for="ventes_terminees">ventes
-									terminées</label> <br>
+							<div class="vente">
+								<input type="checkbox" id="ventes_en_cours" name="ventes_en_cours" ${param.ventes_en_cours == 'on' ? 'checked' : ''}> 
+								<label for="ventes_en_cours">ventes en cours</label> <br>
+								<input type="checkbox" id="ventes_non_debutees" name="ventes_non_debutees" ${param.ventes_non_debutees == 'on' ? 'checked' : ''}>
+								<label for="ventes_non_debutees">ventes non débutées</label> <br>
+								<input type="checkbox" id="ventes_terminees" name="ventes_terminees" ${param.ventes_terminees == 'on' ? 'checked' : ''}> 
+								<label for="ventes_terminees">ventes terminées</label> <br>
 							</div>
 						</div>
 					</div>
@@ -211,7 +204,62 @@
 </body>
 
 <!-- Début Footer -->
+<script type="text/javascript">
+document.body.onload = ()=>{	
+	setVenteActive();
+	setAchatActive();
+	document.querySelector('.achat-trigger input').checked = true;
+	initRecherche();
+}
+function initRecherche(){
+	document.querySelectorAll('.achat input').forEach((e)=>{
+	    e.disabled = false;
+	});
+	document.querySelectorAll('.achat label').forEach((e)=>{
+	    e.style.color = "inherit";
+	});
+	document.querySelectorAll('.vente input').forEach((e)=>{
+	    e.disabled = true;
+	});
+	document.querySelectorAll('.vente label').forEach((e)=>{
+	    e.style.color = "grey";
+	});
+}
+function setAchatActive(){	
+	document.querySelector('.achat-trigger input').onchange = ()=>{
+		document.querySelectorAll('.achat input').forEach((e)=>{
+		    e.disabled = false;
+		});
+		document.querySelectorAll('.achat label').forEach((e)=>{
+		    e.style.color = "inherit";
+		});
+		document.querySelectorAll('.vente input').forEach((e)=>{
+		    e.disabled = true;
+		});
+		document.querySelectorAll('.vente label').forEach((e)=>{
+		    e.style.color = "grey";
+		});
+	};
+}
+function setVenteActive(){	
+	document.querySelector('.vente-trigger input').onchange = ()=>{
+		document.querySelectorAll('.vente input').forEach((e)=>{
+		    e.disabled = false;
+		});
+		document.querySelectorAll('.vente label').forEach((e)=>{
+		    e.style.color = "inherit";
+		});
+		document.querySelectorAll('.achat input').forEach((e)=>{
+		    e.disabled = true;
+		});
+		document.querySelectorAll('.achat label').forEach((e)=>{
+		    e.style.color = "grey";
+		});
 	
+	};
+}
+
+</script>
 	
 </body>
 </html>
