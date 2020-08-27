@@ -286,14 +286,17 @@ public class DetailVenteServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			Utilisateur ancienEncherisseur = utilisateurManager.selectById(noUtilisateurAncienEncherisseur);
-			int soldeUtilisateurAncienEncherisseur = ancienEncherisseur.getCredit() + enchereMax.getMontantEnchere();
-			ancienEncherisseur.setCredit(soldeUtilisateurAncienEncherisseur);
-			try {
-				utilisateurManager.update(ancienEncherisseur);
-			} catch (DALException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			
+			if(noUtilisateurAncienEncherisseur != 0) {
+				Utilisateur ancienEncherisseur = utilisateurManager.selectById(noUtilisateurAncienEncherisseur);
+				int soldeUtilisateurAncienEncherisseur = ancienEncherisseur.getCredit() + enchereMax.getMontantEnchere();
+				ancienEncherisseur.setCredit(soldeUtilisateurAncienEncherisseur);
+				try {
+					utilisateurManager.update(ancienEncherisseur);
+				} catch (DALException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 
 		}
