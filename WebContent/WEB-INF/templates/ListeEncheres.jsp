@@ -98,7 +98,7 @@
 					</c:if>
 					<label for="recherche">Filtres :</label> <br> 
 					<input type="text" name="recherche" id="recherche"
-						placeholder="Le nom de l'article contient" value="${recherche}" class='form-control'>
+						placeholder="Le nom de l'article contient..." value="${recherche}" class='form-control'>
 					<br>
 					<label for="categorie">Catégories :</label> <select
 						name="categorie" id="categorie">
@@ -151,7 +151,7 @@
 		<h4 for="listeArticle">Liste des Articles</h4>
 		<br>
 		<c:if test="${listeArticle.size() <= 0 }">
-			<div>
+			<div class="text-center">
 				<p>Aucun article disponible.</p>
 			</div>
 		</c:if>
@@ -159,7 +159,7 @@
 
 			<c:forEach var="listeArticle" items="${listeArticle}">
 				<div class="col-6">
-					<div class="card">
+					<div class="card mb-3">
 						<img src="${pageContext.request.contextPath}/image/image.jpg" class="card-img-top" alt="...">
 						<div class="card-body">
 							<h5 class="card-title">${listeArticle.nomArticle}</h5>
