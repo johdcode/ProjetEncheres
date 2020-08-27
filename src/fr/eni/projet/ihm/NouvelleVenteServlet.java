@@ -24,6 +24,7 @@ import fr.eni.projet.bo.Categorie;
 import fr.eni.projet.bo.Retrait;
 import fr.eni.projet.bo.Utilisateur;
 import fr.eni.projet.dal.DALException;
+import fr.eni.projet.exception.BusinessException;
 
 /**
  * Servlet implementation class NouvelleVenteServlet
@@ -169,29 +170,29 @@ System.out.println("dateDebutEnchere" +debutEnchere);
 		//vérification des erreurs formulaire
 		int erreur = 0;
 		if(article == null || article == "") {
-			erreur++;
+			BusinessException.addMessageErreur("Veuillez renseigner un nom");
 			}
 		
 		if(article != null && article.length() >= 50) {
-			erreur++;
+			BusinessException.addMessageErreur("Le nom ne peut contenir que 30 caractères");
 			}
 		
 		if(description == null || description == "") {
-			erreur++;
+			BusinessException.addMessageErreur("Veuillez renseigner une description");
 		}
 		if(description != null && description.length() >= 100) {
-			erreur++;
+			BusinessException.addMessageErreur("La description ne peut contenir que 100 caractères");
 			}
 		if(categorie == null || categorie == "") {
-			erreur++;
+			BusinessException.addMessageErreur("Veuillez renseigner une catégorie");
 		}
 		if(categorie != null && categorie.length() >= 50) {
-			erreur++;
+			BusinessException.addMessageErreur("La catégorie ne peut contenir plus de 50 caractères");
 			}
 		//TODO erreur fichier(taille? format?)
 
 		if(prix <= 0) {
-			erreur++;
+			BusinessException.addMessageErreur("Veuillez renseigner un prix supérieur à 0");
 		}
 		
 		//TODO format date?
@@ -206,16 +207,16 @@ System.out.println("dateDebutEnchere" +debutEnchere);
 		}
 		else
 		if(rue == null || rue == "") {
-			erreur++;
+			BusinessException.addMessageErreur("Veuillez renseigner une adresse");
 		}
 		if(rue != null && rue.length() >= 50) {
-			erreur++;
+			BusinessException.addMessageErreur("L'adresse ne peut contenir plus de 50 caractères");
 			}
 		if(cp == null || cp == "") {
-		erreur++;
+			BusinessException.addMessageErreur("Veuillez renseigner un code postal");
 		}
-		if(cp != null && cp.length() > 5) {
-			erreur++;
+		if(cp != null && cp.length() != 5) {
+			BusinessException.addMessageErreur("Le code postal doit contenir 5 chiffres");
 			}
 		
 		if(erreur == 0) {
@@ -245,6 +246,7 @@ System.out.println("dateDebutEnchere" +debutEnchere);
 		} else {
 			//Chargement des catégories en BDD pour affichage en JSP
 			CategorieManager cm = CategorieManager.getInstance();
+			request.setAttribute("listeErreur", BusinessException.getListeMessageException());
 			try {
 				List <Categorie> categories = cm.selectAll();
 				request.setAttribute("categories", categories);

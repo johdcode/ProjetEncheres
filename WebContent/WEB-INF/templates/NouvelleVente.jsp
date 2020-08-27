@@ -108,6 +108,18 @@
 			<div class="row">
 				<div class="col-2"></div>
 				<div class="col-8">
+				<c:if test="${listeErreur != null}">
+							
+								<c:forEach var="message" items="${listeErreur}">
+										<div class="alert alert-warning" role="alert">
+											${message}
+										</div>
+								</c:forEach>
+							
+						</c:if>
+					<c:if test="${!empty erreurDate}">
+				<div class="alert alert-warning" role="alert">${erreurDate}</div>
+				</c:if>
 					<form action="${pageContext.request.contextPath}/nouvelle-vente" method="post" class="form">
 	
 						<div class="form-group row">
@@ -139,9 +151,7 @@
 						<label class="col-form-label" for="debut-enchere">Début de l'enchère : </label> 
 							<input name="debut-enchere" type="date" class="form-control" id="debut-enchere">
 					</div>
-					<c:if test="${!empty erreurDate}">
-				<div class="alert alert-warning" role="alert">${erreurDate}</div>
-				</c:if>
+					
 					<div class="form-group row">
 						<label class="col-form-label" for="fin-enchere">Fin de l'enchère : </label> 
 						<input name="fin-enchere" type="date" class="form-control" id="fin-enchere">
