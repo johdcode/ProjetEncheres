@@ -71,7 +71,7 @@
 	<div class="container container-titre">
 		<div>
 			<br><br>	
-			<h2>Mon profil</h2>
+			<h2>Profil</h2>
 			<br><br>
 		</div>	
 	</div>
@@ -124,7 +124,7 @@
 				<!-- Partie en cas de non connexion -->
 				<c:if test="${utilisateurSessionId == null}">
 					<br><br>
-					<h2>Vous devez vous connecter</h2>
+					<h2>Connectez-vous pour accéder à ces informations</h2>
 					<br><br>
 					<div class="row">	
 							<div class= "col-12 text-center">

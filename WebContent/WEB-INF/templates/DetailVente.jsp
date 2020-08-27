@@ -118,6 +118,8 @@
 				<br><br>
 				<b>Mise à prix :</b> ${articleAAfficher.miseAPrix}
 				<br><br>
+				<b>Début de l'enchère :</b> ${articleAAfficher.dateDebutEnchere}
+				<br><br>
 				<b>Fin de l'enchère :</b> ${articleAAfficher.dateFinEnchere}
 				<br><br>
 				<b>Retrait :</b> ${retraitArticle.rue} ${retraitArticle.codePostal} ${retraitArticle.ville}

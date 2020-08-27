@@ -165,7 +165,8 @@
 							<h5 class="card-title">${listeArticle.nomArticle}</h5>
 							<p class="card-text">${listeArticle.description}</p>
 							<p class="card-text">Prix : ${listeArticle.miseAPrix} points</p>
-							<p class="card-text">Fin de l'enchère: ${listeArticle.dateFinEnchere}</p>
+							<p class="card-text">Début de l'enchère : ${listeArticle.dateDebutEnchere}</p>
+							<p class="card-text">Fin de l'enchère : ${listeArticle.dateFinEnchere}</p>
 							<p class="card-text">
 							<a href="${pageContext.request.contextPath}/profil?id=${listeArticle.noUtilisateurArticle}"> Voir le vendeur</a>
 							</p>
