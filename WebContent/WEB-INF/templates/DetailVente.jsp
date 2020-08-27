@@ -156,6 +156,9 @@ Article : ${articleAAfficher.nomArticle}
 			<c:if test="${!empty erreurMontant }">
 				<div class="alert alert-warning" role="alert">${erreurMontant}</div>
 			</c:if>
+			<c:if test="${!empty erreurTypeMontant }">
+				<div class="alert alert-warning" role="alert">${erreurTypeMontant}</div>
+			</c:if>
 			<c:if test="${!empty erreurCredit }">
 				<div class="alert alert-warning" role="alert">${erreurCredit}</div>
 
@@ -165,10 +168,10 @@ Article : ${articleAAfficher.nomArticle}
 			</c:if>
 			<button type="submit">Proposer Enchère</button>
 		</form>
-		<c:if test="${UtilisateurEnSession.noUtilisateur == articleAAfficher.noUtilisateurArticle}">
+	<!--	<c:if test="${UtilisateurEnSession.noUtilisateur == articleAAfficher.noUtilisateurArticle}">
 			<a class="btn btn-primary"
 				href="${pageContext.request.contextPath}/NouvelleVenteServlet?idArticle=${articleAAfficher.noArticle}">Modifier</a>
-		</c:if>
+		</c:if> -->
 
 	</c:if>
 		</div>

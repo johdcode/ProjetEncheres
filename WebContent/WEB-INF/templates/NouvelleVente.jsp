@@ -54,7 +54,7 @@
 					<div class="form-group row">
 						<label class="col-form-label" for="prix">Mise à prix : </label> <input
 						
-							name="prix" type="number" class="form-control" id="prix">
+							name="prix" type="number" class="form-control" id="prix" title="Veuillez saisir un nombre entier">
 					</div>
 					<div class="form-group row">
 						<label class="col-form-label" for="debut-enchere">Début de

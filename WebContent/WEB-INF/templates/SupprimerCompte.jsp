@@ -1,10 +1,11 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-
+<meta charset="UTF-8">
+<title>Supprimer mon compte</title>
 <link rel="stylesheet"href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
@@ -13,10 +14,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<title>Modifier son profil</title>
-
 </head>
 <body>
+
 <header>
 
 <!-- Début Navbar -->
@@ -71,20 +71,16 @@
 		</nav>
 	</div>
 </header>	
-<!-- Fin Navbar -->
-
-<!-- Début Titre de la page (en <h2> ) -->
 
 <main>
 	<div class="container container-titre">
 		<div>
 			<br><br>	
-			<h2>Mon profil</h2>
+			<h2>Supprimer mon compte</h2>
 			<br><br>
 		</div>	
 	</div>
 <!-- Fin Titre de la page-->
-
 <!-- Début corp de la page -->
 	<div class="container container-corps">
 	
@@ -92,62 +88,13 @@
 			<div >
 			<br>
 			<br>
-			<form action="${pageContext.request.contextPath}/modifier-profil" method="POST">
+			<h3>Etes-vous sûr.e de vouloir nous quitter?</h3>
+			<form action="${pageContext.request.contextPath}/supprimer-mon-compte" method="POST">
 				<div class="row">
 				<div class= "col-6">
-				<label for="pseudo">Pseudo :</label>
-				<input required type="text" id="pseudo" name="pseudo" value="${utilisateurSession.pseudo}" class="form-control">
-				<label for="nom">Nom :</label>
-				<input type="text" id="nom" name="nom" value="${utilisateurSession.nom}"class="form-control">
-				<label for="prenom">Prénom :</label>
-				<input type="text" id="prenom" name="prenom" value="${utilisateurSession.prenom}" class="form-control">
-				<label for="rue">Rue :</label>
-				<input type="text" id="rue" name="rue" value="${utilisateurSession.rue}" class="form-control">
-				<label for="code_postal">Code postale :</label>
-				<input type="text" id="code_postal" name="code_postal" value="${utilisateurSession.codePostal}" class="form-control">
-				<label for="ville">Ville :</label>
-				<input type="text" id="ville" name="ville" value="${utilisateurSession.ville}" class="form-control">
-				
-				
-				</div>
-				
-				<div class= "col-6">
-				<label for="email">Email :</label>
-				<input type="text" id="email" name="email" value="${utilisateurSession.email}" class="form-control">
-				<label for="telephone">Téléphone :</label>
-				<input type="text" id="telephone" name="telephone" value="${utilisateurSession.telephone}" class="form-control">
-				<label for="mot_de_passe">Mot de passe actuel :</label>
-				<input type="password" id="mot_de_passe" name="mot_de_passe" class="form-control">
-				<label for="nouveau_mot_de_passe">Nouveau mot de passe :</label>
-				<input type="password" id="nouveau_mot_de_passe" name="nouveau_mot_de_passe" class="form-control">
-				<label for="confirmation_nouveau_mot_de_passe">Confirmation :</label>
-				<input type="password" id="confirmation_nouveau_mot_de_passe" name="confirmation_nouveau_mot_de_passe" class="form-control">	
-				<br><br>
+				<button action="${pageContext.request.contextPath}/deconnexion"  type="submit" class="btn btn-danger">Supprimer mon compte</button>
 				</div>
 				</div>
-				
-				<br><br>
-				<div class="mise-en-avant">
-					<label for="credit">Crédit :</label>
-					<span >${utilisateurSession.credit}</span> <br>
-				</div>
-				<br><br>
-				 <div class="row">
-					<div class= "col-12 text-center">
-						<button type="submit" class="btn btn-dark">Enregistrer</button>
-					 </div>
-					<br><br>
-				 </div>
-				<br><br>
-				
-				<div class="row">	
-					<div class= "col-12 text-center">
-					<!--  TODO : faire boutton supprimer membre -->
-					<a href="${pageContext.request.contextPath}/supprimer-mon-compte?id=${utilisateurSessionId}"><button type="button" class="btn btn-danger"> Supprimer mon compte</button></a>	
-					 </div>
-				
-				
-				</div> 
 			</form>
 			</div>
 			<br><br>
@@ -198,6 +145,6 @@
   </div>
 </footer>
 <!-- Fin Footer -->
-</body>
 
+</body>
 </html>
