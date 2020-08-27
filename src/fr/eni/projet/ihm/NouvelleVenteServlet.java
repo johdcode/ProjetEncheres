@@ -201,7 +201,7 @@ System.out.println("dateDebutEnchere" +debutEnchere);
 			request.setAttribute("erreurDate", erreurDate);
 			erreur++;
 			
-		}else if(datetimeDebutEnchere.isBefore(LocalDateTime.now())||datetimeDebutEnchere.isAfter(datetimeFinEnchere)) {
+		}else if(datetimeDebutEnchere.isBefore(LocalDateTime.now().plusMinutes(-5))||datetimeDebutEnchere.isAfter(datetimeFinEnchere)) {
 			request.setAttribute("erreurDate", erreurDate);
 			erreur++;
 		}
