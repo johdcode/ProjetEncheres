@@ -113,7 +113,8 @@ public class NouvelleVenteServlet extends HttpServlet {
 //		DateTimeFormatter fDatePattern = DateTimeFormatter.ofPattern(datePattern);
 //		if(request.getParameter("debut-enchere") != null)
 		
-		String debutEnchere = request.getParameter("debut-enchere");
+String debutEnchere = request.getParameter("debut-enchere");
+System.out.println("dateDebutEnchere" +debutEnchere);	
 		String finEnchere = request.getParameter("fin-enchere");
 		LocalDate dateDebutEnchere = null;
 		LocalDate dateFinEnchere = null;
@@ -164,7 +165,7 @@ public class NouvelleVenteServlet extends HttpServlet {
 		System.out.println("rue"+rue);
 		System.out.println("cp :"+cp);
 		System.out.println("ville :"+ville);
-		
+		RequestDispatcher rs = null;
 		//vérification des erreurs formulaire
 		int erreur = 0;
 		if(article == null || article == "") {
@@ -194,15 +195,16 @@ public class NouvelleVenteServlet extends HttpServlet {
 		}
 		
 		//TODO format date?
-		if(datetimeDebutEnchere == null ) {
+		String erreurDate = "Veuillez entrer une date valide";
+		if(debutEnchere.isEmpty() ||finEnchere.isEmpty()) {
+			request.setAttribute("erreurDate", erreurDate);
+			erreur++;
+			
+		}else if(datetimeDebutEnchere.isBefore(LocalDateTime.now())||datetimeDebutEnchere.isAfter(datetimeFinEnchere)) {
+			request.setAttribute("erreurDate", erreurDate);
 			erreur++;
 		}
-		
-//		//TODO format date?
-		if(datetimeFinEnchere == null) {
-			erreur++;
-		}
-	
+		else
 		if(rue == null || rue == "") {
 			erreur++;
 		}
@@ -215,7 +217,7 @@ public class NouvelleVenteServlet extends HttpServlet {
 		if(cp != null && cp.length() > 5) {
 			erreur++;
 			}
-		RequestDispatcher rs = null;
+		
 		if(erreur == 0) {
 			
 			int noUtilisateur = (int) request.getSession().getAttribute("utilisateurSessionId");
@@ -241,6 +243,15 @@ public class NouvelleVenteServlet extends HttpServlet {
 			
 			
 		} else {
+			//Chargement des catégories en BDD pour affichage en JSP
+			CategorieManager cm = CategorieManager.getInstance();
+			try {
+				List <Categorie> categories = cm.selectAll();
+				request.setAttribute("categories", categories);
+			} catch (DALException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			rs = request.getRequestDispatcher("/WEB-INF/templates/NouvelleVente.jsp");
 		}
 		rs.forward(request, response);

@@ -139,6 +139,9 @@
 						<label class="col-form-label" for="debut-enchere">Début de l'enchère : </label> 
 							<input name="debut-enchere" type="date" class="form-control" id="debut-enchere">
 					</div>
+					<c:if test="${!empty erreurDate}">
+				<div class="alert alert-warning" role="alert">${erreurDate}</div>
+				</c:if>
 					<div class="form-group row">
 						<label class="col-form-label" for="fin-enchere">Fin de l'enchère : </label> 
 						<input name="fin-enchere" type="date" class="form-control" id="fin-enchere">
