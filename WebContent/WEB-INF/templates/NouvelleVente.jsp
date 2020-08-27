@@ -19,9 +19,9 @@
 
 <!-- Début Navbar -->
 	<div class="container-fluid">
-		<nav class="navbar navbar-expand-lg navbar-light bg-ligh">
-		
-			<h1>ENI-Enchères</h1>
+			
+			<nav class="navbar navbar-expand-lg navbar-light bg-ligh">
+ 			 <a class="navbar-brand" href="${pageContext.request.contextPath}/encheres" style="font-size:24px; color:#dee2e6"><b>ENI-Enchères</b></a>
 			
 			<c:if test="${utilisateurSessionId == null }">
 				<a 	class="nav-link text_light text-uppercase px-4 fa fa-text-height"
@@ -35,13 +35,7 @@
   				</button>
 				 <div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav" >
-						<li class="nav-item active">
-							<a 	class="nav-link text_light text-uppercase px-4 fa fa-text-height"
-								href="${pageContext.request.contextPath}/encheres" 
-								style="font-size:20px; color:#aed9e0" >
-								Enchères <span class="sr-only">(current)</span>
-							</a>
-						</li>
+						
 						<li class="nav-item">
 							<a 	class="nav-link text_light text-uppercase px-4 fa fa-text-height"
 								href="${pageContext.request.contextPath}/nouvelle-vente" 
