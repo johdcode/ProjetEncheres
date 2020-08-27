@@ -117,7 +117,8 @@
 				<br><br>
 				<b>Catégorie :</b> ${categorieArticle.libelle}
 				<br><br>
-				<b>Vendeur :</b> ${utilisateurArticle.pseudo}
+				<b>Vendeur :</b>
+				<a href="${pageContext.request.contextPath}/profil?id=${utilisateurArticle.noUtilisateur}"> ${utilisateurArticle.pseudo}</a>
 				<br><br>
 				<b>Meilleur offre :</b> ${enchereActuelle} 
 				<br><br>

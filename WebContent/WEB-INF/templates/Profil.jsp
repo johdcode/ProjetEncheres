@@ -88,7 +88,7 @@
 		<div class="row">
 			<div class="col-md-3"></div>
 			<div class="col-md-6 text-center">
-				<% // TODO: Dans la jsp %>
+				
 				<c:if test="${utilisateur != null}">
 					
 					<br>
@@ -96,20 +96,24 @@
 					<label for="pseudo">Pseudo: </label>
 					<span class="pseudo">${utilisateur.pseudo}</span><br>
 					
-					<label for="nom">Nom: </label>
-					<span class="nom">${utilisateur.nom}</span><br>
+					<c:if test="${(utilisateur.nom != null) && (utilisateur.nom == utilisateurSession.nom)}">
+						<label for="nom">Nom: </label>
+						<span class="nom">${utilisateur.nom}</span><br>
+					</c:if>
 					
 					<label for="prenom">Prénom: </label>
 					<span class="prenom">${utilisateur.prenom}</span><br>
 					
-					<label for="email">Email: </label>
-					<span class="email">${utilisateur.email}</span><br>
+					<c:if test="${(utilisateur.nom != null) && (utilisateur.nom == utilisateurSession.nom)}">
+						<label for="email">Email: </label>
+						<span class="email">${utilisateur.email}</span><br>
 					
-					<label for="telephone">Téléphone: </label>
-					<span class="telephone">${utilisateur.telephone}</span><br>
-					
-					<label for="rue">Rue: </label>
-					<span class="rue">${utilisateur.rue}</span><br>
+						<label for="telephone">Téléphone: </label>
+						<span class="telephone">${utilisateur.telephone}</span><br>
+						
+						<label for="rue">Rue: </label>
+						<span class="rue">${utilisateur.rue}</span><br>
+					</c:if>
 					
 					<label for="code_postal">Code postal: </label>
 					<span class="code_postal">${utilisateur.codePostal}</span><br>
