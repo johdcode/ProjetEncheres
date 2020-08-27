@@ -53,6 +53,19 @@ h5{
 
 }
 
+.erreur-messages{
+	width: 100%;
+	padding: 0.5em 0.8em 0.5em 0.8em;
+	margin: 0.25em 0 0.25em 0;
+	margin-left: auto; margin-right: auto;
+	background-color: rgb(255, 159, 159);
+	color: rgb(94, 0, 0);
+	border-radius: 5px;
+	border: 2px solid rgb(94, 0, 0);
+	font-size: 0.9em;
+	text-align: center;
+}
+
 .vertical-center{
 	padding-top: 50%; transform: translateY(-50%);
 }

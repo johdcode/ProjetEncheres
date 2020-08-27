@@ -84,7 +84,16 @@
 		<c:if test="${utilisateurSessionId != null}">
 			<div >
 			<br>
-			<br>
+			<c:if test="${listeErreur != null}">
+				<!-- <div class="erreur-messages"> -->
+				<div class="alert alert-warning" role="alert">
+					<c:forEach var="message" items="${listeErreur}">
+							<p>
+								• ${message}
+							</p>
+					</c:forEach>
+				</div>
+			</c:if>
 			<form action="${pageContext.request.contextPath}/modifier-profil" method="POST">
 				<div class="row">
 				<div class= "col-6">

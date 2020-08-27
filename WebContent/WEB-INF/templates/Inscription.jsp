@@ -77,13 +77,14 @@
 						<br>
 						
 						<c:if test="${listeErreur != null}">
-							<div class="erreur-messages">
+							<div class="alert alert-warning" role="alert">
 								<c:forEach var="message" items="${listeErreur}">
 										<p>
-											${message}
+											• ${message}
 										</p>
 								</c:forEach>
 							</div>
+							<br>
 						</c:if>
 						
 						<form action="${pageContext.request.contextPath}/inscription" method="POST">

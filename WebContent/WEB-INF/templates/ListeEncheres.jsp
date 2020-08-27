@@ -82,10 +82,20 @@
 <!-- Début Corps -->
 	<div class="container container-corps">
 		<div class="row ml-auto mr-auto">
+			<br>
 			<form action="${pageContext.request.contextPath}/encheres"
 				method="GET"
 				class="p-5 m-auto w-50">
 				<div class="col">
+					<c:if test="${listeErreur.size() > 0}">
+						<div class="alert alert-warning" role="alert">
+							<c:forEach var="message" items="${listeErreur}">
+									<p>
+										• ${message}
+									</p>
+							</c:forEach>
+						</div>
+					</c:if>
 					<label for="recherche">Filtres :</label> <br> 
 					<input type="text" name="recherche" id="recherche"
 						placeholder="Le nom de l'article contient" value="${recherche}" class='form-control'>

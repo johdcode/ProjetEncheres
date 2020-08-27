@@ -88,7 +88,6 @@ public class ConnexionServlet extends HttpServlet {
 			}
 		}
 		else {
-			System.out.println("okok");
 			rd = request.getRequestDispatcher("/WEB-INF/templates/ListeEncheres.jsp");
 			rd.forward(request, response);
 		}

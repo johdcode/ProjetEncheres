@@ -98,9 +98,9 @@
 				      <label for="motDePasse" class="sr-only">Mot de passe</label>
 				      <input type="password" id="motDePasse" name="motDePasse" class="form-control mb-3" placeholder="Mot de passe" required="true">
 				      <div class="checkbox mb-3">
-						<label>
+						<!-- <label>
 						  <input type="checkbox" id="seSouvenirDeMoi" name="seSouvenirDeMoi" value="seSouvenirDeMoi"> Se souvenir de moi
-						</label>
+						</label> -->
 					    <div><a href="/ServletMotDePasseOublie">Mot de passe oublié</a></div>
 				      </div>
 				      <div class="rom mt-3">
