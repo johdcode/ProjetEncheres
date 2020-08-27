@@ -50,19 +50,23 @@ public class ConnexionServlet extends HttpServlet {
 		
 		int erreur = 0;
 		
-		if(identifiant == null || identifiant == "") {
+		if(identifiant.equals("désactivé")) {
+			String identifiantDesactive = "Ce compte a été déactivé";
+			request.setAttribute("identifiantDesactive", identifiantDesactive);
+		}
+		if(identifiant.equals(null) || identifiant.isEmpty()) {
 			erreur++;
 		}
-		if(identifiant != null && identifiant.length() >= 30) {
+		if(!identifiant.equals(null) && identifiant.length() >= 30) {
 			erreur++;
 		}
-		if(motDePasse == null || motDePasse == "") {
+		if(motDePasse.equals(null)|| motDePasse.isEmpty()) {
 			erreur++;
 		}
-		if(motDePasse != null && motDePasse.length() >= 30) {
+		if(!motDePasse.equals(null) && motDePasse.length() >= 30) {
 			erreur++;
 		}
-		
+		RequestDispatcher rd = null ;
 		System.out.println("Erreurs : " + erreur);
 		// Si il n'y a pas d'erreur et que l'utilisateur n'est pas encore connecté
 		if((erreur == 0) && (session.getAttribute("utilisateurSession") == null)) {		
@@ -70,27 +74,19 @@ public class ConnexionServlet extends HttpServlet {
 			Utilisateur u = utilisateurManager.authentification(identifiant, motDePasse);
 			
 			if(u != null) {
-//				session.setAttribute("utilisateurSession", u);
+				
 				SessionService.setUtilisateurSessionId(request, u.getNoUtilisateur());
 				connexionLogger.info("Connexion utilisateur n°"+session.getAttribute("utilisateurSessionId"));
-				response.sendRedirect(request.getContextPath() + "/encheres"); 
-				System.out.println("Utilisateur connecté");
+				rd = request.getRequestDispatcher("/WEB-INF/templates/ListeEncheres.jsp");
+
 			} else  {
-				System.out.println("La connexion a échoué");
-				response.sendRedirect(request.getContextPath() + "/connexion"); 
-//				RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/WEB-INF/Accueil.jsp"); 
+				
+				request.setAttribute("messageAuthentification", messageAuthentification);
+				rd = request.getRequestDispatcher("/WEB-INF/templates/Connexion.jsp");
 				erreur++;
 			}
 		}	
-//		else {
-//			
-//			if(seSouvenirDeMoi.contentEquals("seSouvenirDeMoi")) {
-//				session.setAttribute("suiviSession", seSouvenirDeMoi);
-//				
-//			}
-//			RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/WEB-INF/Connexion.jsp"); 
-//		}
-		
+			rd.forward(request, response);
 		
 		
 	}

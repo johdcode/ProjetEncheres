@@ -92,7 +92,7 @@
 			<form action="${pageContext.request.contextPath}/supprimer-mon-compte" method="POST">
 				<div class="row">
 				<div class= "col-6">
-				<button action="${pageContext.request.contextPath}/deconnexion"  type="submit" class="btn btn-danger">Supprimer mon compte</button>
+				<button type="submit" class="btn btn-danger">Supprimer mon compte</button>
 				</div>
 				</div>
 			</form>

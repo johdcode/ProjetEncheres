@@ -109,6 +109,11 @@
 				      </div>
 				      <div class="rom mt-3">
 					      <button class="btn btn-lg btn-success btn-block" type="submit">Connexion</button>
+					      <c:if test="${!empty identifiantDesactive}">
+				<div class="alert alert-warning" role="alert">${identifiantDesactive}</div>
+				</c:if><c:if test="${!empty messageAuthentification }">
+				<div class="alert alert-warning" role="alert">${messageAuthentification}</div>
+				</c:if>
 						  <a href="${pageContext.request.contextPath}/inscription" class="btn btn-lg btn-primary btn-block">Créer un compte</a>
 				      </div>
 					  
