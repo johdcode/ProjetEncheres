@@ -27,7 +27,7 @@ public class DeconnexionServlet extends HttpServlet {
 		
 		
 		HttpSession session = request.getSession();
-		deconnexionLogger.info("Deconnexion : " +session.getAttribute("utilisateurSessionId"));
+		deconnexionLogger.info("Deconnexion utilisateur n°: " +SessionService.getUtilisateurSessionId(request));
 		session.invalidate();
 		deconnexionLogger.info("Deconnexion réussie");
 		response.sendRedirect(request.getContextPath() + "/encheres");

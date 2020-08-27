@@ -29,9 +29,9 @@ public class ConnexionServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// Utilisateur connecté
-		
+		HttpSession session = request.getSession();
 		SessionService.checkUtilisateurSession(request);
-		connexionLogger.info("Connexion");
+		
 	
 		this.getServletContext().getRequestDispatcher("/WEB-INF/templates/Connexion.jsp").forward(request, response);
 	}
@@ -72,7 +72,7 @@ public class ConnexionServlet extends HttpServlet {
 			if(u != null) {
 //				session.setAttribute("utilisateurSession", u);
 				SessionService.setUtilisateurSessionId(request, u.getNoUtilisateur());
-				
+				connexionLogger.info("Connexion utilisateur n°"+session.getAttribute("utilisateurSessionId"));
 				response.sendRedirect(request.getContextPath() + "/encheres"); 
 				System.out.println("Utilisateur connecté");
 			} else  {
