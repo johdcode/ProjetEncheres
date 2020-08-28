@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -133,9 +134,12 @@
 				<br><br>
 				<b>Mise à prix :</b> ${articleAAfficher.miseAPrix}
 				<br><br>
-				<b>Début de l'enchère :</b> ${articleAAfficher.dateDebutEnchere}
+				<fmt:parseDate value="${articleAAfficher.dateDebutEnchere}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
+				<b>Début de l'enchère :</b> <fmt:formatDate pattern="dd/MM/yyyy à HH:mm" value="${ parsedDateTime }" />
 				<br><br>
-				<b>Fin de l'enchère :</b> ${articleAAfficher.dateFinEnchere}
+				<fmt:parseDate value="${ articleAAfficher.dateFinEnchere }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
+				<b>Fin de l'enchère :</b> <fmt:formatDate pattern="dd/MM/yyyy à HH:mm" value="${ parsedDateTime }" />
+				
 				<br><br>
 				<b>Retrait :</b> ${retraitArticle.rue} ${retraitArticle.codePostal} ${retraitArticle.ville}
 				<br><br>

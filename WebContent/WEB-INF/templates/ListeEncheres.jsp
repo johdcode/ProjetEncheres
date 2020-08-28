@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -158,17 +159,19 @@
 		<div class="row">
 
 			<c:forEach var="listeArticle" items="${listeArticle}">
-				<div class="col-6">
+				<div class="col-6 text-center">
 					<div class="card mb-3">
 						<img src="${pageContext.request.contextPath}/image/image.jpg" class="card-img-top" alt="...">
 						<div class="card-body">
 							<h5 class="card-title">${listeArticle.nomArticle}</h5>
 							<p class="card-text">${listeArticle.description}</p>
-							<p class="card-text">Prix : ${listeArticle.miseAPrix} points</p>
-							<p class="card-text">Début de l'enchère : ${listeArticle.dateDebutEnchere}</p>
-							<p class="card-text">Fin de l'enchère : ${listeArticle.dateFinEnchere}</p>
+							<p class="card-text"><strong>Prix :</strong> ${listeArticle.miseAPrix} points</p>
+							<fmt:parseDate value="${listeArticle.dateDebutEnchere}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
+							<p class="card-text"><strong>Début de l'enchère :</strong> <fmt:formatDate pattern="dd/MM/yyyy à HH:mm" value="${ parsedDateTime }" /></p>
+							<fmt:parseDate value="${listeArticle.dateDebutEnchere}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
+							<p class="card-text"><strong>Fin de l'enchère : </strong><fmt:formatDate pattern="dd/MM/yyyy à HH:mm" value="${ parsedDateTime }" /></p>
 							<p class="card-text">
-							<a href="${pageContext.request.contextPath}/profil?id=${listeArticle.noUtilisateurArticle}"> Voir le vendeur</a>
+							<a href="${pageContext.request.contextPath}/profil?id=${listeArticle.noUtilisateurArticle}" class="text-secondary"> Voir le vendeur</a>
 							</p>
 								<%-- ${listeArticle.noUtilisateurArticle --%>
 							<a class="btn btn-dark"
