@@ -54,18 +54,7 @@ public class ModifierProfil extends HttpServlet {
 		String nouveauMotDePasse = request.getParameter("nouveau_mot_de_passe").trim();
 		String confirmationNouveauMotDePasse = request.getParameter("confirmation_nouveau_mot_de_passe").trim();
 		
-		System.out.println("pseudo : " + pseudo);
-		System.out.println("nom : " + nom);
-		System.out.println("prenom : " + prenom);
-		System.out.println("email : " + email);
-		System.out.println("telephone : " + telephone);
-		System.out.println("rue : " + rue);
-		System.out.println("code_postal : " + codePostal);
-		System.out.println("ville : " + ville);
-		System.out.println("motDePasse : " + motDePasse);
-		System.out.println("nouveauMotDePasse : " + nouveauMotDePasse);
-		System.out.println("confirmationNouveauMotDePasse : " + confirmationNouveauMotDePasse);
-		
+	
 		int erreur = 0;
 		
 		if(pseudo == null || pseudo == "") {
@@ -258,7 +247,7 @@ public class ModifierProfil extends HttpServlet {
 			}
 		}
 
-		System.out.println("Erreurs : " + erreur);
+
 		if((erreur == 0) && (SessionService.getUtilisateurSessionId(request) != null)) {
 			Utilisateur utilisateur = null;
 			

@@ -73,7 +73,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				encheres.add(enchere);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 		return encheres;
@@ -144,7 +144,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 		}
 		
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		
 			e.printStackTrace();
 		}
 		return enchere;
@@ -169,7 +169,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				encheres.add(enchere);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		return encheres;
@@ -194,7 +194,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 				encheres.add(enchere);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		
 			e.printStackTrace();
 		}
 		return encheres;

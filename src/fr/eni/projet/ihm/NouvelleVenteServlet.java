@@ -37,27 +37,7 @@ public class NouvelleVenteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		//==================fonctionnalité modifier vente
-		//		ArticleVenduManager av = ArticleVenduManager.getInstance();
-//		
-//		String idArticle = request.getParameter("idArticle");
-//		if(!idArticle.equals(null)||!idArticle.isEmpty()) {
-//			try {
-//				ArticleVendu articleAModifier = av.selectById(Integer.parseInt(idArticle));
-//				
-//				request.setAttribute("articleAModifier", articleAModifier);
-//				request.setAttribute("dateDebut", articleAModifier.getDateDebutEnchere().toLocalDate());
-//				request.setAttribute("dateFin", articleAModifier.getDateFinEnchere().toLocalDate());
-//			} catch (NumberFormatException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			} catch (DALException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			
-//		}
-//		=========================================================================================================
+
 		
 		//Chargement des catégories en BDD pour affichage en JSP
 		CategorieManager cm = CategorieManager.getInstance();
@@ -65,7 +45,7 @@ public class NouvelleVenteServlet extends HttpServlet {
 			List <Categorie> categories = cm.selectAll();
 			request.setAttribute("categories", categories);
 		} catch (DALException e) {
-			// TODO Auto-generated catch block
+		
 			e.printStackTrace();
 		}
 		
@@ -110,9 +90,7 @@ public class NouvelleVenteServlet extends HttpServlet {
 		
 		//Gestion de la date
 		//Récupération des saisies utilisateur et conversion en LocalDate
-//		String datePattern = "dd.MM.yyyy hh:mm:ss";
-//		DateTimeFormatter fDatePattern = DateTimeFormatter.ofPattern(datePattern);
-//		if(request.getParameter("debut-enchere") != null)
+
 		
 String debutEnchere = request.getParameter("debut-enchere");
 System.out.println("dateDebutEnchere" +debutEnchere);	
@@ -130,9 +108,6 @@ System.out.println("dateDebutEnchere" +debutEnchere);
 			dateFinEnchere = LocalDate.parse(request.getParameter("fin-enchere"));
 		} catch(DateTimeParseException e) {}
 		
-//		LocalDate dateDebutEnchereSaisie = LocalDate.parse(request.getParameter("debut-enchere"));
-//		LocalDate dateFinEnchereSaisie = LocalDate.parse(request.getParameter("fin-enchere"));
-//		LocalDate dateFinEnchereSaisie = LocalDate.parse(request.getParameter("fin-enchere"));
 		
 		//Création du LocalDateTime avec la nouvelle LocalDate
 		try {			
@@ -146,26 +121,6 @@ System.out.println("dateDebutEnchere" +debutEnchere);
 		String ville = request.getParameter("ville");
 		
 		
-		//affichage saisie pour vérification
-		System.out.println("article :"+article);
-		System.out.println("article :"+description);
-		System.out.println("article :"+categorie);
-		System.out.println("article :"+photo);
-		System.out.println("article :"+prix);
-		System.out.println("article :"+datetimeDebutEnchere);
-		System.out.println("article :"+datetimeFinEnchere);
-		System.out.println("article :"+rue);
-		System.out.println("article :"+cp);
-		System.out.println("article :"+ville);
-		System.out.println("description :"+description);
-		System.out.println("categorie :"+categorie);
-		System.out.println("photo :"+photo);
-		System.out.println("prix :"+prix);
-		System.out.println("dateDebutEnchere :"+dateDebutEnchere);
-		System.out.println("dateFinEnchere :"+dateFinEnchere);
-		System.out.println("rue"+rue);
-		System.out.println("cp :"+cp);
-		System.out.println("ville :"+ville);
 		RequestDispatcher rs = null;
 		//vérification des erreurs formulaire
 		int erreur = 0;
@@ -195,14 +150,14 @@ System.out.println("dateDebutEnchere" +debutEnchere);
 			BusinessException.addMessageErreur("La catégorie ne peut contenir plus de 50 caractères");
 			erreur++;
 			}
-		//TODO erreur fichier(taille? format?)
+	
 
 		if(prix <= 0) {
 			BusinessException.addMessageErreur("Veuillez renseigner un prix supérieur à 0");
 			erreur++;
 		}
 		
-		//TODO format date?
+	
 		String erreurDate = "Veuillez entrer une date valide";
 		if(debutEnchere.isEmpty() ||finEnchere.isEmpty()) {
 			request.setAttribute("erreurDate", erreurDate);
@@ -269,7 +224,7 @@ System.out.println("dateDebutEnchere" +debutEnchere);
 				request.setAttribute("dateDebutEnchere", dateDebutEnchere);
 				request.setAttribute("dateFinEnchere", dateFinEnchere);
 			} catch (DALException e) {
-				// TODO Auto-generated catch block
+		
 				e.printStackTrace();
 			}
 			rs = request.getRequestDispatcher("/WEB-INF/templates/NouvelleVente.jsp");

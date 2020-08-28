@@ -41,14 +41,10 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 		
 		private static final String SQL_UPDATE = "UPDATE  ARTICLES_VENDUS SET nom_article=?,description=?,date_debut_encheres=?,date_fin_encheres=?,prix_initial=?,prix_vente=?,no_utilisateur=?,no_categorie=? WHERE no_article = ?;";
 		private static final String SQL_DELETE = "DELETE  FROM  ARTICLES_VENDUS WHERE no_article = ?";
-//		
-	// Constructor Vide
 		
-		public ArticleVenduDAOJdbcImpl () {
-			
-		}
+	
 		
-
+		
 	
 		
 	// Methode Insert nouvel Article
@@ -99,8 +95,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
-				
-				//TODO 
+				 
 				throw new DALException("Insert ArticleVendu FAIL", e);
 			}
 		}

@@ -67,7 +67,7 @@ public class ConnexionServlet extends HttpServlet {
 			erreur++;
 		}
 		RequestDispatcher rd = null ;
-		System.out.println("Erreurs : " + erreur);
+		
 		// Si il n'y a pas d'erreur et que l'utilisateur n'est pas encore connecté
 		if((erreur == 0) && (session.getAttribute("utilisateurSession") == null)) {		
 			UtilisateurManager utilisateurManager = UtilisateurManager.getInstance();

@@ -21,10 +21,6 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
 	private static final String SQL_UPDATE = "UPDATE CATEGORIES SET libelle=? WHERE no_categorie = ?;";
 	private static final String SQL_DELETE = "DELETE  FROM  CATEGORIES WHERE no_categorie = ?";
 
-	
-	//Constructor vide
-	public CategorieDAOJdbcImpl() {	
-	}
 
 	//Insert
 

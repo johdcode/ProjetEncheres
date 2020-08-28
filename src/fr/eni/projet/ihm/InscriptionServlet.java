@@ -52,16 +52,7 @@ public class InscriptionServlet extends HttpServlet {
 		String motDePasse = request.getParameter("mot_de_passe").trim();
 		String confirmationMotDePasse = request.getParameter("confirmation_mot_de_passe").trim();
 		
-		System.out.println("pseudo : " + pseudo);
-		System.out.println("nom : " + nom);
-		System.out.println("prenom : " + prenom);
-		System.out.println("email : " + email);
-		System.out.println("telephone : " + telephone);
-		System.out.println("rue : " + rue);
-		System.out.println("code_postal : " + codePostal);
-		System.out.println("ville : " + ville);
-		System.out.println("motDePasse : " + motDePasse);
-		System.out.println("confirmationMotDePasse : " + confirmationMotDePasse);
+	
 		
 		int erreur = 0;
 		
@@ -234,7 +225,7 @@ public class InscriptionServlet extends HttpServlet {
 			if(erreurFormat) {
 				BusinessException.addMessageErreur("Votre mot de passe doit contenir au moins 1 minuscules, 1 majuscule, 1 nombre et un caractère spécial.");
 			}
-			System.out.println("Erreur : " + erreur);
+		
 		}
 		
 		if(confirmationMotDePasse == null || confirmationMotDePasse == "") {
@@ -250,8 +241,7 @@ public class InscriptionServlet extends HttpServlet {
 				BusinessException.addMessageErreur("Le mot de passe doit être le même que la confirmation.");
 			}
 		}
-		System.out.println("Erreurs : " + erreur);
-		System.out.println("ok");
+	
 		if((erreur == 0) && session.getAttribute("utilisateurSessionId")  == null) {
 			Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse, creditInitial, false);
 			utilisateurManager.insert(utilisateur);

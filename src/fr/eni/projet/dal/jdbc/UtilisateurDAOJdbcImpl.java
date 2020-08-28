@@ -80,7 +80,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 				utilisateurs.add(utilisateur);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		
 			e.printStackTrace();
 		}
 		return utilisateurs;
@@ -104,7 +104,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		}
 		
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		return utilisateur;
@@ -129,7 +129,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		}
 		
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		return utilisateur;

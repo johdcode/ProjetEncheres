@@ -7,7 +7,7 @@ public class DALException extends Exception {
 	
 
 	public DALException(String string, SQLException e) {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	/**

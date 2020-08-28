@@ -22,10 +22,6 @@ public class RetraitDAOJdbcImpl implements RetraitDAO {
 	private static final String SQL_DELETE = "DELETE  FROM  RETRAITS WHERE no_article = ?";
 
 	
-	//Constructor vide
-	public RetraitDAOJdbcImpl() {	
-	}
-	
 	//Insert
 	@Override
 	public void insert(Retrait r) throws DALException {

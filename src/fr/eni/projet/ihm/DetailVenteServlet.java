@@ -61,7 +61,7 @@ public class DetailVenteServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			try {
-				System.out.println(av.getNoUtilisateurArticle());			
+				av.getNoUtilisateurArticle();			
 			} catch(NullPointerException e) {
 				e.printStackTrace();
 			}
@@ -121,7 +121,7 @@ public class DetailVenteServlet extends HttpServlet {
 			request.setAttribute("utilisateurArticle", vendeur);
 			
 			Utilisateur u = utilisateurManager.selectEnchereGagneeByArticle(idArticle);
-			System.out.println(u);
+		
 			
 			request.setAttribute("gagnantDeLEnchere", utilisateurManager.selectEnchereGagneeByArticle(idArticle));
 			request.getRequestDispatcher("/WEB-INF/templates/DetailVente.jsp").forward(request, response);
@@ -219,18 +219,18 @@ public class DetailVenteServlet extends HttpServlet {
 
 		}
 
-		System.out.println(montantEnchereSaisie);
+	
 
 		// recuperer l'id utilisateur
 		int idUtilisateurSession = Integer.parseInt(SessionService.getUtilisateurSessionId(request));
-		System.out.println("idUt : " + idUtilisateurSession);
+	
 
 		// recuperer l'id de l'article
-		System.out.println("idArt : " + idArticle);
+	
 
 		// récuperer la date
 		LocalDateTime dateNow = LocalDateTime.now();
-		System.out.println("date : " + dateNow);
+	
 
 		// vérification des conditions de l'enchère saisie par rapport à l'enchère
 		// actuelle, le crédit utilisateur et les dates de début et fin de l'enchère
@@ -270,7 +270,7 @@ public class DetailVenteServlet extends HttpServlet {
 		// enregistrer l'enchère si elle répond aux 3 critères précédents : montant, date, crédit utilisateur
 		if (MontantEnchereSaisieEstPlusElevé && enchereSaisieDateValide && creditSuperieurAMontantEnchere) {
 			enchereManager.insert(enchereAIntegrer);
-			System.out.println("enchère insérée");
+		
 			// passe le prix max en attribut
 			request.setAttribute("enchereActuelle", enchereAIntegrer.getMontantEnchere());
 			
@@ -280,7 +280,6 @@ public class DetailVenteServlet extends HttpServlet {
 			try {
 				utilisateurManager.update(utilisateurEnSession);
 			} catch (DALException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			
@@ -291,7 +290,7 @@ public class DetailVenteServlet extends HttpServlet {
 			try {
 				noUtilisateurAncienEncherisseur = enchereMax.getNoUtilisateurEnchere();
 			} catch (NullPointerException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 			
@@ -302,7 +301,7 @@ public class DetailVenteServlet extends HttpServlet {
 				try {
 					utilisateurManager.update(ancienEncherisseur);
 				} catch (DALException e) {
-					// TODO Auto-generated catch block
+					
 					e.printStackTrace();
 				}
 

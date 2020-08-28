@@ -25,7 +25,7 @@ public class SessionService {
 		}
 		if(u != null) {
 			request.setAttribute("utilisateurSession", u);
-//			request.setAttribute("connecte", true);
+//			
 		}
 		return u;
 	}
